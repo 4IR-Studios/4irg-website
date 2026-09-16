@@ -1,0 +1,5 @@
+# 4irg.com is a hand-written static site: one index.html, no build step.
+# Telling Netlify that explicitly stops it guessing a framework and failing.
+[build]
+  command = ""
+  publish = "."
