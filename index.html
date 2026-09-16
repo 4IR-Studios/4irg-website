@@ -185,6 +185,20 @@
     white-space:nowrap;flex:0 0 auto;width:112px;
   }
   .services p{margin:0;font-size:1rem;line-height:1.5}
+  /* The one action on the page, so it is the only thing here that looks
+     clickable. Cobalt on hover rather than a second accent colour. */
+  .studios .cta{
+    display:inline-flex;align-items:center;gap:10px;
+    margin-top:clamp(26px,3.6vw,38px);
+    font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    text-decoration:none;
+    padding:15px 26px;
+    background:var(--midnight);color:var(--parchment);
+    border:1px solid var(--midnight);
+    transition:background-color .2s,border-color .2s;
+  }
+  .studios .cta:hover{background:var(--cobalt);border-color:var(--cobalt)}
+  .studios .cta svg{flex:0 0 auto}
   @media(max-width:860px){
     .studios{grid-template-columns:1fr}
   }
@@ -254,6 +268,12 @@
           <span class="eyebrow">Studios</span>
           <h2 class="studios-title">The story an allocator reads before the first meeting.</h2>
           <p class="studios-lede">4IR Studios is the group's capital markets PR and marketing arm. It builds the public face of the companies we back — the positioning, the site, the materials that carry a thesis into a room before anyone walks into it.</p>
+          <a class="cta" href="https://privateinvestorcircle.com/4ir-group">
+            Fall capital roadshow
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/>
+            </svg>
+          </a>
         </div>
         <ul class="services">
           <li>
