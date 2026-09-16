@@ -1,0 +1,93 @@
+/* Shared across every page on 4irg.com: tokens, reset, masthead, footer.
+   Page-specific rules stay inline in the page that uses them. */
+
+
+  :root{
+    --midnight:#101820;
+    --parchment:#F4F1EA;
+    --parchment-deep:#E8E4DA;
+    --steel:#6D747A;
+    --cobalt:#3563E9;
+    --oxide:#A55D3B;
+
+    --display:"Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --mono:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    --gutter:clamp(20px, 5vw, 72px);
+    --rule:1px solid rgba(109,116,122,.28);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--parchment);
+    color:var(--midnight);
+    font-family:var(--display);
+    font-size:17px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit}
+  ::selection{background:var(--cobalt);color:var(--parchment)}
+  :focus-visible{outline:2px solid var(--cobalt);outline-offset:3px}
+
+  .wrap{max-width:1360px;margin:0 auto;padding:0 var(--gutter)}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--steel);
+  }
+
+  /* ---------- header ---------- */
+  .masthead{
+    position:sticky;top:0;z-index:20;
+    background:var(--midnight);
+    color:var(--parchment);
+    border-bottom:1px solid rgba(244,241,234,.14);
+  }
+  .masthead .wrap{
+    display:flex;align-items:center;gap:24px;
+    height:60px;
+  }
+  .wordmark{display:inline-flex;align-items:center;text-decoration:none}
+  .logo{display:block;height:24px;width:auto}
+  .logo-sm{height:19px;opacity:.75}
+
+  /* ---------- section frame ---------- */
+  section.band{padding:clamp(64px,10vh,120px) 0;border-top:var(--rule)}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--midnight);color:rgba(244,241,234,.4);padding:26px 0 46px}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:14px 32px;align-items:baseline;border-top:1px solid rgba(244,241,234,.14);padding-top:26px}
+  footer small{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase}
+  footer .legal{max-width:56ch;font-size:12px;line-height:1.5;letter-spacing:0;text-transform:none;margin-left:auto}
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .stratum{opacity:1;transform:none;transition:none}
+    *{animation:none!important}
+  }
+
+  /* ---------- nav ---------- */
+  /* Added when the site grew past one page. The masthead was a logo and
+     nothing else, so this is built to sit in that same 60px bar without
+     changing its proportions. */
+  .masthead nav{margin-left:auto;display:flex;gap:clamp(18px,3vw,34px)}
+  .masthead nav a{
+    font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:rgba(244,241,234,.62);text-decoration:none;
+    padding:4px 0;border-bottom:1px solid transparent;
+    transition:color .2s,border-color .2s;
+  }
+  .masthead nav a:hover{color:var(--parchment)}
+  /* aria-current marks the page you are on, so the styling follows the
+     accessibility state rather than a second hand-maintained class. */
+  .masthead nav a[aria-current="page"]{color:var(--parchment);border-bottom-color:var(--cobalt)}
+  @media(max-width:420px){
+    .masthead nav{gap:16px}
+    .masthead nav a{font-size:10px;letter-spacing:.12em}
+  }
