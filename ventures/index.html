@@ -99,21 +99,34 @@
     background:url('/assets/seco-mark-white.png') center/contain no-repeat;
     opacity:.06;pointer-events:none;
   }
-  .folio-shot{position:relative;overflow:hidden;min-height:clamp(240px,30vw,400px);line-height:0}
-  .folio-shot img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
-  .folio-shot:hover img{transform:scale(1.04)}
-  .folio-shot .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
-  .folio-shot .play span{
-    width:68px;height:68px;border-radius:50%;background:rgba(244,241,234,.94);
+  .folio-shot{
+    position:relative;overflow:hidden;min-height:clamp(240px,30vw,400px);
+    background:var(--parchment-deep);
     display:flex;align-items:center;justify-content:center;
-    box-shadow:0 8px 30px rgba(16,24,32,.4);
-    transition:transform .3s cubic-bezier(.2,.7,.2,1),background-color .3s;
+    border-right:1px solid rgba(16,24,32,.12);
   }
-  .folio-shot:hover .play span{transform:scale(1.08);background:var(--gold)}
+  /* Their grid, quietly, so the panel belongs to this site and not to a
+     screenshot of theirs. */
+  .folio-shot::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(rgba(16,24,32,.06) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(16,24,32,.06) 1px,transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(100% 100% at 30% 20%,#000,transparent 75%);
+    -webkit-mask-image:radial-gradient(100% 100% at 30% 20%,#000,transparent 75%);
+  }
+  .folio-mark{
+    position:relative;width:min(42%,150px);aspect-ratio:133/160;
+    background:var(--midnight);
+    -webkit-mask:url('/assets/seco-mark-white.png') center/contain no-repeat;
+    mask:url('/assets/seco-mark-white.png') center/contain no-repeat;
+    transition:transform .5s cubic-bezier(.2,.7,.2,1),background-color .3s ease;
+  }
+  .folio-shot:hover .folio-mark{transform:scale(1.06);background:var(--cobalt)}
   .folio-body{position:relative;z-index:1;padding:clamp(28px,4vw,52px);display:flex;flex-direction:column;justify-content:center}
   .folio .mark{height:48px;width:auto;display:block;align-self:flex-start;flex:0 0 auto}
   .folio .tagline{
-    margin:22px 0 0;max-width:18ch;
+    margin:0;max-width:18ch;
     font-size:clamp(1.5rem,3.2vw,2.5rem);
     line-height:1.02;letter-spacing:-.032em;font-weight:700;text-transform:uppercase;
   }
@@ -177,12 +190,10 @@
 
       <div class="folio" style="margin-top:clamp(28px,4vw,48px)">
         <a class="folio-shot" href="https://seco.bio" aria-label="Seco Bio — visit seco.bio">
-          <img src="/assets/seco-bio.jpg" alt="Seco Bio — protecting what matters" loading="lazy">
-          <span class="play"><span><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span>
+          <span class="folio-mark"></span>
         </a>
 
         <div class="folio-body">
-          <img class="mark" src="/assets/seco-mark-white.png" alt="Seco Bio">
           <p class="tagline">Protecting what matters.</p>
           <p class="what">Probiotics die before they arrive. Seco Bio&rsquo;s proprietary formulation keeps them alive from the factory to the moment they are used — so what is on the label is what is inside.</p>
 
