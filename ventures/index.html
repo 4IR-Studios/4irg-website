@@ -182,13 +182,13 @@
       <ol class="steps">
         <li>
           <div class="n">01</div>
-          <h3>We select</h3>
-          <p>Real meetings, not a data room crawl. We decide against the criteria below, and we tell you either way rather than going quiet.</p>
+          <h3>We have conviction</h3>
+          <p>Real meetings, not a data room crawl. When we have conviction, you make a formal application to 4IR Ventures and we decide against the criteria below — and we tell you either way rather than going quiet.</p>
         </li>
         <li>
           <div class="n">02</div>
           <h3>We form the SPV</h3>
-          <p>A special purpose vehicle for your company and your round. One line on your cap table, however many investors sit behind it.</p>
+          <p>A special purpose vehicle for your company and your round. One line on your cap table, with many of our investors sitting behind it.</p>
         </li>
         <li>
           <div class="n">03</div>
@@ -300,9 +300,18 @@
     if (!st) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
         !('IntersectionObserver' in window)) { st.classList.add('in'); return; }
+
+    // This block sits high on the page, so it is usually already on screen at
+    // load. Firing immediately means the entrance is over before anyone looks
+    // at it; a short beat lets it actually be seen. Anything further down
+    // still animates the moment it is scrolled to.
+    var run = function (delay) { setTimeout(function () { st.classList.add('in'); }, delay); };
+    var onScreen = st.getBoundingClientRect().top < window.innerHeight * 0.85;
+    if (onScreen) { run(450); return; }
+
     new IntersectionObserver(function (e, o) {
       if (!e[0].isIntersecting) return;
-      st.classList.add('in'); o.disconnect();
+      run(0); o.disconnect();
     }, { threshold: 0.3 }).observe(st);
   })();
 </script>
