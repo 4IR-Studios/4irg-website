@@ -9,6 +9,11 @@
     --steel:#6D747A;
     --cobalt:#3563E9;
     --oxide:#A55D3B;
+    /* Third accent. Two tones because one cannot serve both grounds:
+       --gold is 9.87:1 on midnight, --gold-deep is 4.51:1 on parchment.
+       Gold labels; cobalt stays the interactive colour. */
+    --gold:#F0B824;
+    --gold-deep:#8B690F;
 
     --display:"Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
     --mono:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -39,7 +44,7 @@
     font-size:11px;
     letter-spacing:.16em;
     text-transform:uppercase;
-    color:var(--steel);
+    color:var(--gold-deep);
   }
 
   /* ---------- header ---------- */
@@ -51,11 +56,11 @@
   }
   .masthead .wrap{
     display:flex;align-items:center;gap:24px;
-    height:60px;
+    height:76px;
   }
   .wordmark{display:inline-flex;align-items:center;text-decoration:none}
-  .logo{display:block;height:24px;width:auto}
-  .logo-sm{height:19px;opacity:.75}
+  .logo{display:block;height:34px;width:auto}
+  .logo-sm{height:26px;opacity:.85}
 
   /* ---------- section frame ---------- */
   section.band{padding:clamp(64px,10vh,120px) 0;border-top:var(--rule)}
@@ -78,16 +83,215 @@
      changing its proportions. */
   .masthead nav{margin-left:auto;display:flex;gap:clamp(18px,3vw,34px)}
   .masthead nav a{
+    position:relative;
     font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
     color:rgba(244,241,234,.62);text-decoration:none;
-    padding:4px 0;border-bottom:1px solid transparent;
-    transition:color .2s,border-color .2s;
+    padding:6px 0;
+    transition:color .2s ease;
+  }
+  /* The rule is drawn rather than toggled: it grows from the left on the way
+     in and retreats the same way, so the hover has a direction. */
+  .masthead nav a::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:1.5px;
+    background:var(--gold);
+    transform:scaleX(0);transform-origin:left center;
+    transition:transform .28s cubic-bezier(.4,0,.2,1);
   }
   .masthead nav a:hover{color:var(--parchment)}
+  .masthead nav a:hover::after{transform:scaleX(1)}
   /* aria-current marks the page you are on, so the styling follows the
      accessibility state rather than a second hand-maintained class. */
-  .masthead nav a[aria-current="page"]{color:var(--parchment);border-bottom-color:var(--cobalt)}
+  .masthead nav a[aria-current="page"]{color:var(--parchment)}
+  .masthead nav a[aria-current="page"]::after{transform:scaleX(1)}
   @media(max-width:420px){
     .masthead nav{gap:16px}
     .masthead nav a{font-size:10px;letter-spacing:.12em}
   }
+
+  /* ---------- page head (every page below the home page) ---------- */
+  .page-head{background:var(--midnight);color:var(--parchment);padding:clamp(52px,9vh,104px) 0 clamp(44px,7vh,82px);position:relative;overflow:hidden}
+  .page-head::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(rgba(244,241,234,.05) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(244,241,234,.05) 1px,transparent 1px);
+    background-size:132px 132px;
+    mask-image:radial-gradient(120% 90% at 78% 20%,#000,transparent 72%);
+    -webkit-mask-image:radial-gradient(120% 90% at 78% 20%,#000,transparent 72%);
+  }
+  .page-head .wrap{position:relative;z-index:1}
+  .page-head .eyebrow{color:var(--gold)}
+  .page-head h1{
+    margin:16px 0 0;max-width:15ch;
+    font-size:clamp(2.3rem,6.4vw,5.2rem);
+    line-height:.94;letter-spacing:-.035em;font-weight:700;text-transform:uppercase;
+  }
+  .page-head .lede{margin:26px 0 0;max-width:52ch;font-size:clamp(1rem,1.35vw,1.2rem);color:rgba(244,241,234,.72)}
+
+  /* ---------- buttons ---------- */
+  .btn{
+    /* Used on both <a> and <button>; the resets keep them identical. */
+    appearance:none;-webkit-appearance:none;font:inherit;cursor:pointer;
+    display:inline-flex;align-items:center;gap:11px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    text-decoration:none;padding:16px 28px;border:1px solid transparent;
+    transition:background-color .2s,color .2s,border-color .2s;
+  }
+  .btn svg{flex:0 0 auto}
+  .btn-solid{background:var(--midnight);color:var(--parchment);border-color:var(--midnight)}
+  .btn-solid:hover{background:var(--cobalt);border-color:var(--cobalt)}
+  .btn-line{color:var(--midnight);border-color:rgba(16,24,32,.34)}
+  .btn-line:hover{background:var(--midnight);color:var(--parchment);border-color:var(--midnight)}
+  .on-dark .btn-solid,.btn-solid.on-dark{background:var(--parchment);color:var(--midnight);border-color:var(--parchment)}
+  .on-dark .btn-solid:hover,.btn-solid.on-dark:hover{background:var(--cobalt);border-color:var(--cobalt);color:var(--parchment)}
+  .on-dark .btn-line,.btn-line.on-dark{color:var(--parchment);border-color:rgba(244,241,234,.38)}
+  .on-dark .btn-line:hover,.btn-line.on-dark:hover{background:var(--parchment);color:var(--midnight);border-color:var(--parchment)}
+  .actions{display:flex;flex-wrap:wrap;gap:12px 14px;margin-top:clamp(28px,4vw,40px)}
+
+  /* ---------- section lead-in ---------- */
+  .lead-in{max-width:56ch}
+  .lead-in h2{
+    margin:14px 0 0;
+    font-size:clamp(1.6rem,3.4vw,2.6rem);
+    line-height:1.04;letter-spacing:-.032em;font-weight:600;text-transform:uppercase;
+  }
+  .lead-in p{margin:20px 0 0;color:var(--steel);font-size:clamp(1rem,1.3vw,1.1rem);line-height:1.6}
+
+  /* ---------- audience bar ---------- */
+  /* The other reader's door, in the hero. Founders get the headline; this
+     costs them nothing and stops investors bouncing before they scroll. */
+  .aud-bar{
+    margin-top:clamp(30px,4.5vw,46px);
+    display:inline-flex;flex-wrap:wrap;align-items:center;gap:8px 18px;
+    padding:14px 22px;
+    border:1px solid rgba(244,241,234,.22);
+    font-size:.95rem;color:rgba(244,241,234,.66);
+  }
+  .aud-bar a{
+    font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--parchment);text-decoration:none;
+    display:inline-flex;align-items:center;gap:8px;
+    border-bottom:1px solid rgba(244,241,234,.4);padding-bottom:3px;
+    transition:color .2s,border-color .2s;
+  }
+  .aud-bar a:hover{color:var(--cobalt);border-color:var(--cobalt)}
+  .band .aud-bar{border-color:rgba(16,24,32,.2);color:var(--steel)}
+  .band .aud-bar a{color:var(--midnight);border-bottom-color:rgba(16,24,32,.34)}
+
+  /* ---------- footer nav ---------- */
+  /* The pillar line was typography pretending to be navigation. Now it is
+     navigation, and sponsorship lives here rather than in the masthead:
+     a third audience in the nav would dilute the two that matter most. */
+  .foot-nav{display:flex;flex-wrap:wrap;gap:10px 22px}
+  .foot-nav a{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:rgba(244,241,234,.62);text-decoration:none;
+    border-bottom:1px solid transparent;padding-bottom:2px;
+    transition:color .2s,border-color .2s;
+  }
+  .foot-nav a:hover{color:var(--parchment);border-bottom-color:var(--cobalt)}
+
+  /* ---------- gold statement band ---------- */
+  /* One per page, and one line only. At full width this colour will take
+     over anything it shares a band with, so it gets a single sentence and
+     nothing else to compete with. Midnight on gold is 9.87:1. */
+  .band.gold{
+    background:var(--gold);color:var(--midnight);
+    border-top:none;
+    padding:clamp(44px,7vw,92px) 0;
+    position:relative;overflow:hidden;
+  }
+  .band.gold::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(rgba(16,24,32,.07) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(16,24,32,.07) 1px,transparent 1px);
+    background-size:132px 132px;
+    mask-image:radial-gradient(120% 120% at 88% 16%,#000,transparent 70%);
+    -webkit-mask-image:radial-gradient(120% 120% at 88% 16%,#000,transparent 70%);
+  }
+  .band.gold .wrap{position:relative;z-index:1}
+  .band.gold .eyebrow{color:rgba(16,24,32,.62)}
+  .band.gold p{
+    margin:16px 0 0;max-width:24ch;
+    font-size:clamp(1.7rem,4.4vw,3.4rem);
+    line-height:1.02;letter-spacing:-.035em;font-weight:700;text-transform:uppercase;
+    text-wrap:balance;
+  }
+  .band.gold .attrib{
+    margin:clamp(22px,3vw,32px) 0 0;max-width:46ch;
+    font-size:.98rem;line-height:1.55;font-weight:400;text-transform:none;letter-spacing:0;
+    color:rgba(16,24,32,.7);
+  }
+
+  /* ---------- transparent masthead ---------- */
+  /* On a page that opens on video, the bar becomes part of the frame rather
+     than a lid on it: the footage runs to the top edge and the masthead
+     floats over it, with a short scrim so the mark and nav stay readable
+     against whatever the video is doing underneath. */
+  body.hero-top .masthead{
+    position:absolute;top:0;left:0;right:0;
+    background:transparent;border-bottom:none;
+  }
+  body.hero-top .masthead::before{
+    content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+    background:linear-gradient(to bottom, rgba(16,24,32,.55), rgba(16,24,32,0));
+  }
+  /* The hero starts at the very top and pads itself clear of the bar. */
+  body.hero-top .hero{padding-top:clamp(120px,17vh,190px)}
+
+  /* The kinds of capital, set as a row under the claim. Mono and small so it
+     reads as a definition of the word above it rather than a second heading. */
+  .band.gold .kinds{
+    list-style:none;margin:clamp(26px,3.6vw,38px) 0 0;padding:clamp(22px,3vw,28px) 0 0;
+    border-top:1px solid rgba(16,24,32,.22);
+    display:flex;flex-wrap:wrap;gap:10px 0;
+  }
+  .band.gold .kinds li{
+    font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:rgba(16,24,32,.78);
+  }
+  .band.gold .kinds li+li::before{content:"\00b7";margin:0 18px;color:rgba(16,24,32,.42)}
+  @media(max-width:560px){
+    .band.gold .kinds li{font-size:9.5px;letter-spacing:.1em}
+    .band.gold .kinds li+li::before{margin:0 10px}
+  }
+
+  /* ---------- enquiry dialog ---------- */
+  dialog.enquiry{
+    border:0;padding:0;max-width:620px;width:calc(100% - 32px);
+    background:var(--parchment);color:var(--midnight);
+  }
+  dialog.enquiry::backdrop{background:rgba(16,24,32,.74)}
+  .enquiry-inner{padding:clamp(26px,4vw,44px)}
+  .enquiry-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}
+  .enquiry-head h2{
+    margin:12px 0 0;max-width:18ch;
+    font-size:clamp(1.5rem,3.2vw,2.2rem);
+    line-height:1.02;letter-spacing:-.032em;font-weight:700;text-transform:uppercase;
+  }
+  .enquiry-close{
+    appearance:none;background:none;border:1px solid rgba(16,24,32,.24);
+    width:38px;height:38px;flex:0 0 auto;cursor:pointer;color:var(--midnight);
+    font-size:17px;line-height:1;transition:background-color .2s,color .2s;
+  }
+  .enquiry-close:hover{background:var(--midnight);color:var(--parchment)}
+  .enquiry form{margin-top:26px;display:grid;gap:16px}
+  .enquiry .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .enquiry label{display:block}
+  .enquiry .lab{
+    display:block;margin-bottom:7px;
+    font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--steel);
+  }
+  .enquiry input,.enquiry select,.enquiry textarea{
+    width:100%;font:inherit;font-size:.98rem;color:var(--midnight);
+    background:#fff;border:1px solid rgba(16,24,32,.22);padding:12px 14px;border-radius:0;
+  }
+  .enquiry textarea{resize:vertical;min-height:88px}
+  .enquiry input:focus,.enquiry select:focus,.enquiry textarea:focus{
+    outline:2px solid var(--cobalt);outline-offset:1px;border-color:var(--cobalt);
+  }
+  .enquiry .hp{position:absolute;left:-9999px}
+  .enquiry .note{margin:0;font-size:.82rem;color:var(--steel);line-height:1.5}
+  .enquiry-done{padding:clamp(30px,5vw,54px);text-align:center}
+  .enquiry-done h3{margin:0;font-size:1.5rem;font-weight:600;text-transform:uppercase;letter-spacing:-.03em}
+  .enquiry-done p{margin:14px 0 0;color:var(--steel);line-height:1.6}
+  @media(max-width:540px){.enquiry .row{grid-template-columns:1fr}}

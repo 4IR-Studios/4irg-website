@@ -3,191 +3,96 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>4IR Group — From Founder to Exit</title>
-<meta name="description" content="A private capital ecosphere for the companies and infrastructure transforming physical industry — the factories, power and supply chains everything else runs on.">
+<title>Investors — 4IR Group</title>
+<meta name="description" content="Deal flow in physical industry, allocated deal by deal through SPVs. Investor evenings in five cities.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/site.css">
 <style>
 
-  /* ---------- hero ---------- */
-  /* Video bed -> 45% wash -> brand grid -> content. Four layers, each with
-     its own job: the wash carries legibility, the grid keeps the drone shot
-     reading as ours rather than as stock footage. */
-  .hero{
-    position:relative;overflow:hidden;isolation:isolate;
-    background:var(--midnight);color:var(--parchment);
-    min-height:min(92vh,880px);
-    display:flex;align-items:flex-end;
-    padding:clamp(64px,13vh,132px) 0 clamp(44px,7vh,88px);
+  /* ---------- how allocation works ---------- */
+  .steps{list-style:none;margin:clamp(30px,4.5vw,50px) 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.6vw,28px)}
+  .steps li{border-top:2px solid var(--cobalt);padding:22px 0 0}
+  .steps .n{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--cobalt)}
+  .steps h3{margin:12px 0 0;font-size:1.15rem;font-weight:600;letter-spacing:-.018em}
+  .steps p{margin:12px 0 0;color:var(--steel);font-size:.98rem;line-height:1.58}
+  @media(max-width:760px){.steps{grid-template-columns:1fr}}
+
+  /* ---------- events: date block, detail, register ---------- */
+  /* The date is the thing an investor scans for, so it is set large and sits
+     in its own column rather than being buried in a line of body copy. */
+  .events{list-style:none;margin:clamp(30px,4.5vw,50px) 0 0;padding:0;display:flex;flex-direction:column;gap:16px}
+  .events li{
+    display:grid;grid-template-columns:96px 132px minmax(0,1fr) auto;
+    gap:clamp(18px,3vw,40px);align-items:center;
+    border:1px solid rgba(16,24,32,.18);
+    padding:clamp(20px,2.8vw,30px);
+    transition:border-color .2s,transform .2s;
   }
-  .hero-media{position:absolute;inset:0;z-index:-3;overflow:hidden}
-  .hero-media video,.hero-media img{
-    width:100%;height:100%;object-fit:cover;display:block;
-    /* A touch of scale so the edges never show during the loop restart. */
-    transform:scale(1.04);
+  .events li:hover{border-color:var(--cobalt);transform:translateY(-2px)}
+  .events .date{text-align:center;border-right:var(--rule);padding-right:clamp(12px,2vw,24px)}
+  .events .mon{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--oxide)}
+  .events .day{font-size:clamp(1.9rem,3.4vw,2.6rem);font-weight:600;letter-spacing:-.04em;line-height:1}
+  .events .where{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--steel)}
+  .events h3{margin:8px 0 0;font-size:clamp(1.15rem,2vw,1.5rem);font-weight:600;text-transform:uppercase;letter-spacing:-.025em}
+  .events p{margin:8px 0 0;color:var(--steel);font-size:.95rem;line-height:1.55;max-width:56ch}
+  /* The Luma cover is the thing people recognise, so it earns a column of
+     its own next to the date rather than being dropped into the copy. */
+  .events .cover{overflow:hidden;border:1px solid rgba(16,24,32,.14);line-height:0;background:var(--parchment-deep)}
+  .events .cover img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+  .events li:hover .cover img{transform:scale(1.05)}
+  @media(max-width:980px){
+    .events li{grid-template-columns:76px 104px minmax(0,1fr);row-gap:18px}
+    .events .cta-cell{grid-column:1 / -1}
   }
-  /* The wash. --wash is the single number to turn when the footage needs to
-     sit further back: everything else is derived from it, so the gradient
-     keeps its shape and only the depth changes. The bottom stays heavier
-     than the top because that is where the type sits. */
-  .hero{--wash:.68}
-  .hero::before{
-    content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;
-    background:linear-gradient(
-      to top,
-      rgba(16,24,32,calc(var(--wash) + .24)) 0%,
-      rgba(16,24,32,calc(var(--wash) + .06)) 40%,
-      rgba(16,24,32,var(--wash)) 100%);
-  }
-  .hero::after{
-    content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
-    background-image:linear-gradient(rgba(244,241,234,.07) 1px,transparent 1px),
-                     linear-gradient(90deg,rgba(244,241,234,.07) 1px,transparent 1px);
-    background-size:132px 132px;
-    mask-image:radial-gradient(120% 90% at 78% 14%,#000,transparent 72%);
-    -webkit-mask-image:radial-gradient(120% 90% at 78% 14%,#000,transparent 72%);
-  }
-  .hero .wrap{position:relative;z-index:1;width:100%}
-  /* 11px base, 75% up. Tracking eases off as it grows — .16em was set for
-     small caps and gets loose at this size. */
-  .hero .eyebrow{
-    color:var(--gold);
-    font-size:19.25px;
-    letter-spacing:.12em;
-  }
-  @media(max-width:480px){
-    .hero .eyebrow{font-size:16px;letter-spacing:.1em}
-  }
-  h1{
-    margin:14px 0 0;
-    font-size:clamp(2.5rem,7.4vw,6.1rem);
-    line-height:.94;letter-spacing:-.035em;font-weight:700;text-transform:uppercase;
-    max-width:14ch;
-    text-wrap:balance;
-  }
-  .hero p.lede{
-    margin:28px 0 0;max-width:50ch;
-    font-size:clamp(1rem,1.35vw,1.2rem);
-    color:rgba(244,241,234,.86);
-  }
-  .hero-foot{
-    margin-top:clamp(34px,5vh,60px);
-    padding-top:22px;
-    border-top:1px solid rgba(244,241,234,.22);
-    display:flex;flex-wrap:wrap;align-items:center;gap:20px 32px;
-  }
-  .pillars{display:flex;flex-wrap:wrap;gap:10px 22px}
-  .pillars span{
-    font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-    color:rgba(244,241,234,.86);
-  }
-  .pillars span+span::before{content:"\00b7";margin-right:22px;color:rgba(244,241,234,.45)}
-  /* Four words have to hold one line on a phone. Type and spacing scale off
-     the viewport so the row shrinks to fit rather than wrapping, and nowrap
-     stops flex breaking it as a last resort. */
   @media(max-width:620px){
-    .pillars{flex-wrap:nowrap;gap:0;width:100%}
-    .pillars span{
-      font-size:clamp(7.4px,2.06vw,11px);
-      letter-spacing:.05em;
-      white-space:nowrap;
-    }
-    .pillars span+span::before{
-      margin-right:clamp(5px,1.5vw,10px);
-      margin-left:clamp(5px,1.5vw,10px);
-    }
+    .events li{grid-template-columns:76px minmax(0,1fr)}
+    .events .cover{grid-column:1 / -1;max-width:220px}
   }
-  /* Where the footage came from. Quiet, but it is a real room in a real city. */
-  .hero-credit{
-    margin-left:auto;
+  @media(max-width:460px){
+    .events li{grid-template-columns:1fr}
+    .events .date{text-align:left;border-right:none;border-bottom:var(--rule);padding:0 0 12px;display:flex;align-items:baseline;gap:10px}
+  }
+
+  /* ---------- past events ---------- */
+  /* A facade, not an embed: the thumbnail is ours and YouTube's player only
+     loads if someone actually clicks. Nothing third-party runs otherwise. */
+  .past{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(26px,4.5vw,64px);align-items:center;margin-top:clamp(30px,4.5vw,50px)}
+  .vidcard{position:relative;display:block;border:1px solid rgba(16,24,32,.18);overflow:hidden;background:var(--midnight);line-height:0;cursor:pointer;padding:0;width:100%}
+  .vidcard img{width:100%;height:auto;display:block;transition:transform .5s cubic-bezier(.2,.7,.2,1),opacity .3s}
+  .vidcard:hover img{transform:scale(1.03);opacity:.88}
+  .vidcard .play{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;
+  }
+  .vidcard .play span{
+    width:74px;height:74px;border-radius:50%;
+    background:rgba(244,241,234,.94);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 34px rgba(16,24,32,.42);
+    transition:transform .3s cubic-bezier(.2,.7,.2,1),background-color .3s;
+  }
+  .vidcard:hover .play span{transform:scale(1.08);background:var(--cobalt)}
+  .vidcard .play svg{margin-left:4px;color:var(--midnight);transition:color .3s}
+  .vidcard:hover .play svg{color:var(--parchment)}
+  .vidcard .tag{
+    position:absolute;left:0;top:0;
     font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
-    color:rgba(244,241,234,.5);
+    background:var(--midnight);color:var(--parchment);padding:9px 14px;line-height:1;
   }
-  @media(max-width:700px){
-    .hero{min-height:auto}
-    .hero-credit{margin-left:0}
-  }
-  /* Someone who asked for less motion gets the still frame. */
-  @media (prefers-reduced-motion:reduce){
-    .hero-media video{display:none}
-  }
-
-  /* ---------- buttons ---------- */
-  .btn{
-    display:inline-flex;align-items:center;gap:11px;
-    font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-    text-decoration:none;padding:16px 28px;border:1px solid transparent;
-    transition:background-color .2s,color .2s,border-color .2s;
-  }
-  .btn svg{flex:0 0 auto}
-  .on-dark .btn-solid{background:var(--parchment);color:var(--midnight);border-color:var(--parchment)}
-  .on-dark .btn-solid:hover{background:var(--cobalt);border-color:var(--cobalt);color:var(--parchment)}
-  .on-dark .btn-line{color:var(--parchment);border-color:rgba(244,241,234,.38)}
-  .on-dark .btn-line:hover{background:var(--parchment);color:var(--midnight);border-color:var(--parchment)}
-  .btn-solid{background:var(--midnight);color:var(--parchment);border-color:var(--midnight)}
-  .btn-solid:hover{background:var(--cobalt);border-color:var(--cobalt)}
-  .actions{display:flex;flex-wrap:wrap;gap:12px 14px;margin-top:clamp(28px,4vw,40px)}
-
-  /* ---------- the gap ---------- */
-  /* One claim, set large, with nothing beside it. The argument for the whole
-     page rests here, so it gets a band to itself. */
-  .gap-claim{max-width:24ch}
-  .gap-claim h2{
-    margin:14px 0 0;
-    font-size:clamp(1.9rem,4.6vw,3.6rem);
-    line-height:1.0;letter-spacing:-.035em;font-weight:700;text-transform:uppercase;
-  }
-  .gap-body{margin:clamp(26px,3.4vw,34px) 0 0;max-width:58ch;color:var(--steel);font-size:clamp(1.02rem,1.35vw,1.15rem);line-height:1.62}
-  .gap-body strong{color:var(--midnight);font-weight:600}
-
-  /* ---------- the three offerings ---------- */
-  /* Numbered, stacked, read top to bottom: the order is the argument. Cards
-     side by side would say these are alternatives, and they are not. */
-  .offers{list-style:none;margin:clamp(34px,5vw,58px) 0 0;padding:0}
-  .offers li{
-    display:grid;
-    grid-template-columns:clamp(54px,7vw,92px) minmax(0,1fr);
-    gap:clamp(18px,3.4vw,52px);
-    padding:clamp(30px,4vw,46px) 0;
-    border-top:var(--rule);
-  }
-  .offers li:last-child{border-bottom:var(--rule)}
-  .offers .num{
-    font-family:var(--mono);font-size:clamp(11px,1.1vw,13px);letter-spacing:.1em;
-    color:var(--cobalt);padding-top:6px;
-  }
-  .offers .name{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--steel)}
-  .offers h3{
-    margin:12px 0 0;max-width:22ch;
-    font-size:clamp(1.35rem,3vw,2.25rem);
-    line-height:1.04;letter-spacing:-.03em;font-weight:600;text-transform:uppercase;
-  }
-  .offers p{margin:18px 0 0;max-width:58ch;color:var(--steel);font-size:1.02rem;line-height:1.6}
-  .offers a.more{
-    display:inline-flex;align-items:center;gap:9px;margin-top:20px;
-    font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-    text-decoration:none;color:var(--midnight);
-    border-bottom:1px solid rgba(16,24,32,.3);padding-bottom:4px;
-    transition:color .2s,border-color .2s;
-  }
-  .offers a.more:hover{color:var(--cobalt);border-color:var(--cobalt)}
-  @media(max-width:560px){
-    .offers li{grid-template-columns:1fr;gap:10px}
-    .offers .num{padding-top:0}
-  }
-
-  /* ---------- section headings ---------- */
-  .lead-in{max-width:54ch}
-  .lead-in h2{
-    margin:14px 0 0;
-    font-size:clamp(1.6rem,3.4vw,2.6rem);
-    line-height:1.04;letter-spacing:-.032em;font-weight:600;text-transform:uppercase;
-  }
-  .lead-in p{margin:20px 0 0;color:var(--steel);font-size:clamp(1rem,1.3vw,1.1rem);line-height:1.6}
+  .vidcard iframe{width:100%;aspect-ratio:9/16;max-height:70vh;border:0;display:block}
+  .past .meta .where{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--oxide)}
+  .past .meta h3{margin:12px 0 0;font-size:clamp(1.3rem,2.6vw,2rem);font-weight:600;text-transform:uppercase;letter-spacing:-.03em;line-height:1.05}
+  .past .meta p{margin:16px 0 0;color:var(--steel);font-size:1rem;line-height:1.6;max-width:50ch}
+  .sponsors{margin:22px 0 0;padding:18px 0 0;border-top:var(--rule)}
+  .sponsors .k{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--steel)}
+  .sponsors .names{margin:10px 0 0;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.95rem;font-weight:600;letter-spacing:-.01em}
+  .sponsors .names span+span::before{content:"·";margin-right:18px;color:var(--steel);font-weight:400}
+  @media(max-width:860px){.past{grid-template-columns:1fr}}
 
   /* ---------- close ---------- */
+  /* Same block as the home page's closing ask, so the two read as one site
+     rather than two templates. */
   .close h2{
     margin:14px 0 0;max-width:16ch;
     font-size:clamp(2rem,5.2vw,4rem);
@@ -195,138 +100,123 @@
   }
   .close p{margin:22px 0 0;max-width:52ch;color:var(--steel);font-size:clamp(1rem,1.3vw,1.1rem);line-height:1.6}
 
-  /* ---------- centred statement ---------- */
-  /* The page is otherwise a left column. Centring the one claim the whole
-     argument rests on gives the eye somewhere to stop. */
-  .statement{text-align:center;max-width:22ch;margin:0 auto}
-  /* 22ch was set for a four-word claim. A full sentence needs room, or it
-     stacks into a column of single words. */
-  .statement.wide{max-width:30ch}
-  .statement h1,.statement h2{
-    margin:16px 0 0;
-    font-size:clamp(2rem,5.4vw,4.2rem);
-    line-height:.98;letter-spacing:-.038em;font-weight:700;text-transform:uppercase;
-    text-wrap:balance;
+  /* ---------- page head video ---------- */
+  /* Same half-height band as Studios. The footage is stock and the faces are
+     identifiable, so it is blurred hard: it should read as the atmosphere of
+     a room, not as a claim about who these people are. */
+  .page-head{
+    position:relative;overflow:hidden;isolation:isolate;
+    min-height:min(46vh,440px);
+    display:flex;align-items:flex-end;
+    --wash:.68;
   }
-  .statement-body{
-    margin:clamp(28px,4vw,42px) auto 0;max-width:54ch;text-align:center;
-    color:var(--steel);font-size:clamp(1.02rem,1.4vw,1.2rem);line-height:1.65;
+  .head-media{position:absolute;inset:0;z-index:-3;overflow:hidden}
+  .head-media video,.head-media img{
+    width:100%;height:100%;object-fit:cover;display:block;
+    filter:blur(9px) saturate(.85);
+    /* Blur samples past the edges, so the frame is scaled up to cover the
+       soft border it would otherwise leave. */
+    transform:scale(1.14);
   }
-  .statement-body strong{color:var(--midnight);font-weight:600}
+  .page-head::before{
+    content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;
+    background:linear-gradient(
+      to top,
+      rgba(16,24,32,calc(var(--wash) + .24)) 0%,
+      rgba(16,24,32,calc(var(--wash) + .06)) 42%,
+      rgba(16,24,32,var(--wash)) 100%);
+  }
+  .page-head::after{z-index:-1}
+  .page-head .wrap{width:100%}
+  .page-head .eyebrow{color:var(--gold)}
+  .page-head .lede{color:rgba(244,241,234,.86)}
+  @media (prefers-reduced-motion:reduce){ .head-media video{display:none} }
 
-  /* ---------- offering rows ---------- */
-  /* Image and text swap sides down the page. The zigzag is what stops three
-     long blocks reading as one wall of left-aligned copy. */
-  .offer{
-    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-    gap:clamp(26px,5vw,76px);align-items:center;
-    padding:clamp(40px,6vw,84px) 0;
-    border-top:var(--rule);
+  /* Steps arrive in sequence and answer the cursor. The rule draws first,
+     then the content rises under it — the same grammar as the strata, so
+     the two blocks feel like one system. */
+  .steps li{
+    opacity:0;transform:translateY(18px);
+    transition:opacity .55s cubic-bezier(.2,.7,.2,1),
+               transform .55s cubic-bezier(.2,.7,.2,1);
+    border-top:0;
+    position:relative;
   }
-  .offer:last-of-type{border-bottom:var(--rule)}
-  .offer:nth-child(even) .offer-text{order:-1}
-  .offer .num{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--cobalt)}
-  .offer .name{
-    display:block;margin:0 0 14px;
-    font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--steel);
+  .steps li::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:2px;
+    background:var(--cobalt);
+    transform:scaleX(0);transform-origin:left center;
+    transition:transform .6s cubic-bezier(.4,0,.2,1),background-color .3s ease;
   }
-  .offer h3{
-    margin:0;max-width:20ch;
-    font-size:clamp(1.5rem,3.2vw,2.5rem);
-    line-height:1.03;letter-spacing:-.032em;font-weight:600;text-transform:uppercase;
+  .steps.in li{opacity:1;transform:none}
+  .steps.in li::before{transform:scaleX(1)}
+  .steps.in li:nth-child(2),.steps.in li:nth-child(2)::before{transition-delay:.12s}
+  .steps.in li:nth-child(3),.steps.in li:nth-child(3)::before{transition-delay:.24s}
+  .steps li .n{transition:color .3s ease,transform .3s cubic-bezier(.2,.7,.2,1);display:inline-block;transform-origin:left center}
+  .steps li:hover{transform:translateY(-4px)}
+  .steps li:hover::before{background:var(--gold-deep)}
+  .steps li:hover .n{color:var(--gold-deep);transform:scale(1.18)}
+  @media (prefers-reduced-motion:reduce){
+    .steps li,.steps li::before,.steps li .n{opacity:1!important;transform:none!important;transition:none!important}
   }
-  .offer p{margin:20px 0 0;max-width:52ch;color:var(--steel);font-size:1.02rem;line-height:1.62}
-  .offer .more{
-    display:inline-flex;align-items:center;gap:9px;margin-top:24px;
-    font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-    text-decoration:none;color:var(--midnight);
-    border-bottom:1px solid rgba(16,24,32,.3);padding-bottom:4px;
+
+  /* ---------- open allocation ---------- */
+  /* The investor cut of the same company. No hero imagery and no story: an
+     allocator scanning this wants the structure, the eligibility and the
+     status, so it is set as terms rather than as a case study. */
+  .alloc{
+    margin-top:clamp(28px,4vw,48px);
+    border:1px solid rgba(16,24,32,.2);
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);
+  }
+  .alloc-head{
+    background:var(--midnight);color:var(--parchment);
+    padding:clamp(26px,3.4vw,42px);
+    display:flex;flex-direction:column;justify-content:center;
+    position:relative;overflow:hidden;
+  }
+  .alloc-head::after{
+    content:"";position:absolute;right:-8%;bottom:-22%;width:min(58%,300px);aspect-ratio:133/160;
+    background:url('/assets/seco-mark-white.png') center/contain no-repeat;
+    opacity:.07;pointer-events:none;
+  }
+  .alloc-head .mark{height:42px;width:auto;align-self:flex-start;flex:0 0 auto;position:relative;z-index:1}
+  .alloc-head h3{
+    margin:20px 0 0;position:relative;z-index:1;
+    font-size:clamp(1.4rem,2.8vw,2.1rem);line-height:1.02;letter-spacing:-.032em;
+    font-weight:700;text-transform:uppercase;
+  }
+  .alloc-head p{margin:14px 0 0;position:relative;z-index:1;color:rgba(244,241,234,.7);font-size:.97rem;line-height:1.55;max-width:38ch}
+  .alloc-head a.site{
+    margin-top:22px;position:relative;z-index:1;align-self:flex-start;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--gold);text-decoration:none;
+    border-bottom:1px solid rgba(240,184,36,.45);padding-bottom:3px;
     transition:color .2s,border-color .2s;
   }
-  .offer .more:hover{color:var(--cobalt);border-color:var(--cobalt)}
-  .offer .head{display:flex;align-items:baseline;gap:16px;margin-bottom:14px}
+  .alloc-head a.site:hover{color:var(--parchment);border-color:var(--parchment)}
 
-  /* Picture box. Drop a file in with the named path and it just works. */
-  .shot{
-    position:relative;aspect-ratio:4/3;overflow:hidden;
-    background:var(--parchment-deep);
-    border:1px solid rgba(16,24,32,.16);
+  .alloc-terms{padding:clamp(26px,3.4vw,42px)}
+  .alloc-terms dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:0}
+  .alloc-terms dt{
+    font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--steel);padding:14px 28px 14px 0;border-top:var(--rule);white-space:nowrap;
   }
-  .shot img{width:100%;height:100%;object-fit:cover;display:block}
-  .shot-hint{
-    position:absolute;inset:0;display:flex;flex-direction:column;
-    align-items:center;justify-content:center;gap:8px;text-align:center;padding:24px;
-    font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--steel);
+  .alloc-terms dd{margin:0;padding:14px 0;border-top:var(--rule);font-size:1rem;font-weight:600;letter-spacing:-.01em}
+  .alloc-terms dt:first-of-type,.alloc-terms dl>dt:first-of-type+dd{border-top:none}
+  .alloc-terms .open{color:var(--gold-deep)}
+  .alloc-terms .legal{
+    margin:clamp(20px,2.6vw,26px) 0 0;font-size:.78rem;line-height:1.55;color:var(--steel);max-width:60ch;
   }
-  .shot-hint b{font-weight:500;color:var(--midnight);letter-spacing:.2em}
-  @media(max-width:820px){
-    .offer{grid-template-columns:1fr;gap:26px}
-    .offer:nth-child(even) .offer-text{order:0}
-  }
-
-  /* ---------- the stack ---------- */
-  /* The claim is that these are layers, so the block is built as layers.
-     Each stratum is narrower than the one holding it up, and the foundation
-     is widest, darkest and lands first. The shape is the argument — the
-     hierarchy is legible before a word is read. */
-  .strata{margin-top:clamp(26px,3.6vw,44px);display:flex;flex-direction:column;align-items:center;gap:clamp(8px,1vw,12px)}
-  .stratum{
-    width:100%;position:relative;
-    display:grid;grid-template-columns:clamp(74px,9vw,128px) minmax(0,1fr);
-    align-items:start;gap:clamp(14px,2.6vw,38px);
-    padding:clamp(24px,3.4vw,42px) clamp(20px,3vw,38px);
-    opacity:0;transform:translateY(28px);
-    transition:opacity .6s cubic-bezier(.22,1.1,.36,1),
-               transform .6s cubic-bezier(.22,1.1,.36,1),
-               box-shadow .3s ease;
-  }
-  .strata.in .stratum{opacity:1;transform:none}
-  /* Bottom up: the ground, then what runs on it, then what directs it. */
-  .strata.in .s-foundation{transition-delay:0s}
-  .strata.in .s-execution{transition-delay:.24s}
-  .strata.in .s-intelligence{transition-delay:.48s}
-
-  .s-foundation{width:100%;background:var(--midnight);color:var(--parchment)}
-  .s-execution{width:93%;background:var(--parchment-deep);border-left:3px solid var(--oxide)}
-  .s-intelligence{width:86%;background:transparent;border:1px solid rgba(16,24,32,.22)}
-  .stratum:hover{box-shadow:0 16px 44px rgba(16,24,32,.14)}
-
-  .stratum .tag{
-    font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
-    white-space:nowrap;padding-top:.5em;
-  }
-  .s-foundation .tag{color:rgba(244,241,234,.6)}
-  .s-execution .tag{color:var(--oxide)}
-  .s-intelligence .tag{color:var(--cobalt)}
-  .stratum .line{
-    margin:0;
-    font-size:clamp(1.25rem,3.1vw,2.4rem);
-    line-height:1.04;letter-spacing:-.03em;font-weight:600;text-transform:uppercase;
-  }
-  /* The supporting line arrives just after its layer has landed. */
-  .stratum .sub{
-    margin:12px 0 0;font-size:.98rem;line-height:1.5;max-width:48ch;color:var(--steel);
-    opacity:0;transform:translateY(6px);
-    transition:opacity .45s ease,transform .45s ease;
-  }
-  .s-foundation .sub{color:rgba(244,241,234,.66)}
-  .strata.in .stratum .sub{opacity:1;transform:none}
-  .strata.in .s-foundation .sub{transition-delay:.26s}
-  .strata.in .s-execution .sub{transition-delay:.50s}
-  .strata.in .s-intelligence .sub{transition-delay:.74s}
-
-  @media(max-width:700px){
-    .stratum{grid-template-columns:1fr;gap:10px;width:100%}
-    .s-execution,.s-intelligence{width:100%}
-    .stratum .tag{padding-top:0}
-  }
-  @media (prefers-reduced-motion:reduce){
-    .stratum,.stratum .sub{opacity:1;transform:none;transition:none}
+  @media(max-width:860px){
+    .alloc{grid-template-columns:1fr}
+    .alloc-terms dl{grid-template-columns:1fr}
+    .alloc-terms dt{padding-bottom:0;border-top:var(--rule)}
+    .alloc-terms dd{padding-top:6px;border-top:none}
   }
 </style>
 </head>
-<body class="hero-top">
+<body>
 
 <header class="masthead">
   <div class="wrap">
@@ -334,74 +224,59 @@
     <nav>
       <a href="/ventures/">Ventures</a>
       <a href="/studios/">Studios</a>
-      <a href="/investors/">Investors</a>
+      <a href="/investors/" aria-current="page">Investors</a>
     </nav>
   </div>
 </header>
 
 <main id="top">
 
-
-
-
-  <!-- CLOSE -->
-  <!-- HERO — the promise, then what it is in plain nouns. -->
-  <section class="hero on-dark">
-    <div class="hero-media" aria-hidden="true">
-      <video autoplay muted loop playsinline preload="auto" poster="/assets/hero-boston.jpg">
-        <source src="/assets/hero-boston.mp4" type="video/mp4">
+  <section class="page-head">
+    <div class="head-media" aria-hidden="true">
+      <video autoplay muted loop playsinline preload="auto" poster="/assets/investors-lab.jpg">
+        <source src="/assets/investors-lab.mp4" type="video/mp4">
       </video>
     </div>
     <div class="wrap">
-      <span class="eyebrow">We take you</span>
-      <h1>From founder to exit.</h1>
-      <p class="lede">A private capital ecosphere for the companies and infrastructure transforming physical industry — the factories, power and supply chains everything else runs on.</p>
+      <span class="eyebrow">For family offices, funds and angels</span>
+      <h1>Investors</h1>
+      <p class="lede">Deal flow in physical industry, sourced from real meetings rather than scraped lists — and allocated deal by deal, with no fund commitment.</p>
       <div class="actions">
-        <button class="btn btn-solid" type="button" data-form="company">Companies apply <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></button>
-        <a class="btn btn-line" href="/ventures/">What we do <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
-      </div>
-      <div class="aud-bar">
-        Investing in physical industry?
-        <a href="/investors/">See top companies <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
-      </div>
-      <div class="hero-foot">
-        <div class="pillars">
-          <span>Founders</span><span>Marketing</span><span>Investing</span><span>Ecosphere</span>
-        </div>
-        <span class="hero-credit">Boston · October 8</span>
+        <button class="btn btn-solid on-dark" type="button" data-form="investing">Join the network <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></button>
+        <a class="btn btn-line on-dark" href="#events">See the calendar</a>
       </div>
     </div>
   </section>
 
-  <!-- THESIS — the opening block. Built bottom up, because that is the claim. -->
-  <section class="band" id="thesis">
+  <section class="band" id="past">
     <div class="wrap">
-      <!-- Label only, no heading: the hero already carries the page's h1, and
-           a second one competing with it is why this came out before. -->
-      <div class="statement">
-        <span class="eyebrow">Our thesis</span>
+      <div class="lead-in">
+        <span class="eyebrow">Where this already works</span>
+        <h2>Boston, at The Engine.</h2>
+        <p>September 17 at MIT's tough-tech campus — accredited investors, founders building in the physical world, and the people who fund them.</p>
       </div>
 
-      <div class="strata" id="strata">
-        <div class="stratum s-intelligence">
-          <span class="tag">Intelligence</span>
-          <div>
-            <p class="line">AI is the intelligence.</p>
-            <p class="sub">What decides, routes and optimises — faster than any control room.</p>
+      <div class="past">
+        <button class="vidcard" type="button" data-yt="ixdL2SGAGAk" aria-label="Play the recap from Boston, September 17">
+          <img src="/assets/boston-sept17.jpg" alt="4IR Group investor evening at The Engine, MIT — Boston, September 17" loading="lazy">
+          <span class="play"><span><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span>
+          <span class="tag">Recap</span>
+        </button>
+
+        <div class="meta">
+          <div class="where">Boston · September 17</div>
+          <h3>The Engine at MIT</h3>
+          <p>Exclusively for accredited investors. Companies presented to the room, introductions were made by name, and the conversations carried on well past the programme.</p>
+
+          <div class="sponsors">
+            <div class="k">Sponsored by</div>
+            <div class="names">
+              <span>4IR Group</span><span>FinStrat Management</span><span>The Engine</span><span>Nixon Peabody</span><span>Fidelity</span>
+            </div>
           </div>
-        </div>
-        <div class="stratum s-execution">
-          <span class="tag">Execution</span>
-          <div>
-            <p class="line">Robotics is the execution.</p>
-            <p class="sub">What moves, welds, picks and builds. Intelligence with nothing to act through is a demo.</p>
-          </div>
-        </div>
-        <div class="stratum s-foundation">
-          <span class="tag">Foundation</span>
-          <div>
-            <p class="line">Infrastructure is the foundation.</p>
-            <p class="sub">Power, plants, networks, grid. Everything above it is theory without this.</p>
+
+          <div class="actions">
+            <a class="btn btn-line" href="https://luma.com/bostonsept17">See the event page <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
           </div>
         </div>
       </div>
@@ -411,44 +286,150 @@
 
   <section class="band gold">
     <div class="wrap">
-      <span class="eyebrow">Why we exist</span>
-      <p>Not all capital is money.</p>
-      <p class="attrib">Founders with real companies solving real problems should be free to build — not dragged through the hassle and the time it eats. We grow every kind of capital that moves a company forward, and the infrastructure of industry gets built in the process.</p>
-      <ul class="kinds">
-        <li>Relationships</li>
-        <li>Time</li>
-        <li>Systems</li>
-        <li>Socioeconomic</li>
-        <li>Monetary</li>
-      </ul>
+      <span class="eyebrow">Why rooms</span>
+      <p>The round after ours is decided in rooms, not inboxes.</p>
+      <p class="attrib">Introductions made by name, in front of the people who actually allocate.</p>
     </div>
   </section>
+  <section class="band">
+    <div class="wrap">
+      <div class="lead-in">
+        <span class="eyebrow">How allocation works</span>
+        <h2>Deal by deal, not blind pool.</h2>
+        <p>You are not committing to a fund and waiting to find out what it bought. Every opportunity comes to you on its own, in its own vehicle, and you decide on that one.</p>
+      </div>
+      <ol class="steps">
+        <li>
+          <div class="n">01</div>
+          <h3>We source and select</h3>
+          <p>Companies building in the physical world, assessed against a published bar. Most do not make it through.</p>
+        </li>
+        <li>
+          <div class="n">02</div>
+          <h3>We form an SPV</h3>
+          <p>A vehicle per company, per round. You see the company, the terms and the allocation before anything is committed.</p>
+        </li>
+        <li>
+          <div class="n">03</div>
+          <h3>You allocate</h3>
+          <p>Take the ones that fit your thesis and pass on the rest. Co-invest alongside the other investors in the room.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+
+  <section class="band" id="allocation">
+    <div class="wrap">
+      <div class="lead-in">
+        <span class="eyebrow">In the portfolio</span>
+        <h2>What we have backed.</h2>
+        <p>The kind of company that comes through the process above, and what we looked for when it did.</p>
+      </div>
+
+      <div class="alloc">
+        <div class="alloc-head">
+          <img class="mark" src="/assets/seco-mark-white.png" alt="Seco Bio">
+          <h3>Seco Bio</h3>
+          <p>Probiotics die before they arrive. Seco Bio keeps them alive from the factory to the moment they are used.</p>
+          <a class="site" href="https://seco.bio">seco.bio <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
+        </div>
+
+        <div class="alloc-terms">
+          <dl>
+            <dt>Sector</dt><dd>Biotechnology &mdash; shelf-stable live cultures</dd>
+            <dt>Why we backed it</dt><dd>A physical problem with a physical fix, not a formulation claim</dd>
+            <dt>Evidence</dt><dd>Proprietary formulation, validated through to the point of use</dd>
+            <dt>Presented at</dt><dd>Boston, at The Engine &mdash; September 17</dd>
+          </dl>
+
+          <p class="legal">Portfolio company information is provided for background only. Nothing on this page is an offer to sell or a solicitation of an offer to buy any security, and it is not investment, legal or tax advice. 4IR Group does not offer securities through this website.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="events">
+    <div class="wrap">
+      <div class="lead-in">
+        <span class="eyebrow">Calendar</span>
+        <h2>Where we are this fall &rsquo;26, and who we are presenting.</h2>
+        <p>Five private evenings, each with portfolio companies presenting to the room. Invitation-only, and registration is subject to host approval.</p>
+      </div>
+      <ul class="events">
+        <li>
+          <div class="date"><div class="mon">Oct</div><div class="day">8</div></div>
+          <div class="cover"><img src="/assets/cities/boston.jpg" alt="" loading="lazy"></div>
+          <div>
+            <div class="where">Investor evening</div>
+            <h3>Boston, MA</h3>
+            <p>Thursday · 6:00 – 9:00 PM — companies present uninterrupted, introductions made by name, and the hour afterwards that does the actual work.</p>
+          </div>
+          <div class="cta-cell"><a class="btn btn-line" href="https://luma.com/4IRGroupBoston">Register <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a></div>
+        </li>
+        <li>
+          <div class="date"><div class="mon">Oct</div><div class="day">13</div></div>
+          <div class="cover"><img src="/assets/cities/salt-lake.jpg" alt="" loading="lazy"></div>
+          <div>
+            <div class="where">Investor evening</div>
+            <h3>Salt Lake City, UT</h3>
+            <p>Tuesday · 6:00 – 9:00 PM MDT — companies present uninterrupted, introductions made by name, and the hour afterwards that does the actual work.</p>
+          </div>
+          <div class="cta-cell"><a class="btn btn-line" href="https://luma.com/saltlake">Register <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a></div>
+        </li>
+        <li>
+          <div class="date"><div class="mon">Oct</div><div class="day">27</div></div>
+          <div class="cover"><img src="/assets/cities/beverly-hills.jpg" alt="" loading="lazy"></div>
+          <div>
+            <div class="where">Investor evening</div>
+            <h3>Beverly Hills, CA</h3>
+            <p>Tuesday · 6:00 – 9:00 PM PDT — companies present uninterrupted, introductions made by name, and the hour afterwards that does the actual work.</p>
+          </div>
+          <div class="cta-cell"><a class="btn btn-line" href="https://luma.com/bevhills">Register <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a></div>
+        </li>
+        <li>
+          <div class="date"><div class="mon">Nov</div><div class="day">5</div></div>
+          <div class="cover"><img src="/assets/cities/palm-beach.jpg" alt="" loading="lazy"></div>
+          <div>
+            <div class="where">Investor evening</div>
+            <h3>Palm Beach, FL</h3>
+            <p>Thursday · 6:00 – 9:00 PM — companies present uninterrupted, introductions made by name, and the hour afterwards that does the actual work.</p>
+          </div>
+          <div class="cta-cell"><a class="btn btn-line" href="https://luma.com/palmbeachworthave">Register <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a></div>
+        </li>
+        <li>
+          <div class="date"><div class="mon">Nov</div><div class="day">12</div></div>
+          <div class="cover"><img src="/assets/cities/chicago.jpg" alt="" loading="lazy"></div>
+          <div>
+            <div class="where">Investor evening</div>
+            <h3>Chicago, IL</h3>
+            <p>Thursday · 6:00 – 9:00 PM — companies present uninterrupted, introductions made by name, and the hour afterwards that does the actual work.</p>
+          </div>
+          <div class="cta-cell"><a class="btn btn-line" href="https://luma.com/chicago4ir">Register <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a></div>
+        </li>
+      </ul>
+
+      <div class="aud-bar">
+        Want your firm in front of these rooms?
+        <a href="/studios/fallroadshow/">Sponsorship and the one-pager <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+
+
   <section class="band close">
     <div class="wrap">
       <span class="eyebrow">Get started</span>
-      <h2>Tell us what you're building.</h2>
-      <p>What it makes, moves or powers, what stage it is at, and what the next twelve months have to prove. That is enough to start.</p>
+      <h2>Tell us your thesis.</h2>
+      <p>What you deploy into, at what size, and at what stage. We only come to you when something actually fits it.</p>
       <div class="actions">
-        <button class="btn btn-solid" type="button" data-form="company">Apply <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></button>
+        <button class="btn btn-solid" type="button" data-form="investing">Join the network <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></button>
       </div>
     </div>
   </section>
 
 </main>
-
-<script>
-  // Autoplay is refused often enough that the attribute alone is not a plan.
-  // Muted playback is permitted everywhere, so ask again once the file is
-  // ready and fall back to the poster frame without complaining.
-  (function () {
-    var v = document.querySelector('.hero-media video');
-    if (!v) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { v.remove(); return; }
-    var go = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
-    v.addEventListener('canplay', go, { once: true });
-    go();
-  })();
-</script>
 
 <footer>
   <div class="wrap">
@@ -459,41 +440,42 @@
       <a href="/investors/">Investors</a>
       <a href="/studios/fallroadshow/">Sponsorship</a>
     </nav>
-    <p class="legal">This page is for information only. Nothing here is an offer to sell or a solicitation to buy any security.</p>
+    <p class="legal">This page is for information only. Nothing here is an offer to sell or a solicitation to buy any security. Any offering is made only to verified accredited investors through definitive documents.</p>
   </div>
 </footer>
 
 <script>
-  // Foundation arrives first, then execution, then intelligence.
-  var stack = document.getElementById('stack');
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (stack) {
-    if (reduce || !('IntersectionObserver' in window)) {
-      stack.classList.add('in');
-    } else {
-      new IntersectionObserver(function(entries, obs){
-        entries.forEach(function(e){
-          if (e.isIntersecting) { stack.classList.add('in'); obs.disconnect(); }
-        });
-      }, {threshold:0.25}).observe(stack);
-    }
-  }
+  // Swap the still for YouTube's player only on click — no third-party
+  // request until someone asks for one.
+  document.querySelectorAll('.vidcard').forEach(function (card) {
+    card.addEventListener('click', function () {
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube.com/embed/' + card.dataset.yt + '?autoplay=1&rel=0&playsinline=1';
+      f.title = 'Boston, September 17 — recap';
+      f.allow = 'accelerometer; autoplay; encrypted-media; picture-in-picture';
+      f.allowFullscreen = true;
+      card.replaceWith(f);
+    }, { once: true });
+  });
 </script>
-
-
-
 <script>
-  // One trigger on the group: they stack as a set and the delays do the
-  // ordering, so the ground is always down before anything lands on it.
+  (function(){
+    var v=document.querySelector('.head-media video'); if(!v) return;
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){v.remove();return;}
+    var go=function(){var p=v.play(); if(p&&p.catch)p.catch(function(){});};
+    v.addEventListener('canplay',go,{once:true}); go();
+  })();
+</script>
+<script>
   (function () {
-    var st = document.getElementById('strata');
+    var st = document.querySelector('.steps');
     if (!st) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
         !('IntersectionObserver' in window)) { st.classList.add('in'); return; }
     new IntersectionObserver(function (e, o) {
       if (!e[0].isIntersecting) return;
       st.classList.add('in'); o.disconnect();
-    }, { threshold: 0.2 }).observe(st);
+    }, { threshold: 0.3 }).observe(st);
   })();
 </script>
 <script src="/assets/form.js" defer></script>
