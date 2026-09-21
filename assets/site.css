@@ -9,6 +9,11 @@
     --steel:#6D747A;
     --cobalt:#3563E9;
     --oxide:#A55D3B;
+    /* Third accent. Two tones because one cannot serve both grounds:
+       --gold is 9.87:1 on midnight, --gold-deep is 4.51:1 on parchment.
+       Gold labels; cobalt stays the interactive colour. */
+    --gold:#F0B824;
+    --gold-deep:#8B690F;
 
     --display:"Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
     --mono:"IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -39,7 +44,7 @@
     font-size:11px;
     letter-spacing:.16em;
     text-transform:uppercase;
-    color:var(--steel);
+    color:var(--gold-deep);
   }
 
   /* ---------- header ---------- */
@@ -103,7 +108,7 @@
     -webkit-mask-image:radial-gradient(120% 90% at 78% 20%,#000,transparent 72%);
   }
   .page-head .wrap{position:relative;z-index:1}
-  .page-head .eyebrow{color:rgba(244,241,234,.5)}
+  .page-head .eyebrow{color:var(--gold)}
   .page-head h1{
     margin:16px 0 0;max-width:15ch;
     font-size:clamp(2.3rem,6.4vw,5.2rem);

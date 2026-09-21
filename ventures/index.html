@@ -27,6 +27,34 @@
   .crit svg{display:block;color:var(--cobalt)}
   @media(max-width:1000px){.crit-wrap{grid-template-columns:1fr}}
   @media(max-width:600px){.crit{grid-template-columns:1fr}}
+
+  /* Steps arrive in sequence and answer the cursor. The rule draws first,
+     then the content rises under it — the same grammar as the strata, so
+     the two blocks feel like one system. */
+  .steps li{
+    opacity:0;transform:translateY(18px);
+    transition:opacity .55s cubic-bezier(.2,.7,.2,1),
+               transform .55s cubic-bezier(.2,.7,.2,1);
+    border-top:0;
+    position:relative;
+  }
+  .steps li::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:2px;
+    background:var(--cobalt);
+    transform:scaleX(0);transform-origin:left center;
+    transition:transform .6s cubic-bezier(.4,0,.2,1),background-color .3s ease;
+  }
+  .steps.in li{opacity:1;transform:none}
+  .steps.in li::before{transform:scaleX(1)}
+  .steps.in li:nth-child(2),.steps.in li:nth-child(2)::before{transition-delay:.12s}
+  .steps.in li:nth-child(3),.steps.in li:nth-child(3)::before{transition-delay:.24s}
+  .steps li .n{transition:color .3s ease,transform .3s cubic-bezier(.2,.7,.2,1);display:inline-block;transform-origin:left center}
+  .steps li:hover{transform:translateY(-4px)}
+  .steps li:hover::before{background:var(--gold-deep)}
+  .steps li:hover .n{color:var(--gold-deep);transform:scale(1.18)}
+  @media (prefers-reduced-motion:reduce){
+    .steps li,.steps li::before,.steps li .n{opacity:1!important;transform:none!important;transition:none!important}
+  }
 </style>
 </head>
 <body>
@@ -139,5 +167,17 @@
   </div>
 </footer>
 
+<script>
+  (function () {
+    var st = document.querySelector('.steps');
+    if (!st) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+        !('IntersectionObserver' in window)) { st.classList.add('in'); return; }
+    new IntersectionObserver(function (e, o) {
+      if (!e[0].isIntersecting) return;
+      st.classList.add('in'); o.disconnect();
+    }, { threshold: 0.3 }).observe(st);
+  })();
+</script>
 </body>
 </html>
