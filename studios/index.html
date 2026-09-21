@@ -23,7 +23,14 @@
     padding:clamp(56px,10vh,110px) 0 clamp(40px,6vh,72px);
   }
   .head-media{position:absolute;inset:0;z-index:-3;overflow:hidden}
-  .head-media video,.head-media img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.04)}
+  /* Same treatment as the Investors head, so the two page heads read as one
+     device. The blur samples past the edges, hence the extra scale; the
+     desaturation stops the neon fighting the palette. */
+  .head-media video,.head-media img{
+    width:100%;height:100%;object-fit:cover;display:block;
+    filter:blur(9px) saturate(.8);
+    transform:scale(1.14);
+  }
   /* Same --wash control as the home page, one notch darker: the footage is
      busier than a skyline and the type has to win. */
   .page-head{--wash:.62}
@@ -359,8 +366,11 @@
   (function(){
     var v=document.querySelector('.head-media video'); if(!v) return;
     if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){v.remove();return;}
-    var go=function(){var p=v.play(); if(p&&p.catch)p.catch(function(){});};
-    v.addEventListener('canplay',go,{once:true}); go();
+    var half = function () { v.playbackRate = 0.5; };
+    var go = function () { half(); var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+    v.addEventListener('loadedmetadata', half);
+    v.addEventListener('play', half);
+    v.addEventListener('canplay', go, { once: true }); go();
   })();
 </script>
 <script>
