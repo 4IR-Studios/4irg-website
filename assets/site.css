@@ -158,3 +158,16 @@
   .aud-bar a:hover{color:var(--cobalt);border-color:var(--cobalt)}
   .band .aud-bar{border-color:rgba(16,24,32,.2);color:var(--steel)}
   .band .aud-bar a{color:var(--midnight);border-bottom-color:rgba(16,24,32,.34)}
+
+  /* ---------- footer nav ---------- */
+  /* The pillar line was typography pretending to be navigation. Now it is
+     navigation, and sponsorship lives here rather than in the masthead:
+     a third audience in the nav would dilute the two that matter most. */
+  .foot-nav{display:flex;flex-wrap:wrap;gap:10px 22px}
+  .foot-nav a{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+    color:rgba(244,241,234,.62);text-decoration:none;
+    border-bottom:1px solid transparent;padding-bottom:2px;
+    transition:color .2s,border-color .2s;
+  }
+  .foot-nav a:hover{color:var(--parchment);border-bottom-color:var(--cobalt)}
