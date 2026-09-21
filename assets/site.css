@@ -91,3 +91,70 @@
     .masthead nav{gap:16px}
     .masthead nav a{font-size:10px;letter-spacing:.12em}
   }
+
+  /* ---------- page head (every page below the home page) ---------- */
+  .page-head{background:var(--midnight);color:var(--parchment);padding:clamp(52px,9vh,104px) 0 clamp(44px,7vh,82px);position:relative;overflow:hidden}
+  .page-head::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(rgba(244,241,234,.05) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(244,241,234,.05) 1px,transparent 1px);
+    background-size:132px 132px;
+    mask-image:radial-gradient(120% 90% at 78% 20%,#000,transparent 72%);
+    -webkit-mask-image:radial-gradient(120% 90% at 78% 20%,#000,transparent 72%);
+  }
+  .page-head .wrap{position:relative;z-index:1}
+  .page-head .eyebrow{color:rgba(244,241,234,.5)}
+  .page-head h1{
+    margin:16px 0 0;max-width:15ch;
+    font-size:clamp(2.3rem,6.4vw,5.2rem);
+    line-height:.94;letter-spacing:-.035em;font-weight:700;text-transform:uppercase;
+  }
+  .page-head .lede{margin:26px 0 0;max-width:52ch;font-size:clamp(1rem,1.35vw,1.2rem);color:rgba(244,241,234,.72)}
+
+  /* ---------- buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;gap:11px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    text-decoration:none;padding:16px 28px;border:1px solid transparent;
+    transition:background-color .2s,color .2s,border-color .2s;
+  }
+  .btn svg{flex:0 0 auto}
+  .btn-solid{background:var(--midnight);color:var(--parchment);border-color:var(--midnight)}
+  .btn-solid:hover{background:var(--cobalt);border-color:var(--cobalt)}
+  .btn-line{color:var(--midnight);border-color:rgba(16,24,32,.34)}
+  .btn-line:hover{background:var(--midnight);color:var(--parchment);border-color:var(--midnight)}
+  .on-dark .btn-solid,.btn-solid.on-dark{background:var(--parchment);color:var(--midnight);border-color:var(--parchment)}
+  .on-dark .btn-solid:hover,.btn-solid.on-dark:hover{background:var(--cobalt);border-color:var(--cobalt);color:var(--parchment)}
+  .on-dark .btn-line,.btn-line.on-dark{color:var(--parchment);border-color:rgba(244,241,234,.38)}
+  .on-dark .btn-line:hover,.btn-line.on-dark:hover{background:var(--parchment);color:var(--midnight);border-color:var(--parchment)}
+  .actions{display:flex;flex-wrap:wrap;gap:12px 14px;margin-top:clamp(28px,4vw,40px)}
+
+  /* ---------- section lead-in ---------- */
+  .lead-in{max-width:56ch}
+  .lead-in h2{
+    margin:14px 0 0;
+    font-size:clamp(1.6rem,3.4vw,2.6rem);
+    line-height:1.04;letter-spacing:-.032em;font-weight:600;text-transform:uppercase;
+  }
+  .lead-in p{margin:20px 0 0;color:var(--steel);font-size:clamp(1rem,1.3vw,1.1rem);line-height:1.6}
+
+  /* ---------- audience bar ---------- */
+  /* The other reader's door, in the hero. Founders get the headline; this
+     costs them nothing and stops investors bouncing before they scroll. */
+  .aud-bar{
+    margin-top:clamp(30px,4.5vw,46px);
+    display:inline-flex;flex-wrap:wrap;align-items:center;gap:8px 18px;
+    padding:14px 22px;
+    border:1px solid rgba(244,241,234,.22);
+    font-size:.95rem;color:rgba(244,241,234,.66);
+  }
+  .aud-bar a{
+    font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--parchment);text-decoration:none;
+    display:inline-flex;align-items:center;gap:8px;
+    border-bottom:1px solid rgba(244,241,234,.4);padding-bottom:3px;
+    transition:color .2s,border-color .2s;
+  }
+  .aud-bar a:hover{color:var(--cobalt);border-color:var(--cobalt)}
+  .band .aud-bar{border-color:rgba(16,24,32,.2);color:var(--steel)}
+  .band .aud-bar a{color:var(--midnight);border-bottom-color:rgba(16,24,32,.34)}
