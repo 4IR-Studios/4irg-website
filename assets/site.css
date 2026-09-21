@@ -51,11 +51,11 @@
   }
   .masthead .wrap{
     display:flex;align-items:center;gap:24px;
-    height:60px;
+    height:76px;
   }
   .wordmark{display:inline-flex;align-items:center;text-decoration:none}
-  .logo{display:block;height:24px;width:auto}
-  .logo-sm{height:19px;opacity:.75}
+  .logo{display:block;height:34px;width:auto}
+  .logo-sm{height:26px;opacity:.85}
 
   /* ---------- section frame ---------- */
   section.band{padding:clamp(64px,10vh,120px) 0;border-top:var(--rule)}
