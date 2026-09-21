@@ -12,44 +12,76 @@
 <style>
 
   /* ---------- hero ---------- */
+  /* Video bed -> 45% wash -> brand grid -> content. Four layers, each with
+     its own job: the wash carries legibility, the grid keeps the drone shot
+     reading as ours rather than as stock footage. */
   .hero{
+    position:relative;overflow:hidden;isolation:isolate;
     background:var(--midnight);color:var(--parchment);
-    padding:clamp(64px,13vh,132px) 0 clamp(48px,9vh,96px);
-    position:relative;overflow:hidden;
+    min-height:min(92vh,880px);
+    display:flex;align-items:flex-end;
+    padding:clamp(64px,13vh,132px) 0 clamp(44px,7vh,88px);
+  }
+  .hero-media{position:absolute;inset:0;z-index:-3;overflow:hidden}
+  .hero-media video,.hero-media img{
+    width:100%;height:100%;object-fit:cover;display:block;
+    /* A touch of scale so the edges never show during the loop restart. */
+    transform:scale(1.04);
+  }
+  /* The 45% wash, weighted toward the bottom where the type sits. */
+  .hero::before{
+    content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;
+    background:
+      linear-gradient(to top, rgba(16,24,32,.88) 0%, rgba(16,24,32,.45) 46%, rgba(16,24,32,.38) 100%);
   }
   .hero::after{
-    content:"";position:absolute;inset:0;pointer-events:none;
-    background-image:linear-gradient(rgba(244,241,234,.05) 1px,transparent 1px),
-                     linear-gradient(90deg,rgba(244,241,234,.05) 1px,transparent 1px);
+    content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+    background-image:linear-gradient(rgba(244,241,234,.07) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(244,241,234,.07) 1px,transparent 1px);
     background-size:132px 132px;
-    mask-image:radial-gradient(120% 90% at 78% 20%,#000,transparent 72%);
-    -webkit-mask-image:radial-gradient(120% 90% at 78% 20%,#000,transparent 72%);
+    mask-image:radial-gradient(120% 90% at 78% 14%,#000,transparent 72%);
+    -webkit-mask-image:radial-gradient(120% 90% at 78% 14%,#000,transparent 72%);
   }
-  .hero .wrap{position:relative;z-index:1}
-  .hero .eyebrow{color:rgba(244,241,234,.5)}
+  .hero .wrap{position:relative;z-index:1;width:100%}
+  .hero .eyebrow{color:rgba(244,241,234,.72)}
   h1{
     margin:14px 0 0;
     font-size:clamp(2.5rem,7.4vw,6.1rem);
     line-height:.94;letter-spacing:-.035em;font-weight:700;text-transform:uppercase;
     max-width:14ch;
+    text-wrap:balance;
   }
   .hero p.lede{
     margin:28px 0 0;max-width:50ch;
     font-size:clamp(1rem,1.35vw,1.2rem);
-    color:rgba(244,241,234,.72);
+    color:rgba(244,241,234,.86);
   }
   .hero-foot{
-    margin-top:clamp(40px,6vh,72px);
+    margin-top:clamp(34px,5vh,60px);
     padding-top:22px;
-    border-top:1px solid rgba(244,241,234,.16);
+    border-top:1px solid rgba(244,241,234,.22);
     display:flex;flex-wrap:wrap;align-items:center;gap:20px 32px;
   }
   .pillars{display:flex;flex-wrap:wrap;gap:10px 22px}
   .pillars span{
     font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-    color:rgba(244,241,234,.78);
+    color:rgba(244,241,234,.86);
   }
-  .pillars span+span::before{content:"\00b7";margin-right:22px;color:rgba(244,241,234,.35)}
+  .pillars span+span::before{content:"\00b7";margin-right:22px;color:rgba(244,241,234,.45)}
+  /* Where the footage came from. Quiet, but it is a real room in a real city. */
+  .hero-credit{
+    margin-left:auto;
+    font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+    color:rgba(244,241,234,.5);
+  }
+  @media(max-width:700px){
+    .hero{min-height:auto}
+    .hero-credit{margin-left:0}
+  }
+  /* Someone who asked for less motion gets the still frame. */
+  @media (prefers-reduced-motion:reduce){
+    .hero-media video{display:none}
+  }
 
   /* ---------- buttons ---------- */
   .btn{
@@ -214,6 +246,11 @@
 
   <!-- HERO — the promise, then what it is in plain nouns. -->
   <section class="hero on-dark">
+    <div class="hero-media" aria-hidden="true">
+      <video autoplay muted loop playsinline preload="auto" poster="/assets/hero-boston.jpg">
+        <source src="/assets/hero-boston.mp4" type="video/mp4">
+      </video>
+    </div>
     <div class="wrap">
       <span class="eyebrow">For founders building in physical industry</span>
       <h1>From founder to exit.</h1>
@@ -230,6 +267,7 @@
         <div class="pillars">
           <span>Ventures</span><span>Studios</span><span>Ecosystem</span>
         </div>
+        <span class="hero-credit">Boston · October 8</span>
       </div>
     </div>
   </section>
@@ -364,6 +402,20 @@
   </section>
 
 </main>
+
+<script>
+  // Autoplay is refused often enough that the attribute alone is not a plan.
+  // Muted playback is permitted everywhere, so ask again once the file is
+  // ready and fall back to the poster frame without complaining.
+  (function () {
+    var v = document.querySelector('.hero-media video');
+    if (!v) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { v.remove(); return; }
+    var go = function () { var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+    v.addEventListener('canplay', go, { once: true });
+    go();
+  })();
+</script>
 
 <footer>
   <div class="wrap">
