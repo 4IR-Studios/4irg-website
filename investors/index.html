@@ -214,6 +214,21 @@
     .alloc-terms dt{padding-bottom:0;border-top:var(--rule)}
     .alloc-terms dd{padding-top:6px;border-top:none}
   }
+
+  /* PhAST has no mark file with usable transparency on dark, so its panel
+     carries the wordmark as a watermark in parchment rather than white. */
+  .alloc-head.phast::after{
+    background:url('/assets/phast-mark.png') center/contain no-repeat;
+    width:min(66%,300px);aspect-ratio:600/236;right:-6%;bottom:-8%;
+    opacity:.10;
+    filter:invert(1);
+  }
+
+  .alloc-head.syntis::after{
+    background:url('/assets/syntis-mark.png') center/contain no-repeat;
+    width:min(66%,290px);aspect-ratio:520/240;right:-6%;bottom:-8%;
+    opacity:.10;filter:invert(1);
+  }
 </style>
 </head>
 <body>
@@ -346,6 +361,44 @@
           <p class="legal">Portfolio company information is provided for background only. Nothing on this page is an offer to sell or a solicitation of an offer to buy any security, and it is not investment, legal or tax advice. 4IR Group does not offer securities through this website.</p>
         </div>
       </div>
+
+      <div class="alloc" style="margin-top:clamp(16px,2vw,24px)">
+        <div class="alloc-head phast">
+          <h3>PhAST</h3>
+          <p>When sepsis sets in, doctors guess at antibiotics for days while the lab catches up. PhAST names the one that works in hours.</p>
+          <a class="site" href="https://phast.ai">phast.ai <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
+        </div>
+
+        <div class="alloc-terms">
+          <dl>
+            <dt>Sector</dt><dd>Diagnostics &mdash; antimicrobial susceptibility testing</dd>
+            <dt>Why we backed it</dt><dd>A timing problem measured in lives, with a cleared product against it</dd>
+            <dt>Evidence</dt><dd>FDA-cleared panel; the fastest susceptibility test on the market</dd>
+            <dt>Presented at</dt><dd>Boston, at The Engine &mdash; September 17</dd>
+          </dl>
+
+          <p class="legal">Portfolio company information is provided for background only. Nothing on this page is an offer to sell or a solicitation of an offer to buy any security, and it is not investment, legal or tax advice. 4IR Group does not offer securities through this website.</p>
+        </div>
+      </div>
+
+      <div class="alloc" style="margin-top:clamp(16px,2vw,24px)">
+        <div class="alloc-head syntis">
+          <h3>Syntis Bio</h3>
+          <p>Oral therapies that act through the small intestine&rsquo;s own biology — a pill where the working obesity drugs are injections.</p>
+          <a class="site" href="https://syntis.bio">syntis.bio <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
+        </div>
+
+        <div class="alloc-terms">
+          <dl>
+            <dt>Sector</dt><dd>Biotechnology &mdash; oral therapeutics</dd>
+            <dt>Why we backed it</dt><dd>A delivery route that changes who can be treated, not just how well</dd>
+            <dt>Evidence</dt><dd>Pipeline across multiple therapeutic areas, led by obesity</dd>
+            <dt>Presented at</dt><dd>Boston, at The Engine &mdash; September 17</dd>
+          </dl>
+
+          <p class="legal">Portfolio company information is provided for background only. Nothing on this page is an offer to sell or a solicitation of an offer to buy any security, and it is not investment, legal or tax advice. 4IR Group does not offer securities through this website.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -354,7 +407,7 @@
       <div class="lead-in">
         <span class="eyebrow">Calendar</span>
         <h2>Where we are this fall &rsquo;26, and who we are presenting.</h2>
-        <p>Five private evenings, each with portfolio companies presenting to the room. Invitation-only, and registration is subject to host approval.</p>
+        <p>Six private evenings, each with portfolio companies presenting to the room. Invitation-only, and registration is subject to host approval.</p>
       </div>
       <ul class="events">
         <li>
@@ -386,6 +439,16 @@
             <p>Tuesday · 6:00 – 9:00 PM PDT — companies present uninterrupted, introductions made by name, and the hour afterwards that does the actual work.</p>
           </div>
           <div class="cta-cell"><a class="btn btn-line" href="https://luma.com/bevhills">Register <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a></div>
+        </li>
+        <li>
+          <div class="date"><div class="mon">Nov</div><div class="day">3</div></div>
+          <div class="cover"><img src="/assets/cities/palo-alto.jpg" alt="" loading="lazy"></div>
+          <div>
+            <div class="where">Investor evening</div>
+            <h3>Palo Alto, CA</h3>
+            <p>Tuesday · 6:00 – 8:00 PM PST — companies present uninterrupted, introductions made by name, and the hour afterwards that does the actual work.</p>
+          </div>
+          <div class="cta-cell"><a class="btn btn-line" href="https://luma.com/paloaltoCa">Register <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a></div>
         </li>
         <li>
           <div class="date"><div class="mon">Nov</div><div class="day">5</div></div>
