@@ -154,42 +154,6 @@
     .offers .num{padding-top:0}
   }
 
-  /* ---------- thesis stack (signature, unchanged) ---------- */
-  .stack{display:flex;flex-direction:column-reverse;gap:8px;margin-top:clamp(30px,4.5vw,50px)}
-  .stratum{
-    display:flex;align-items:baseline;gap:clamp(16px,3vw,44px);
-    padding:clamp(22px,3.4vw,40px) clamp(20px,3vw,36px);
-    border-radius:2px;
-    opacity:0;transform:translateY(18px);
-    transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);
-  }
-  .stack.in .stratum{opacity:1;transform:none}
-  /* The stack renders column-reverse, so child 3 is the top row. Reading
-     order is top-down — intelligence, execution, foundation — so the delays
-     run backwards through the children to match what the eye does. */
-  .stack.in .stratum:nth-child(3){transition-delay:0s}    /* intelligence */
-  .stack.in .stratum:nth-child(2){transition-delay:.22s}  /* execution    */
-  .stack.in .stratum:nth-child(1){transition-delay:.44s}  /* foundation   */
-  .stratum .tag{
-    font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-    white-space:nowrap;flex:0 0 auto;width:112px;
-  }
-  .stratum .line{
-    font-size:clamp(1.35rem,3.5vw,2.65rem);
-    line-height:1.05;letter-spacing:-.028em;font-weight:600;
-    text-transform:uppercase;margin:0;
-  }
-  .s-intelligence{background:transparent;border:1px solid rgba(16,24,32,.22)}
-  .s-intelligence .tag{color:var(--cobalt)}
-  .s-execution{background:var(--parchment-deep);border-left:3px solid var(--oxide)}
-  .s-execution .tag{color:var(--oxide)}
-  .s-foundation{background:var(--midnight);color:var(--parchment);padding-block:clamp(30px,5vw,64px)}
-  .s-foundation .tag{color:rgba(244,241,234,.55)}
-  @media(max-width:640px){
-    .stratum{flex-direction:column;align-items:flex-start;gap:12px}
-    .stratum .tag{width:auto}
-  }
-
   /* ---------- section headings ---------- */
   .lead-in{max-width:54ch}
   .lead-in h2{
@@ -199,34 +163,6 @@
   }
   .lead-in p{margin:20px 0 0;color:var(--steel);font-size:clamp(1rem,1.3vw,1.1rem);line-height:1.6}
 
-  /* ---------- proof ---------- */
-  .proof{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,3vw,32px);margin-top:clamp(32px,4.5vw,52px)}
-  .proof > div{border:1px solid rgba(16,24,32,.18);padding:clamp(24px,3.2vw,38px);display:flex;flex-direction:column}
-  .proof .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--cobalt)}
-  .proof .big{margin:14px 0 0;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:600;letter-spacing:-.03em;text-transform:uppercase;line-height:1.05}
-  .proof p{margin:14px 0 0;color:var(--steel);font-size:.98rem;line-height:1.55}
-  .proof a.more{
-    display:inline-flex;align-items:center;gap:9px;margin-top:auto;padding-top:22px;
-    font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-    text-decoration:none;color:var(--midnight);transition:color .2s;
-  }
-  .proof a.more:hover{color:var(--cobalt)}
-  @media(max-width:760px){.proof{grid-template-columns:1fr}}
-
-  /* ---------- investors (secondary door) ---------- */
-  /* Deliberately quieter than anything above it: founders are the reader,
-     investors are the second door, and the page should look like it. */
-  .investors{background:var(--midnight);color:var(--parchment);border-top:none}
-  .investors .eyebrow{color:rgba(244,241,234,.5)}
-  .investors .row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:clamp(26px,5vw,72px);align-items:end}
-  .investors h2{
-    margin:14px 0 0;max-width:18ch;
-    font-size:clamp(1.6rem,3.6vw,2.7rem);
-    line-height:1.04;letter-spacing:-.032em;font-weight:600;text-transform:uppercase;
-  }
-  .investors p{margin:20px 0 0;max-width:52ch;color:rgba(244,241,234,.7);font-size:1.02rem;line-height:1.6}
-  @media(max-width:860px){.investors .row{grid-template-columns:1fr;align-items:start}}
-
   /* ---------- close ---------- */
   .close h2{
     margin:14px 0 0;max-width:16ch;
@@ -234,6 +170,113 @@
     line-height:.98;letter-spacing:-.035em;font-weight:700;text-transform:uppercase;
   }
   .close p{margin:22px 0 0;max-width:52ch;color:var(--steel);font-size:clamp(1rem,1.3vw,1.1rem);line-height:1.6}
+
+  /* ---------- centred statement ---------- */
+  /* The page is otherwise a left column. Centring the one claim the whole
+     argument rests on gives the eye somewhere to stop. */
+  .statement{text-align:center;max-width:22ch;margin:0 auto}
+  .statement h2{
+    margin:16px 0 0;
+    font-size:clamp(2rem,5.4vw,4.2rem);
+    line-height:.98;letter-spacing:-.038em;font-weight:700;text-transform:uppercase;
+    text-wrap:balance;
+  }
+  .statement-body{
+    margin:clamp(28px,4vw,42px) auto 0;max-width:54ch;text-align:center;
+    color:var(--steel);font-size:clamp(1.02rem,1.4vw,1.2rem);line-height:1.65;
+  }
+  .statement-body strong{color:var(--midnight);font-weight:600}
+
+  /* ---------- offering rows ---------- */
+  /* Image and text swap sides down the page. The zigzag is what stops three
+     long blocks reading as one wall of left-aligned copy. */
+  .offer{
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:clamp(26px,5vw,76px);align-items:center;
+    padding:clamp(40px,6vw,84px) 0;
+    border-top:var(--rule);
+  }
+  .offer:last-of-type{border-bottom:var(--rule)}
+  .offer:nth-child(even) .offer-text{order:-1}
+  .offer .num{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--cobalt)}
+  .offer .name{
+    display:block;margin:0 0 14px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--steel);
+  }
+  .offer h3{
+    margin:0;max-width:20ch;
+    font-size:clamp(1.5rem,3.2vw,2.5rem);
+    line-height:1.03;letter-spacing:-.032em;font-weight:600;text-transform:uppercase;
+  }
+  .offer p{margin:20px 0 0;max-width:52ch;color:var(--steel);font-size:1.02rem;line-height:1.62}
+  .offer .more{
+    display:inline-flex;align-items:center;gap:9px;margin-top:24px;
+    font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    text-decoration:none;color:var(--midnight);
+    border-bottom:1px solid rgba(16,24,32,.3);padding-bottom:4px;
+    transition:color .2s,border-color .2s;
+  }
+  .offer .more:hover{color:var(--cobalt);border-color:var(--cobalt)}
+  .offer .head{display:flex;align-items:baseline;gap:16px;margin-bottom:14px}
+
+  /* Picture box. Drop a file in with the named path and it just works. */
+  .shot{
+    position:relative;aspect-ratio:4/3;overflow:hidden;
+    background:var(--parchment-deep);
+    border:1px solid rgba(16,24,32,.16);
+  }
+  .shot img{width:100%;height:100%;object-fit:cover;display:block}
+  .shot-hint{
+    position:absolute;inset:0;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:8px;text-align:center;padding:24px;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--steel);
+  }
+  .shot-hint b{font-weight:500;color:var(--midnight);letter-spacing:.2em}
+  @media(max-width:820px){
+    .offer{grid-template-columns:1fr;gap:26px}
+    .offer:nth-child(even) .offer-text{order:0}
+  }
+
+  /* ---------- apply dialog ---------- */
+  dialog.apply{
+    border:0;padding:0;max-width:620px;width:calc(100% - 32px);
+    background:var(--parchment);color:var(--midnight);
+  }
+  dialog.apply::backdrop{background:rgba(16,24,32,.72)}
+  .apply-inner{padding:clamp(26px,4vw,44px)}
+  .apply-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}
+  .apply-head h2{
+    margin:12px 0 0;max-width:16ch;
+    font-size:clamp(1.5rem,3.2vw,2.2rem);
+    line-height:1.02;letter-spacing:-.032em;font-weight:700;text-transform:uppercase;
+  }
+  .apply-close{
+    appearance:none;background:none;border:1px solid rgba(16,24,32,.24);
+    width:38px;height:38px;flex:0 0 auto;cursor:pointer;color:var(--midnight);
+    font-size:17px;line-height:1;transition:background-color .2s,color .2s;
+  }
+  .apply-close:hover{background:var(--midnight);color:var(--parchment)}
+  .apply form{margin-top:26px;display:grid;gap:16px}
+  .apply .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .apply label{display:block}
+  .apply .lab{
+    display:block;margin-bottom:7px;
+    font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--steel);
+  }
+  .apply input,.apply select,.apply textarea{
+    width:100%;font:inherit;font-size:.98rem;color:var(--midnight);
+    background:#fff;border:1px solid rgba(16,24,32,.22);
+    padding:12px 14px;border-radius:0;
+  }
+  .apply textarea{resize:vertical;min-height:88px}
+  .apply input:focus,.apply select:focus,.apply textarea:focus{outline:2px solid var(--cobalt);outline-offset:1px;border-color:var(--cobalt)}
+  .apply .hp{position:absolute;left:-9999px}
+  .apply .note{margin:0;font-size:.82rem;color:var(--steel);line-height:1.5}
+  .apply-done{padding:clamp(30px,5vw,54px);text-align:center}
+  .apply-done h3{margin:0;font-size:1.5rem;font-weight:600;text-transform:uppercase;letter-spacing:-.03em}
+  .apply-done p{margin:14px 0 0;color:var(--steel);line-height:1.6}
+  @media(max-width:540px){.apply .row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -263,7 +306,7 @@
       <h1>From founder to exit.</h1>
       <p class="lede">Private capital, companies and infrastructure rebuilding physical industry — the factories, power and supply chains everything else runs on.</p>
       <div class="actions">
-        <a class="btn btn-solid" href="mailto:joe@4irg.com?subject=4IR%20Group%20%E2%80%94%20my%20company">Talk to us about your company <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
+        <a class="btn btn-solid" href="mailto:joe@4irg.com?subject=4IR%20Group%20%E2%80%94%20my%20company">Apply <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
         <a class="btn btn-line" href="#offerings">What we do</a>
       </div>
       <div class="aud-bar">
@@ -279,122 +322,68 @@
     </div>
   </section>
 
-  <!-- THE GAP — the argument the rest of the page pays off. -->
+  <!-- THE ARGUMENT — centred, because everything below answers it. -->
   <section class="band">
     <div class="wrap">
-      <div class="gap-claim">
+      <div class="statement">
         <span class="eyebrow">Why we exist</span>
         <h2>Most capital arrives as a wire and a board seat.</h2>
       </div>
-      <p class="gap-body">Then the founder is on their own for everything that decides the outcome — explaining the company to people who do not speak its language, and getting in front of them before the runway is gone. <strong>We do all three, in order.</strong> Money is the easiest one to get.</p>
+      <p class="statement-body">Then the founder is alone for everything that actually decides the outcome — explaining the company to people who do not speak its language, and getting in front of them before the runway is gone. <strong>We do all three, in order.</strong> Money is the easiest one to get.</p>
     </div>
   </section>
 
-  <!-- THE THREE — a sequence, not a menu. -->
+
+  <!-- THE THREE — a sequence, not a menu. Sides alternate down the page. -->
   <section class="band" id="offerings">
     <div class="wrap">
-      <div class="lead-in">
+      <div class="statement">
         <span class="eyebrow">What we do</span>
         <h2>An ecosphere, not a cap table.</h2>
-        <p>Three things, in the order a company needs them. Most founders come for the first and stay for the other two.</p>
       </div>
 
-      <ol class="offers">
-        <li>
-          <div class="num">01</div>
-          <div>
-            <div class="name">Ventures</div>
-            <h3>The capital you need to scale.</h3>
-            <p>Early and growth capital for companies building in the physical world — robotics, automation, energy, advanced manufacturing and the infrastructure underneath them. Cheques that understand a hardware timeline, because software maths does not survive contact with a factory floor.</p>
-            <a class="more" href="/ventures/">4IR Ventures <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
-          </div>
-        </li>
-        <li>
-          <div class="num">02</div>
-          <div>
-            <div class="name">Studios</div>
-            <h3>Don't flop. Be ready to go to market.</h3>
-            <p>Capital markets PR and marketing, run in-house. We write the positioning, build the site and the materials, and get the company ready to be read by someone with twenty minutes and three other deals on the desk. Everything is handed over outright — the company owns what we build for it.</p>
-            <a class="more" href="/studios/">4IR Studios <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
-          </div>
-        </li>
-        <li>
-          <div class="num">03</div>
-          <div>
-            <div class="name">Ecosystem</div>
-            <h3>In the room with the people who fund what's next.</h3>
-            <p>Private investor evenings in five cities, warm introductions made by name, and a network of family offices, founders and institutional allocators deploying into physical industry. The round after ours is the one that matters, and it is decided in rooms, not inboxes.</p>
-            <a class="more" href="/investors/">For investors <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
-          </div>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- THESIS — kept from the original site: what we back, unchanged. -->
-  <section class="band" id="thesis">
-    <div class="wrap">
-      <div class="lead-in">
-        <span class="eyebrow">Our thesis</span>
-        <h2>What we back.</h2>
-      </div>
-      <div class="stack" id="stack">
-          <!-- reversed in CSS: foundation renders at the bottom and arrives first -->
-          <div class="stratum s-foundation">
-            <span class="tag">Foundation</span>
-            <p class="line">Infrastructure is the foundation.</p>
-          </div>
-          <div class="stratum s-execution">
-            <span class="tag">Execution</span>
-            <p class="line">Robotics is the execution.</p>
-          </div>
-          <div class="stratum s-intelligence">
-            <span class="tag">Intelligence</span>
-            <p class="line">AI is the intelligence.</p>
-          </div>
+      <div class="offer">
+        <div class="shot">
+          <img src="/assets/shot-ventures.jpg" alt="" loading="lazy" onerror="this.remove()">
+          <span class="shot-hint"><b>Factory floor / hardware</b>assets/shot-ventures.jpg</span>
         </div>
-    </div>
-  </section>
-
-  <!-- PROOF — the two things that are real today. -->
-  <section class="band">
-    <div class="wrap">
-      <div class="lead-in">
-        <span class="eyebrow">In motion</span>
-        <h2>Happening now.</h2>
-      </div>
-      <div class="proof">
-        <div>
-          <span class="k">This fall</span>
-          <p class="big">Five cities, five investor evenings</p>
-          <p>Boston, Salt Lake City, Beverly Hills, Palm Beach and Chicago. Companies present uninterrupted to the allocators in the room — no expo hall, no competing pitch across the aisle.</p>
-          <a class="more" href="/studios/fallroadshow/">Fall Capital Road Show <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
+        <div class="offer-text">
+          <div class="head"><span class="num">01</span><span class="name">Ventures</span></div>
+          <h3>The capital you need to scale.</h3>
+          <p>Early and growth capital for companies building in the physical world. Cheques that understand a hardware timeline, because software maths does not survive contact with a factory floor.</p>
+          <a class="more" href="/ventures/">How we invest <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
         </div>
-        <div>
-          <span class="k">Portfolio</span>
-          <p class="big">Seco Bio</p>
-          <p>Featured across all five cities this fall, in front of family offices, founders and institutional allocators deploying capital into deep tech and physical AI.</p>
-          <a class="more" href="https://seco.bio">seco.bio <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
+      </div>
+
+      <div class="offer">
+        <div class="shot">
+          <img src="/assets/shot-studios.jpg" alt="" loading="lazy" onerror="this.remove()">
+          <span class="shot-hint"><b>Materials / deck / screen</b>assets/shot-studios.jpg</span>
+        </div>
+        <div class="offer-text">
+          <div class="head"><span class="num">02</span><span class="name">Studios</span></div>
+          <h3>Don't flop. Be ready to go to market.</h3>
+          <p>Capital markets PR and marketing, run in-house. The positioning, the site, the materials — built to be read by someone with twenty minutes and three other deals on the desk, and handed over outright.</p>
+          <a class="more" href="/studios/">4IR Studios <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
+        </div>
+      </div>
+
+      <div class="offer">
+        <div class="shot">
+          <img src="/assets/shot-ecosystem.jpg" alt="" loading="lazy" onerror="this.remove()">
+          <span class="shot-hint"><b>The room / an investor evening</b>assets/shot-ecosystem.jpg</span>
+        </div>
+        <div class="offer-text">
+          <div class="head"><span class="num">03</span><span class="name">Ecosystem</span></div>
+          <h3>In the room with the people who fund what's next.</h3>
+          <p>Private investor salons, warm introductions made by name, and a network of family offices and allocators deploying into physical industry. The round after ours is decided in rooms, not inboxes.</p>
+          <a class="more" href="/investors/">The salons <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- INVESTORS — the second door, deliberately quieter. -->
-  <section class="band investors on-dark">
-    <div class="wrap">
-      <div class="row">
-        <div>
-          <span class="eyebrow">For investors</span>
-          <h2>Or come in on the other side.</h2>
-          <p>Family offices and allocators looking at physical industry: see what we are backing, sponsor a room, or co-invest alongside the fund.</p>
-        </div>
-        <div class="actions" style="margin-top:0">
-          <a class="btn btn-line" href="mailto:joe@4irg.com?subject=4IR%20Group%20%E2%80%94%20investing%20alongside%20you">Investing alongside us <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
-        </div>
-      </div>
-    </div>
-  </section>
+
 
   <!-- CLOSE -->
   <section class="band close">
@@ -403,7 +392,7 @@
       <h2>Tell us what you're building.</h2>
       <p>What it makes, moves or powers, what stage it is at, and what the next twelve months have to prove. That is enough to start.</p>
       <div class="actions">
-        <a class="btn btn-solid" href="mailto:joe@4irg.com?subject=4IR%20Group%20%E2%80%94%20my%20company">Talk to us about your company <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
+        <a class="btn btn-solid" href="mailto:joe@4irg.com?subject=4IR%20Group%20%E2%80%94%20my%20company">Apply <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
       </div>
     </div>
   </section>
@@ -448,5 +437,99 @@
     }
   }
 </script>
+
+<!-- Netlify picks the form up from the built HTML, so it must be present in
+     the markup rather than injected. Submissions land in the project's Forms
+     tab; the email notification to joe@4irg.com is set there, once. -->
+<dialog class="apply" id="applyDialog" aria-labelledby="applyTitle">
+  <div class="apply-inner" id="applyBody">
+    <div class="apply-head">
+      <div>
+        <span class="eyebrow">Ventures</span>
+        <h2 id="applyTitle">Tell us what you're building.</h2>
+      </div>
+      <button class="apply-close" type="button" data-close aria-label="Close">&#215;</button>
+    </div>
+
+    <form name="apply" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="applyForm">
+      <input type="hidden" name="form-name" value="apply">
+      <p class="hp"><label>Leave this empty <input name="bot-field"></label></p>
+
+      <div class="row">
+        <label><span class="lab">Your name</span><input name="name" required autocomplete="name"></label>
+        <label><span class="lab">Email</span><input type="email" name="email" required autocomplete="email"></label>
+      </div>
+      <div class="row">
+        <label><span class="lab">Company</span><input name="company" required></label>
+        <label><span class="lab">Website</span><input name="website" placeholder="optional"></label>
+      </div>
+      <label><span class="lab">What does it make, move or power?</span>
+        <textarea name="what" required placeholder="One or two sentences, in plain words."></textarea></label>
+      <div class="row">
+        <label><span class="lab">Stage</span>
+          <select name="stage" required>
+            <option value="">Select…</option>
+            <option>Pre-revenue, prototype built</option>
+            <option>Signed pilot with a real counterparty</option>
+            <option>Revenue, scaling</option>
+            <option>Growth / later</option>
+          </select></label>
+        <label><span class="lab">Raising</span><input name="raising" placeholder="Amount and round"></label>
+      </div>
+      <label><span class="lab">What do the next twelve months have to prove?</span>
+        <textarea name="twelve" required></textarea></label>
+
+      <div class="actions" style="margin-top:6px">
+        <button class="btn btn-solid" type="submit">Send to 4IR &#8599;</button>
+      </div>
+      <p class="note">Goes straight to Joe. We read everything and reply either way.</p>
+    </form>
+  </div>
+</dialog>
+
+<script>
+  (function () {
+    var dlg = document.getElementById('applyDialog');
+    if (!dlg) return;
+
+    // Any CTA that asks a founder to get in touch opens the form instead of
+    // firing off a mailto, which loses the person who has no mail client set.
+    document.querySelectorAll('a[href^="mailto:joe@4irg.com?subject=4IR%20Group%20%E2%80%94%20my%20company"]')
+      .forEach(function (a) {
+        a.setAttribute('role', 'button');
+        a.addEventListener('click', function (e) { e.preventDefault(); dlg.showModal(); });
+      });
+
+    dlg.addEventListener('click', function (e) {
+      // Clicking the backdrop closes; clicking the panel does not.
+      if (e.target === dlg) dlg.close();
+      if (e.target.closest('[data-close]')) dlg.close();
+    });
+
+    var form = document.getElementById('applyForm');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var btn = form.querySelector('button[type=submit]');
+      btn.disabled = true; btn.textContent = 'Sending…';
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form)).toString()
+      }).then(function (r) {
+        if (!r.ok) throw new Error(r.status);
+        document.getElementById('applyBody').innerHTML =
+          '<div class="apply-done"><h3>Thank you.</h3>' +
+          '<p>That is with Joe. You will hear back either way.</p>' +
+          '<div class="actions" style="justify-content:center"><button class="btn btn-line" type="button" data-close>Close</button></div></div>';
+      }).catch(function () {
+        btn.disabled = false; btn.textContent = 'Send to 4IR \u2197';
+        var n = form.querySelector('.note');
+        n.textContent = 'That did not send. Email joe@4irg.com directly and we will pick it up.';
+        n.style.color = '#A55D3B';
+      });
+    });
+  })();
+</script>
+
 </body>
 </html>
