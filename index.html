@@ -175,7 +175,10 @@
   /* The page is otherwise a left column. Centring the one claim the whole
      argument rests on gives the eye somewhere to stop. */
   .statement{text-align:center;max-width:22ch;margin:0 auto}
-  .statement h2{
+  /* 22ch was set for a four-word claim. A full sentence needs room, or it
+     stacks into a column of single words. */
+  .statement.wide{max-width:30ch}
+  .statement h1,.statement h2{
     margin:16px 0 0;
     font-size:clamp(2rem,5.4vw,4.2rem);
     line-height:.98;letter-spacing:-.038em;font-weight:700;text-transform:uppercase;
@@ -277,6 +280,66 @@
   .apply-done h3{margin:0;font-size:1.5rem;font-weight:600;text-transform:uppercase;letter-spacing:-.03em}
   .apply-done p{margin:14px 0 0;color:var(--steel);line-height:1.6}
   @media(max-width:540px){.apply .row{grid-template-columns:1fr}}
+
+  /* ---------- the stack ---------- */
+  /* The claim is that these are layers, so the block is built as layers.
+     Each stratum is narrower than the one holding it up, and the foundation
+     is widest, darkest and lands first. The shape is the argument — the
+     hierarchy is legible before a word is read. */
+  .strata{margin-top:clamp(36px,5vw,64px);display:flex;flex-direction:column;align-items:center;gap:clamp(8px,1vw,12px)}
+  .stratum{
+    width:100%;position:relative;
+    display:grid;grid-template-columns:clamp(74px,9vw,128px) minmax(0,1fr);
+    align-items:start;gap:clamp(14px,2.6vw,38px);
+    padding:clamp(24px,3.4vw,42px) clamp(20px,3vw,38px);
+    opacity:0;transform:translateY(28px);
+    transition:opacity .6s cubic-bezier(.22,1.1,.36,1),
+               transform .6s cubic-bezier(.22,1.1,.36,1),
+               box-shadow .3s ease;
+  }
+  .strata.in .stratum{opacity:1;transform:none}
+  /* Bottom up: the ground, then what runs on it, then what directs it. */
+  .strata.in .s-foundation{transition-delay:0s}
+  .strata.in .s-execution{transition-delay:.24s}
+  .strata.in .s-intelligence{transition-delay:.48s}
+
+  .s-foundation{width:100%;background:var(--midnight);color:var(--parchment)}
+  .s-execution{width:93%;background:var(--parchment-deep);border-left:3px solid var(--oxide)}
+  .s-intelligence{width:86%;background:transparent;border:1px solid rgba(16,24,32,.22)}
+  .stratum:hover{box-shadow:0 16px 44px rgba(16,24,32,.14)}
+
+  .stratum .tag{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+    white-space:nowrap;padding-top:.5em;
+  }
+  .s-foundation .tag{color:rgba(244,241,234,.6)}
+  .s-execution .tag{color:var(--oxide)}
+  .s-intelligence .tag{color:var(--cobalt)}
+  .stratum .line{
+    margin:0;
+    font-size:clamp(1.25rem,3.1vw,2.4rem);
+    line-height:1.04;letter-spacing:-.03em;font-weight:600;text-transform:uppercase;
+  }
+  /* The supporting line arrives just after its layer has landed. */
+  .stratum .sub{
+    margin:12px 0 0;font-size:.98rem;line-height:1.5;max-width:48ch;color:var(--steel);
+    opacity:0;transform:translateY(6px);
+    transition:opacity .45s ease,transform .45s ease;
+  }
+  .s-foundation .sub{color:rgba(244,241,234,.66)}
+  .strata.in .stratum .sub{opacity:1;transform:none}
+  .strata.in .s-foundation .sub{transition-delay:.26s}
+  .strata.in .s-execution .sub{transition-delay:.50s}
+  .strata.in .s-intelligence .sub{transition-delay:.74s}
+
+  @media(max-width:700px){
+    .stratum{grid-template-columns:1fr;gap:10px;width:100%}
+    .s-execution,.s-intelligence{width:100%}
+    .stratum .tag{padding-top:0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .stratum,.stratum .sub{opacity:1;transform:none;transition:none}
+  }
 </style>
 </head>
 <body>
@@ -298,6 +361,40 @@
 
 
   <!-- CLOSE -->
+  <!-- THESIS — the opening block. Built bottom up, because that is the claim. -->
+  <section class="band" id="thesis">
+    <div class="wrap">
+      <div class="statement wide">
+        <span class="eyebrow">Our thesis</span>
+        <h1>The new industrial age is built in three layers.</h1>
+      </div>
+
+      <div class="strata" id="strata">
+        <div class="stratum s-intelligence">
+          <span class="tag">Intelligence</span>
+          <div>
+            <p class="line">AI is the intelligence.</p>
+            <p class="sub">What decides, routes and optimises — faster than any control room.</p>
+          </div>
+        </div>
+        <div class="stratum s-execution">
+          <span class="tag">Execution</span>
+          <div>
+            <p class="line">Robotics is the execution.</p>
+            <p class="sub">What moves, welds, picks and builds. Intelligence with nothing to act through is a demo.</p>
+          </div>
+        </div>
+        <div class="stratum s-foundation">
+          <span class="tag">Foundation</span>
+          <div>
+            <p class="line">Infrastructure is the foundation.</p>
+            <p class="sub">Power, plants, networks, grid. Everything above it is theory without this.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="band close">
     <div class="wrap">
       <span class="eyebrow">Get started</span>
@@ -448,5 +545,19 @@
   })();
 </script>
 
+<script>
+  // One trigger on the group: they stack as a set and the delays do the
+  // ordering, so the ground is always down before anything lands on it.
+  (function () {
+    var st = document.getElementById('strata');
+    if (!st) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+        !('IntersectionObserver' in window)) { st.classList.add('in'); return; }
+    new IntersectionObserver(function (e, o) {
+      if (!e[0].isIntersecting) return;
+      st.classList.add('in'); o.disconnect();
+    }, { threshold: 0.2 }).observe(st);
+  })();
+</script>
 </body>
 </html>

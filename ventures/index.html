@@ -27,42 +27,6 @@
   .crit svg{display:block;color:var(--cobalt)}
   @media(max-width:1000px){.crit-wrap{grid-template-columns:1fr}}
   @media(max-width:600px){.crit{grid-template-columns:1fr}}
-  /* ---------- thesis stack (signature, unchanged) ---------- */
-  .stack{display:flex;flex-direction:column-reverse;gap:8px;margin-top:clamp(30px,4.5vw,50px)}
-  .stratum{
-    display:flex;align-items:baseline;gap:clamp(16px,3vw,44px);
-    padding:clamp(22px,3.4vw,40px) clamp(20px,3vw,36px);
-    border-radius:2px;
-    opacity:0;transform:translateY(18px);
-    transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);
-  }
-  .stack.in .stratum{opacity:1;transform:none}
-  /* The stack renders column-reverse, so child 3 is the top row. Reading
-     order is top-down — intelligence, execution, foundation — so the delays
-     run backwards through the children to match what the eye does. */
-  .stack.in .stratum:nth-child(3){transition-delay:0s}    /* intelligence */
-  .stack.in .stratum:nth-child(2){transition-delay:.22s}  /* execution    */
-  .stack.in .stratum:nth-child(1){transition-delay:.44s}  /* foundation   */
-  .stratum .tag{
-    font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-    white-space:nowrap;flex:0 0 auto;width:112px;
-  }
-  .stratum .line{
-    font-size:clamp(1.35rem,3.5vw,2.65rem);
-    line-height:1.05;letter-spacing:-.028em;font-weight:600;
-    text-transform:uppercase;margin:0;
-  }
-  .s-intelligence{background:transparent;border:1px solid rgba(16,24,32,.22)}
-  .s-intelligence .tag{color:var(--cobalt)}
-  .s-execution{background:var(--parchment-deep);border-left:3px solid var(--oxide)}
-  .s-execution .tag{color:var(--oxide)}
-  .s-foundation{background:var(--midnight);color:var(--parchment);padding-block:clamp(30px,5vw,64px)}
-  .s-foundation .tag{color:rgba(244,241,234,.55)}
-  @media(max-width:640px){
-    .stratum{flex-direction:column;align-items:flex-start;gap:12px}
-    .stratum .tag{width:auto}
-  }
-
 </style>
 </head>
 <body>
@@ -115,32 +79,6 @@
           <p>We match the opportunity to the investors whose thesis it actually fits, and they allocate through the platform. You raise; we handle the mechanics.</p>
         </li>
       </ol>
-    </div>
-  </section>
-
-  <!-- Thesis: moved off the home page, where it competed with the three
-       offerings. Here it answers the question the page is already asking. -->
-  <section class="band" id="thesis">
-    <div class="wrap">
-      <div class="lead-in">
-        <span class="eyebrow">Our thesis</span>
-        <h2>What we back.</h2>
-      </div>
-      <div class="stack" id="stack">
-          <!-- reversed in CSS: foundation renders at the bottom and arrives first -->
-          <div class="stratum s-foundation">
-            <span class="tag">Foundation</span>
-            <p class="line">Infrastructure is the foundation.</p>
-          </div>
-          <div class="stratum s-execution">
-            <span class="tag">Execution</span>
-            <p class="line">Robotics is the execution.</p>
-          </div>
-          <div class="stratum s-intelligence">
-            <span class="tag">Intelligence</span>
-            <p class="line">AI is the intelligence.</p>
-          </div>
-        </div>
     </div>
   </section>
 
@@ -201,16 +139,5 @@
   </div>
 </footer>
 
-<script>
-  var stack=document.getElementById('stack');
-  if(stack){
-    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window)){
-      stack.classList.add('in');
-    }else{
-      new IntersectionObserver(function(e,o){e.forEach(function(x){
-        if(x.isIntersecting){stack.classList.add('in');o.disconnect();}});},{threshold:.25}).observe(stack);
-    }
-  }
-</script>
 </body>
 </html>
