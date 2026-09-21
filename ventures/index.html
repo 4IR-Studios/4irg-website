@@ -137,6 +137,28 @@
     font-size:.78rem;line-height:1.55;color:rgba(244,241,234,.5);
   }
   @media(max-width:900px){.folio{grid-template-columns:1fr}}
+
+  .folio-shot.phast{
+    background:var(--parchment-deep);
+    display:flex;align-items:center;justify-content:center;
+    border-right:1px solid rgba(16,24,32,.12);
+  }
+  .folio-shot.phast::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(rgba(16,24,32,.06) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(16,24,32,.06) 1px,transparent 1px);
+    background-size:64px 64px;
+    mask-image:radial-gradient(100% 100% at 30% 20%,#000,transparent 75%);
+    -webkit-mask-image:radial-gradient(100% 100% at 30% 20%,#000,transparent 75%);
+  }
+  .folio-shot.phast::after{
+    content:"";position:relative;width:min(62%,280px);aspect-ratio:426/168;
+    background:var(--midnight);
+    -webkit-mask:url('/assets/phast-mark.png') center/contain no-repeat;
+    mask:url('/assets/phast-mark.png') center/contain no-repeat;
+    transition:transform .5s cubic-bezier(.2,.7,.2,1),background-color .3s ease;
+  }
+  .folio-shot.phast:hover::after{transform:scale(1.05);background:var(--cobalt)}
 </style>
 </head>
 <body>
@@ -203,8 +225,8 @@
   <section class="band" id="portfolio">
     <div class="wrap">
       <div class="lead-in">
-        <span class="eyebrow">Highlight &mdash; a portfolio company</span>
-        <h2>Seco Bio.</h2>
+        <span class="eyebrow">Highlight &mdash; portfolio companies</span>
+        <h2>Who we are backing.</h2>
       </div>
 
       <div class="folio" style="margin-top:clamp(28px,4vw,48px)">
@@ -222,6 +244,25 @@
 
           <div class="actions">
             <a class="btn btn-solid on-dark" href="https://seco.bio">Visit seco.bio <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
+          </div>
+
+          <p class="legal">Portfolio company information is provided for background only. Nothing on this page is an offer to sell or a solicitation of an offer to buy any security, and it is not investment, legal or tax advice.</p>
+        </div>
+      </div>
+
+      <div class="folio" style="margin-top:clamp(16px,2vw,24px)">
+        <a class="folio-shot phast" href="https://phast.ai" aria-label="PhAST — visit phast.ai"></a>
+
+        <div class="folio-body">
+          <p class="tagline">The right antibiotic, in hours.</p>
+          <p class="what">When sepsis sets in, doctors guess at antibiotics for days while the lab catches up. PhAST names the one that works in hours.</p>
+          <p class="origin">Computer vision that resolves individual bacteria with no isolation and no staining, read across thousands of cells and converted to a categorical result by a locked machine-learning pipeline.</p>
+          <ul class="provenance">
+            <li>FDA cleared</li><li>Diagnostics</li><li>phast.ai</li>
+          </ul>
+
+          <div class="actions">
+            <a class="btn btn-solid on-dark" href="https://phast.ai">Visit phast.ai <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
           </div>
 
           <p class="legal">Portfolio company information is provided for background only. Nothing on this page is an offer to sell or a solicitation of an offer to buy any security, and it is not investment, legal or tax advice.</p>
