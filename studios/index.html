@@ -13,23 +13,45 @@
   /* ---------- page head ---------- */
   /* The home page opens on a full-height hero; a second page should not
      compete with it, so this is the same ground at about half the height. */
-  .page-head{background:var(--midnight);color:var(--parchment);padding:clamp(56px,10vh,110px) 0 clamp(48px,8vh,88px);position:relative;overflow:hidden}
+  /* Half the home hero's height: this page has to get to the point faster,
+     and a second full-bleed hero would read as a second front door. */
+  .page-head{
+    background:var(--midnight);color:var(--parchment);
+    position:relative;overflow:hidden;isolation:isolate;
+    min-height:min(46vh,440px);
+    display:flex;align-items:flex-end;
+    padding:clamp(56px,10vh,110px) 0 clamp(40px,6vh,72px);
+  }
+  .head-media{position:absolute;inset:0;z-index:-3;overflow:hidden}
+  .head-media video,.head-media img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.04)}
+  /* Same --wash control as the home page, one notch darker: the footage is
+     busier than a skyline and the type has to win. */
+  .page-head{--wash:.62}
+  .page-head::before{
+    content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;
+    background:linear-gradient(
+      to top,
+      rgba(16,24,32,calc(var(--wash) + .3)) 0%,
+      rgba(16,24,32,calc(var(--wash) + .06)) 42%,
+      rgba(16,24,32,var(--wash)) 100%);
+  }
+  @media (prefers-reduced-motion:reduce){ .head-media video{display:none} }
   .page-head::after{
-    content:"";position:absolute;inset:0;pointer-events:none;
+    content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
     background-image:linear-gradient(rgba(244,241,234,.05) 1px,transparent 1px),
                      linear-gradient(90deg,rgba(244,241,234,.05) 1px,transparent 1px);
     background-size:132px 132px;
     mask-image:radial-gradient(120% 90% at 78% 20%,#000,transparent 72%);
     -webkit-mask-image:radial-gradient(120% 90% at 78% 20%,#000,transparent 72%);
   }
-  .page-head .wrap{position:relative;z-index:1}
-  .page-head .eyebrow{color:rgba(244,241,234,.5)}
+  .page-head .wrap{position:relative;z-index:1;width:100%}
+  .page-head .eyebrow{color:rgba(244,241,234,.72)}
   .page-head h1{
     margin:16px 0 0;
     font-size:clamp(2.6rem,7.4vw,6.1rem);
     line-height:.94;letter-spacing:-.035em;font-weight:700;text-transform:uppercase;
   }
-  .page-head .lede{margin:26px 0 0;max-width:50ch;font-size:clamp(1rem,1.35vw,1.2rem);color:rgba(244,241,234,.72)}
+  .page-head .lede{margin:26px 0 0;max-width:50ch;font-size:clamp(1rem,1.35vw,1.2rem);color:rgba(244,241,234,.86)}
 
   /* ---------- what we do ---------- */
   .lead-in{max-width:56ch}
@@ -95,6 +117,11 @@
 <main id="top">
 
   <section class="page-head">
+    <div class="head-media" aria-hidden="true">
+      <video autoplay muted loop playsinline preload="auto" poster="/assets/studios-lab.jpg">
+        <source src="/assets/studios-lab.mp4" type="video/mp4">
+      </video>
+    </div>
     <div class="wrap">
       <span class="eyebrow">4IR Group</span>
       <h1>Studios</h1>
@@ -167,5 +194,13 @@
   </div>
 </footer>
 
+<script>
+  (function(){
+    var v=document.querySelector('.head-media video'); if(!v) return;
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){v.remove();return;}
+    var go=function(){var p=v.play(); if(p&&p.catch)p.catch(function(){});};
+    v.addEventListener('canplay',go,{once:true}); go();
+  })();
+</script>
 </body>
 </html>
