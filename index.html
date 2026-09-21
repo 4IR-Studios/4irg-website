@@ -28,11 +28,18 @@
     /* A touch of scale so the edges never show during the loop restart. */
     transform:scale(1.04);
   }
-  /* The 45% wash, weighted toward the bottom where the type sits. */
+  /* The wash. --wash is the single number to turn when the footage needs to
+     sit further back: everything else is derived from it, so the gradient
+     keeps its shape and only the depth changes. The bottom stays heavier
+     than the top because that is where the type sits. */
+  .hero{--wash:.58}
   .hero::before{
     content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;
-    background:
-      linear-gradient(to top, rgba(16,24,32,.88) 0%, rgba(16,24,32,.45) 46%, rgba(16,24,32,.38) 100%);
+    background:linear-gradient(
+      to top,
+      rgba(16,24,32,calc(var(--wash) + .34)) 0%,
+      rgba(16,24,32,calc(var(--wash) + .08)) 40%,
+      rgba(16,24,32,var(--wash)) 100%);
   }
   .hero::after{
     content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
