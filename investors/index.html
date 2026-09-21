@@ -45,6 +45,41 @@
     .events li{grid-template-columns:1fr}
     .events .date{text-align:left;border-right:none;border-bottom:var(--rule);padding:0 0 12px;display:flex;align-items:baseline;gap:10px}
   }
+
+  /* ---------- past events ---------- */
+  /* A facade, not an embed: the thumbnail is ours and YouTube's player only
+     loads if someone actually clicks. Nothing third-party runs otherwise. */
+  .past{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(26px,4.5vw,64px);align-items:center;margin-top:clamp(30px,4.5vw,50px)}
+  .vidcard{position:relative;display:block;border:1px solid rgba(16,24,32,.18);overflow:hidden;background:var(--midnight);line-height:0;cursor:pointer;padding:0;width:100%}
+  .vidcard img{width:100%;height:auto;display:block;transition:transform .5s cubic-bezier(.2,.7,.2,1),opacity .3s}
+  .vidcard:hover img{transform:scale(1.03);opacity:.88}
+  .vidcard .play{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;
+  }
+  .vidcard .play span{
+    width:74px;height:74px;border-radius:50%;
+    background:rgba(244,241,234,.94);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 34px rgba(16,24,32,.42);
+    transition:transform .3s cubic-bezier(.2,.7,.2,1),background-color .3s;
+  }
+  .vidcard:hover .play span{transform:scale(1.08);background:var(--cobalt)}
+  .vidcard .play svg{margin-left:4px;color:var(--midnight);transition:color .3s}
+  .vidcard:hover .play svg{color:var(--parchment)}
+  .vidcard .tag{
+    position:absolute;left:0;top:0;
+    font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+    background:var(--midnight);color:var(--parchment);padding:9px 14px;line-height:1;
+  }
+  .vidcard iframe{width:100%;aspect-ratio:9/16;max-height:70vh;border:0;display:block}
+  .past .meta .where{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--oxide)}
+  .past .meta h3{margin:12px 0 0;font-size:clamp(1.3rem,2.6vw,2rem);font-weight:600;text-transform:uppercase;letter-spacing:-.03em;line-height:1.05}
+  .past .meta p{margin:16px 0 0;color:var(--steel);font-size:1rem;line-height:1.6;max-width:50ch}
+  .sponsors{margin:22px 0 0;padding:18px 0 0;border-top:var(--rule)}
+  .sponsors .k{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--steel)}
+  .sponsors .names{margin:10px 0 0;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:.95rem;font-weight:600;letter-spacing:-.01em}
+  .sponsors .names span+span::before{content:"·";margin-right:18px;color:var(--steel);font-weight:400}
+  @media(max-width:860px){.past{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -163,6 +198,42 @@
     </div>
   </section>
 
+
+  <section class="band" id="past">
+    <div class="wrap">
+      <div class="lead-in">
+        <span class="eyebrow">Already happened</span>
+        <h2>Boston, at The Engine.</h2>
+        <p>September 17 at MIT's tough-tech campus — accredited investors, founders building in the physical world, and the people who fund them.</p>
+      </div>
+
+      <div class="past">
+        <button class="vidcard" type="button" data-yt="ixdL2SGAGAk" aria-label="Play the recap from Boston, September 17">
+          <img src="/assets/boston-sept17.jpg" alt="4IR Group investor evening at The Engine, MIT — Boston, September 17" loading="lazy">
+          <span class="play"><span><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span>
+          <span class="tag">Recap</span>
+        </button>
+
+        <div class="meta">
+          <div class="where">Boston · September 17</div>
+          <h3>The Engine at MIT</h3>
+          <p>Exclusively for accredited investors. Companies presented to the room, introductions were made by name, and the conversations carried on well past the programme.</p>
+
+          <div class="sponsors">
+            <div class="k">Sponsored by</div>
+            <div class="names">
+              <span>4IR Group</span><span>FinStrat Management</span><span>The Engine</span><span>Nixon Peabody</span>
+            </div>
+          </div>
+
+          <div class="actions">
+            <a class="btn btn-line" href="https://luma.com/bostonsept17">See the event page <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="band">
     <div class="wrap">
       <div class="lead-in">
@@ -186,5 +257,19 @@
   </div>
 </footer>
 
+<script>
+  // Swap the still for YouTube's player only on click — no third-party
+  // request until someone asks for one.
+  document.querySelectorAll('.vidcard').forEach(function (card) {
+    card.addEventListener('click', function () {
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube.com/embed/' + card.dataset.yt + '?autoplay=1&rel=0&playsinline=1';
+      f.title = 'Boston, September 17 — recap';
+      f.allow = 'accelerometer; autoplay; encrypted-media; picture-in-picture';
+      f.allowFullscreen = true;
+      card.replaceWith(f);
+    }, { once: true });
+  });
+</script>
 </body>
 </html>
