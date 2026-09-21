@@ -99,36 +99,26 @@
     background:url('/assets/seco-mark-white.png') center/contain no-repeat;
     opacity:.06;pointer-events:none;
   }
-  .folio-shot{
-    position:relative;overflow:hidden;min-height:clamp(240px,30vw,400px);
-    background:var(--parchment-deep);
-    display:flex;align-items:center;justify-content:center;
-    border-right:1px solid rgba(16,24,32,.12);
+  .folio-shot{position:relative;overflow:hidden;min-height:clamp(240px,30vw,400px);line-height:0;background:var(--midnight)}
+  .folio-shot img{
+    width:100%;height:100%;object-fit:cover;object-position:60% center;display:block;
+    transition:transform .6s cubic-bezier(.2,.7,.2,1);
   }
-  /* Their grid, quietly, so the panel belongs to this site and not to a
-     screenshot of theirs. */
-  .folio-shot::before{
-    content:"";position:absolute;inset:0;pointer-events:none;
-    background-image:linear-gradient(rgba(16,24,32,.06) 1px,transparent 1px),
-                     linear-gradient(90deg,rgba(16,24,32,.06) 1px,transparent 1px);
-    background-size:64px 64px;
-    mask-image:radial-gradient(100% 100% at 30% 20%,#000,transparent 75%);
-    -webkit-mask-image:radial-gradient(100% 100% at 30% 20%,#000,transparent 75%);
-  }
-  .folio-mark{
-    position:relative;width:min(42%,150px);aspect-ratio:133/160;
-    background:var(--midnight);
-    -webkit-mask:url('/assets/seco-mark-white.png') center/contain no-repeat;
-    mask:url('/assets/seco-mark-white.png') center/contain no-repeat;
-    transition:transform .5s cubic-bezier(.2,.7,.2,1),background-color .3s ease;
-  }
-  .folio-shot:hover .folio-mark{transform:scale(1.06);background:var(--cobalt)}
+  .folio-shot:hover img{transform:scale(1.04)}
   .folio-body{position:relative;z-index:1;padding:clamp(28px,4vw,52px);display:flex;flex-direction:column;justify-content:center}
   .folio .mark{height:48px;width:auto;display:block;align-self:flex-start;flex:0 0 auto}
   .folio .tagline{
     margin:0;max-width:18ch;
     font-size:clamp(1.5rem,3.2vw,2.5rem);
     line-height:1.02;letter-spacing:-.032em;font-weight:700;text-transform:uppercase;
+  }
+  .folio .origin{margin:16px 0 0;max-width:46ch;color:rgba(244,241,234,.6);font-size:.93rem;line-height:1.55}
+  .folio .origin em{font-style:italic}
+  /* The names are the credential, so they sit as marks rather than prose. */
+  .folio .provenance{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+  .folio .provenance li{
+    font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--gold);border:1px solid rgba(240,184,36,.34);padding:7px 12px;
   }
   .folio .what{margin:16px 0 0;max-width:46ch;color:rgba(244,241,234,.72);font-size:1rem;line-height:1.6}
   .folio .status{
@@ -190,12 +180,16 @@
 
       <div class="folio" style="margin-top:clamp(28px,4vw,48px)">
         <a class="folio-shot" href="https://seco.bio" aria-label="Seco Bio — visit seco.bio">
-          <span class="folio-mark"></span>
+          <img src="/assets/seco-origin.jpg" alt="Lunar mission imagery — the NASA and DARPA research Seco Bio came out of" loading="lazy">
         </a>
 
         <div class="folio-body">
           <p class="tagline">Protecting what matters.</p>
           <p class="what">Probiotics die before they arrive. Seco Bio&rsquo;s proprietary formulation keeps them alive from the factory to the moment they are used — so what is on the label is what is inside.</p>
+          <p class="origin">Out of NASA- and DARPA-funded research at MIT into keeping bacteria alive for soldiers in the field and astronauts on long missions. Published in <em>Nature Materials</em>, 2024.</p>
+          <ul class="provenance">
+            <li>NASA</li><li>DARPA</li><li>MIT</li><li>Nature Materials</li>
+          </ul>
 
           <div class="actions">
             <a class="btn btn-solid on-dark" href="https://seco.bio">Visit seco.bio <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
