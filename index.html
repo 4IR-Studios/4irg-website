@@ -75,6 +75,21 @@
     color:rgba(244,241,234,.86);
   }
   .pillars span+span::before{content:"\00b7";margin-right:22px;color:rgba(244,241,234,.45)}
+  /* Four words have to hold one line on a phone. Type and spacing scale off
+     the viewport so the row shrinks to fit rather than wrapping, and nowrap
+     stops flex breaking it as a last resort. */
+  @media(max-width:620px){
+    .pillars{flex-wrap:nowrap;gap:0;width:100%}
+    .pillars span{
+      font-size:clamp(7.4px,2.06vw,11px);
+      letter-spacing:.05em;
+      white-space:nowrap;
+    }
+    .pillars span+span::before{
+      margin-right:clamp(5px,1.5vw,10px);
+      margin-left:clamp(5px,1.5vw,10px);
+    }
+  }
   /* Where the footage came from. Quiet, but it is a real room in a real city. */
   .hero-credit{
     margin-left:auto;
