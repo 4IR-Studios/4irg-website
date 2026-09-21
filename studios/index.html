@@ -187,6 +187,48 @@
     .node,.flow-line,.branch-rail,.branch-legs i{opacity:1!important;transform:none!important;transition:none!important}
     .node.in::after{animation:none}
   }
+
+  /* ---------- capability cards ---------- */
+  /* Four across instead of a left column: the four things are peers, and
+     stacking them down the page implied a sequence that does not exist. */
+  .caps{
+    list-style:none;margin:clamp(34px,5vw,60px) 0 0;padding:0;
+    display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:clamp(14px,2vw,26px);
+  }
+  .caps li{
+    position:relative;padding:clamp(22px,2.4vw,30px) 0 0;
+    opacity:0;transform:translateY(16px);
+    transition:opacity .55s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1);
+  }
+  .caps li.in{opacity:1;transform:none}
+  /* The rule draws across before the words arrive. */
+  .caps li::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--cobalt);
+    transform:scaleX(0);transform-origin:left center;
+    transition:transform .6s cubic-bezier(.4,0,.2,1);
+  }
+  .caps li.in::before{transform:scaleX(1)}
+  .caps li:nth-child(2),.caps li:nth-child(2)::before{transition-delay:.1s}
+  .caps li:nth-child(3),.caps li:nth-child(3)::before{transition-delay:.2s}
+  .caps li:nth-child(4),.caps li:nth-child(4)::before{transition-delay:.3s}
+  .caps .k{
+    display:block;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--steel);
+  }
+  .caps h3{
+    margin:14px 0 0;
+    font-size:clamp(1.15rem,1.9vw,1.5rem);
+    line-height:1.08;letter-spacing:-.028em;font-weight:600;text-transform:uppercase;
+  }
+  .caps p{margin:12px 0 0;color:var(--steel);font-size:.97rem;line-height:1.5}
+  @media(max-width:900px){.caps{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px}}
+  @media(max-width:520px){.caps{grid-template-columns:1fr}}
+  @media (prefers-reduced-motion:reduce){
+    .caps li{opacity:1;transform:none;transition:none}
+    .caps li::before{transform:scaleX(1);transition:none}
+  }
 </style>
 </head>
 <body>
@@ -257,37 +299,28 @@
       <div class="lead-in">
         <span class="eyebrow">What we do</span>
         <h2>A thesis is only worth what the room understands of it.</h2>
-        <p>The gap between a good company and a funded one is usually explanation. We write the story, build what carries it, and put it in front of the people who allocate.</p>
       </div>
 
-      <ul class="rows">
+      <ul class="caps">
         <li>
-          <span class="tag">Positioning</span>
-          <div>
-            <h3>The thesis, written for the people who fund it</h3>
-            <p>What the company does, why it matters now, and why this team — in the language an allocator already thinks in, rather than the language the engineering team uses internally.</p>
-          </div>
+          <span class="k">Positioning</span>
+          <h3>Written for allocators</h3>
+          <p>Your thesis, in the language they already think in.</p>
         </li>
         <li>
-          <span class="tag">Materials</span>
-          <div>
-            <h3>Built to be read inside a diligence window</h3>
-            <p>Sites, decks and one-pagers made for someone with twenty minutes and three other companies to look at. Fast, specific, and honest about the stage the company is actually at.</p>
-          </div>
+          <span class="k">Materials</span>
+          <h3>Read in twenty minutes</h3>
+          <p>Site, deck, one-pager. Built for a crowded desk.</p>
         </li>
         <li>
-          <span class="tag">Rooms</span>
-          <div>
-            <h3>In front of capital, not adjacent to it</h3>
-            <p>Private evenings where companies present uninterrupted to family offices, founders and institutional allocators. No expo hall, and no competing pitch across the aisle.</p>
-          </div>
+          <span class="k">Rooms</span>
+          <h3>In front of capital</h3>
+          <p>Private evenings. Introductions made by name.</p>
         </li>
         <li>
-          <span class="tag">Ownership</span>
-          <div>
-            <h3>Everything is handed over outright</h3>
-            <p>The repository, the hosting, the domain — transferred to the company when the work is done, whether or not anyone stays on for upkeep. Nothing is held hostage to a retainer.</p>
-          </div>
+          <span class="k">Ownership</span>
+          <h3>Yours outright</h3>
+          <p>Repo, hosting, domain. Handed over, not rented.</p>
         </li>
       </ul>
     </div>
@@ -344,6 +377,25 @@
       });
     }, { threshold: 0.55, rootMargin: '0px 0px -12% 0px' });
     bits.forEach(function (b) { io.observe(b); });
+  })();
+</script>
+<script>
+  (function () {
+    var caps = document.querySelectorAll('.caps li');
+    if (!caps.length) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+        !('IntersectionObserver' in window)) {
+      caps.forEach(function (c) { c.classList.add('in'); });
+      return;
+    }
+    // One trigger on the row, not four: side by side they should arrive as a
+    // set, with the stagger doing the sequencing.
+    var io = new IntersectionObserver(function (e, obs) {
+      if (!e[0].isIntersecting) return;
+      caps.forEach(function (c) { c.classList.add('in'); });
+      obs.disconnect();
+    }, { threshold: 0.25 });
+    io.observe(caps[0].parentNode);
   })();
 </script>
 </body>
