@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="robots" content="noindex"><title>Forms</title></head>
+<body>
+<!-- Netlify discovers forms by parsing built HTML. The real form is injected
+     at runtime by assets/form.js, which Netlify never sees, so this static
+     copy exists purely so the field names are registered. Keep the names in
+     sync with form.js or submissions will be rejected. -->
+<form name="enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="hidden" name="form-name" value="enquiry">
+  <input name="bot-field">
+  <select name="interest">
+    <option value="company"></option>
+    <option value="investing"></option>
+    <option value="sponsorship"></option>
+    <option value="studios"></option>
+    <option value="other"></option>
+  </select>
+  <input name="name"><input type="email" name="email">
+  <input name="company"><input name="website">
+  <textarea name="message"></textarea>
+</form>
+</body>
+</html>

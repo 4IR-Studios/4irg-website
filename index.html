@@ -265,46 +265,6 @@
     .offer:nth-child(even) .offer-text{order:0}
   }
 
-  /* ---------- apply dialog ---------- */
-  dialog.apply{
-    border:0;padding:0;max-width:620px;width:calc(100% - 32px);
-    background:var(--parchment);color:var(--midnight);
-  }
-  dialog.apply::backdrop{background:rgba(16,24,32,.72)}
-  .apply-inner{padding:clamp(26px,4vw,44px)}
-  .apply-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}
-  .apply-head h2{
-    margin:12px 0 0;max-width:16ch;
-    font-size:clamp(1.5rem,3.2vw,2.2rem);
-    line-height:1.02;letter-spacing:-.032em;font-weight:700;text-transform:uppercase;
-  }
-  .apply-close{
-    appearance:none;background:none;border:1px solid rgba(16,24,32,.24);
-    width:38px;height:38px;flex:0 0 auto;cursor:pointer;color:var(--midnight);
-    font-size:17px;line-height:1;transition:background-color .2s,color .2s;
-  }
-  .apply-close:hover{background:var(--midnight);color:var(--parchment)}
-  .apply form{margin-top:26px;display:grid;gap:16px}
-  .apply .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .apply label{display:block}
-  .apply .lab{
-    display:block;margin-bottom:7px;
-    font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--steel);
-  }
-  .apply input,.apply select,.apply textarea{
-    width:100%;font:inherit;font-size:.98rem;color:var(--midnight);
-    background:#fff;border:1px solid rgba(16,24,32,.22);
-    padding:12px 14px;border-radius:0;
-  }
-  .apply textarea{resize:vertical;min-height:88px}
-  .apply input:focus,.apply select:focus,.apply textarea:focus{outline:2px solid var(--cobalt);outline-offset:1px;border-color:var(--cobalt)}
-  .apply .hp{position:absolute;left:-9999px}
-  .apply .note{margin:0;font-size:.82rem;color:var(--steel);line-height:1.5}
-  .apply-done{padding:clamp(30px,5vw,54px);text-align:center}
-  .apply-done h3{margin:0;font-size:1.5rem;font-weight:600;text-transform:uppercase;letter-spacing:-.03em}
-  .apply-done p{margin:14px 0 0;color:var(--steel);line-height:1.6}
-  @media(max-width:540px){.apply .row{grid-template-columns:1fr}}
-
   /* ---------- the stack ---------- */
   /* The claim is that these are layers, so the block is built as layers.
      Each stratum is narrower than the one holding it up, and the foundation
@@ -397,7 +357,7 @@
       <h1>From founder to exit.</h1>
       <p class="lede">A private capital ecosphere for the companies and infrastructure transforming physical industry — the factories, power and supply chains everything else runs on.</p>
       <div class="actions">
-        <a class="btn btn-solid" href="mailto:joe@4irg.com?subject=4IR%20Group%20%E2%80%94%20my%20company">Companies apply <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
+        <a class="btn btn-solid" href="mailto:joe@4irg.com?subject=4IR%20Group%20%E2%80%94%20my%20company" data-form="company">Companies apply <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
         <a class="btn btn-line" href="#offerings">What we do</a>
       </div>
       <div class="aud-bar">
@@ -469,7 +429,7 @@
       <h2>Tell us what you're building.</h2>
       <p>What it makes, moves or powers, what stage it is at, and what the next twelve months have to prove. That is enough to start.</p>
       <div class="actions">
-        <a class="btn btn-solid" href="mailto:joe@4irg.com?subject=4IR%20Group%20%E2%80%94%20my%20company">Apply <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
+        <a class="btn btn-solid" href="mailto:joe@4irg.com?subject=4IR%20Group%20%E2%80%94%20my%20company" data-form="company">Apply <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
       </div>
     </div>
   </section>
@@ -520,98 +480,7 @@
   }
 </script>
 
-<!-- Netlify picks the form up from the built HTML, so it must be present in
-     the markup rather than injected. Submissions land in the project's Forms
-     tab; the email notification to joe@4irg.com is set there, once. -->
-<dialog class="apply" id="applyDialog" aria-labelledby="applyTitle">
-  <div class="apply-inner" id="applyBody">
-    <div class="apply-head">
-      <div>
-        <span class="eyebrow">Ventures</span>
-        <h2 id="applyTitle">Tell us what you're building.</h2>
-      </div>
-      <button class="apply-close" type="button" data-close aria-label="Close">&#215;</button>
-    </div>
 
-    <form name="apply" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="applyForm">
-      <input type="hidden" name="form-name" value="apply">
-      <p class="hp"><label>Leave this empty <input name="bot-field"></label></p>
-
-      <div class="row">
-        <label><span class="lab">Your name</span><input name="name" required autocomplete="name"></label>
-        <label><span class="lab">Email</span><input type="email" name="email" required autocomplete="email"></label>
-      </div>
-      <div class="row">
-        <label><span class="lab">Company</span><input name="company" required></label>
-        <label><span class="lab">Website</span><input name="website" placeholder="optional"></label>
-      </div>
-      <label><span class="lab">What does it make, move or power?</span>
-        <textarea name="what" required placeholder="One or two sentences, in plain words."></textarea></label>
-      <div class="row">
-        <label><span class="lab">Stage</span>
-          <select name="stage" required>
-            <option value="">Select…</option>
-            <option>Pre-revenue, prototype built</option>
-            <option>Signed pilot with a real counterparty</option>
-            <option>Revenue, scaling</option>
-            <option>Growth / later</option>
-          </select></label>
-        <label><span class="lab">Raising</span><input name="raising" placeholder="Amount and round"></label>
-      </div>
-      <label><span class="lab">What do the next twelve months have to prove?</span>
-        <textarea name="twelve" required></textarea></label>
-
-      <div class="actions" style="margin-top:6px">
-        <button class="btn btn-solid" type="submit">Send to 4IR &#8599;</button>
-      </div>
-      <p class="note">Goes straight to Joe. We read everything and reply either way.</p>
-    </form>
-  </div>
-</dialog>
-
-<script>
-  (function () {
-    var dlg = document.getElementById('applyDialog');
-    if (!dlg) return;
-
-    // Any CTA that asks a founder to get in touch opens the form instead of
-    // firing off a mailto, which loses the person who has no mail client set.
-    document.querySelectorAll('a[href^="mailto:joe@4irg.com?subject=4IR%20Group%20%E2%80%94%20my%20company"]')
-      .forEach(function (a) {
-        a.setAttribute('role', 'button');
-        a.addEventListener('click', function (e) { e.preventDefault(); dlg.showModal(); });
-      });
-
-    dlg.addEventListener('click', function (e) {
-      // Clicking the backdrop closes; clicking the panel does not.
-      if (e.target === dlg) dlg.close();
-      if (e.target.closest('[data-close]')) dlg.close();
-    });
-
-    var form = document.getElementById('applyForm');
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var btn = form.querySelector('button[type=submit]');
-      btn.disabled = true; btn.textContent = 'Sending…';
-      fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(new FormData(form)).toString()
-      }).then(function (r) {
-        if (!r.ok) throw new Error(r.status);
-        document.getElementById('applyBody').innerHTML =
-          '<div class="apply-done"><h3>Thank you.</h3>' +
-          '<p>That is with Joe. You will hear back either way.</p>' +
-          '<div class="actions" style="justify-content:center"><button class="btn btn-line" type="button" data-close>Close</button></div></div>';
-      }).catch(function () {
-        btn.disabled = false; btn.textContent = 'Send to 4IR \u2197';
-        var n = form.querySelector('.note');
-        n.textContent = 'That did not send. Email joe@4irg.com directly and we will pick it up.';
-        n.style.color = '#A55D3B';
-      });
-    });
-  })();
-</script>
 
 <script>
   // One trigger on the group: they stack as a set and the delays do the
@@ -627,5 +496,6 @@
     }, { threshold: 0.2 }).observe(st);
   })();
 </script>
+<script src="/assets/form.js" defer></script>
 </body>
 </html>
