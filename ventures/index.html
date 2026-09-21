@@ -85,6 +85,55 @@
   .page-head .wrap{width:100%}
   .page-head .lede{color:rgba(244,241,234,.86)}
   @media (prefers-reduced-motion:reduce){ .head-media video{display:none} }
+
+  /* ---------- portfolio highlight ---------- */
+  .folio{
+    background:var(--midnight);color:var(--parchment);
+    display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);
+    align-items:stretch;position:relative;overflow:hidden;
+  }
+  /* Their mark, oversized and barely there behind the copy. It brands the
+     card as theirs without competing with the words in front of it. */
+  .folio::after{
+    content:"";position:absolute;right:-4%;bottom:-18%;width:min(46%,420px);aspect-ratio:133/160;
+    background:url('/assets/seco-mark-white.png') center/contain no-repeat;
+    opacity:.06;pointer-events:none;
+  }
+  .folio-shot{position:relative;overflow:hidden;min-height:clamp(240px,30vw,400px);line-height:0}
+  .folio-shot img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+  .folio-shot:hover img{transform:scale(1.04)}
+  .folio-shot .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+  .folio-shot .play span{
+    width:68px;height:68px;border-radius:50%;background:rgba(244,241,234,.94);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 30px rgba(16,24,32,.4);
+    transition:transform .3s cubic-bezier(.2,.7,.2,1),background-color .3s;
+  }
+  .folio-shot:hover .play span{transform:scale(1.08);background:var(--gold)}
+  .folio-body{position:relative;z-index:1;padding:clamp(28px,4vw,52px);display:flex;flex-direction:column;justify-content:center}
+  .folio .mark{height:48px;width:auto;display:block;align-self:flex-start;flex:0 0 auto}
+  .folio .tagline{
+    margin:22px 0 0;max-width:18ch;
+    font-size:clamp(1.5rem,3.2vw,2.5rem);
+    line-height:1.02;letter-spacing:-.032em;font-weight:700;text-transform:uppercase;
+  }
+  .folio .what{margin:16px 0 0;max-width:46ch;color:rgba(244,241,234,.72);font-size:1rem;line-height:1.6}
+  .folio .status{
+    margin:clamp(22px,3vw,30px) 0 0;padding:16px 0 0;border-top:1px solid rgba(244,241,234,.18);
+    display:flex;flex-wrap:wrap;gap:8px 0;
+  }
+  .folio .status li{
+    list-style:none;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--gold);
+  }
+  .folio .status li+li::before{content:"\00b7";margin:0 14px;color:rgba(244,241,234,.35)}
+  .folio .allocation{margin:14px 0 0;max-width:46ch;color:rgba(244,241,234,.8);font-size:.98rem;line-height:1.55}
+  .folio .legal{
+    margin:clamp(20px,2.6vw,26px) 0 0;max-width:58ch;
+    font-size:.78rem;line-height:1.55;color:rgba(244,241,234,.5);
+  }
+  @media(max-width:900px){.folio{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -114,6 +163,43 @@
       <p class="lede">The capital you need to scale — raised through a vehicle built for your round, not squeezed into someone else's fund cycle.</p>
       <div class="actions">
         <a class="btn btn-solid on-dark" href="mailto:joe@4irg.com?subject=4IR%20Ventures%20%E2%80%94%20my%20company">Submit my company <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="band" id="portfolio">
+    <div class="wrap">
+      <div class="lead-in">
+        <span class="eyebrow">Portfolio</span>
+        <h2>Who we are backing.</h2>
+      </div>
+
+      <div class="folio" style="margin-top:clamp(28px,4vw,48px)">
+        <a class="folio-shot" href="https://seco.bio" aria-label="Seco Bio — visit seco.bio">
+          <img src="/assets/seco-bio.jpg" alt="Seco Bio — protecting what matters" loading="lazy">
+          <span class="play"><span><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span>
+        </a>
+
+        <div class="folio-body">
+          <img class="mark" src="/assets/seco-mark-white.png" alt="Seco Bio">
+          <p class="tagline">Protecting what matters.</p>
+          <p class="what">Probiotics die before they arrive. Seco Bio&rsquo;s proprietary formulation keeps them alive from the factory to the moment they are used — so what is on the label is what is inside.</p>
+
+          <ul class="status">
+            <li>Series A</li>
+            <li>Regulation D</li>
+            <li>4IR Ventures SPV</li>
+          </ul>
+          <p class="allocation">A special purpose vehicle has been formed for the round and is open to verified accredited investors.</p>
+
+          <div class="actions">
+            <a class="btn btn-solid on-dark" href="https://seco.bio">Visit seco.bio <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
+            <a class="btn btn-line on-dark" href="mailto:joe@4irg.com?subject=Seco%20Bio%20%E2%80%94%20allocation">Ask about allocation <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
+          </div>
+
+          <p class="legal">This page is for information only. It is not an offer to sell or a solicitation of an offer to buy any security, and it is not investment, legal or tax advice. Any offering is made solely to verified accredited investors through definitive offering documents, which contain the terms and the risks. Past performance does not indicate future results, and investments of this kind carry the risk of total loss.</p>
+        </div>
       </div>
     </div>
   </section>
