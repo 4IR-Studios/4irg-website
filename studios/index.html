@@ -99,6 +99,94 @@
   }
   .callout .cta:hover{background:var(--cobalt);border-color:var(--cobalt);color:var(--parchment)}
   .callout .cta svg{flex:0 0 auto}
+
+  /* ---------- founder flow ---------- */
+  /* A spine that draws downward, with each node bursting in as it arrives.
+     Every step animates on its own trigger rather than off one stagger, so
+     the sequence still reads when the diagram is taller than the window. */
+  .flow{display:flex;flex-direction:column;align-items:center;text-align:center;margin-top:clamp(36px,5vw,64px)}
+  .flow-line{
+    width:2px;background:var(--cobalt);
+    height:clamp(34px,5vw,56px);
+    transform:scaleY(0);transform-origin:top center;
+    transition:transform .5s cubic-bezier(.4,0,.2,1);
+  }
+  .flow-line.in{transform:scaleY(1)}
+  .flow-line.long{height:clamp(46px,6vw,76px)}
+
+  .node{
+    position:relative;
+    opacity:0;transform:scale(.94) translateY(10px);
+    transition:opacity .5s cubic-bezier(.2,.7,.2,1),transform .5s cubic-bezier(.2,.7,.2,1);
+  }
+  .node.in{opacity:1;transform:none}
+  /* The burst: a ring that expands out of the node once, then gets out of
+     the way. Nothing loops — this is punctuation, not decoration. */
+  .node::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    border:1px solid var(--cobalt);opacity:0;
+  }
+  .node.in::after{animation:burst .72s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes burst{
+    0%{opacity:.85;transform:scale(1)}
+    100%{opacity:0;transform:scale(1.34)}
+  }
+
+  .node .box{
+    display:inline-block;
+    padding:clamp(14px,1.8vw,20px) clamp(20px,3vw,38px);
+    border:1px solid rgba(16,24,32,.24);
+    background:var(--parchment);
+  }
+  .node .k{
+    display:block;
+    font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+    color:var(--steel);margin-bottom:8px;
+  }
+  .node .v{
+    display:block;
+    font-size:clamp(1.05rem,2.2vw,1.55rem);font-weight:600;
+    letter-spacing:-.025em;text-transform:uppercase;line-height:1.05;
+  }
+  /* The two ends of the story carry weight the middle steps do not. */
+  .node.start .box{background:var(--midnight);color:var(--parchment);border-color:var(--midnight)}
+  .node.start .k{color:rgba(244,241,234,.55)}
+  .node.finish .box{background:var(--midnight);color:var(--parchment);border-color:var(--midnight);border-top:3px solid var(--oxide)}
+  .node.finish .k{color:var(--oxide)}
+  .node.finish .v{font-size:clamp(1.15rem,2.6vw,1.9rem)}
+  .node.problem .box{border-left:3px solid var(--oxide)}
+
+  /* Where Studios actually does the work, the spine widens into three. */
+  .branch{width:100%;max-width:840px}
+  .branch-top{display:flex;justify-content:center}
+  /* Span leg to leg, not edge to edge: the legs drop at the centre of each
+     third, so the rail is two thirds wide and the overshoot disappears. */
+  .branch-rail{
+    height:2px;background:var(--cobalt);width:66.667%;
+    transform:scaleX(0);transform-origin:center;
+    transition:transform .55s cubic-bezier(.4,0,.2,1);
+  }
+  .branch-rail.in{transform:scaleX(1)}
+  .branch-legs{display:grid;grid-template-columns:repeat(3,1fr)}
+  .branch-legs span{display:flex;justify-content:center}
+  .branch-legs i{
+    display:block;width:2px;height:clamp(20px,2.6vw,32px);background:var(--cobalt);
+    transform:scaleY(0);transform-origin:top center;transition:transform .4s cubic-bezier(.4,0,.2,1);
+  }
+  .branch-legs i.in{transform:scaleY(1)}
+  .deliverables{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(12px,2vw,22px);margin-top:0}
+  .deliverables .node .box{width:100%;padding-inline:clamp(12px,1.6vw,22px)}
+  .deliverables .v{font-size:clamp(.92rem,1.6vw,1.15rem)}
+  @media(max-width:700px){
+    .branch-legs,.deliverables{grid-template-columns:1fr}
+    .branch-rail{width:2px;height:0}
+    .branch-legs span:not(:first-child) i{height:clamp(14px,3vw,20px)}
+    .deliverables{gap:10px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .node,.flow-line,.branch-rail,.branch-legs i{opacity:1!important;transform:none!important;transition:none!important}
+    .node.in::after{animation:none}
+  }
 </style>
 </head>
 <body>
@@ -126,6 +214,41 @@
       <span class="eyebrow">4IR Group</span>
       <h1>Studios</h1>
       <p class="lede">Capital markets PR and marketing for the companies we back — the positioning, the materials, and the rooms where they meet capital.</p>
+    </div>
+  </section>
+
+
+  <section class="band" id="flow">
+    <div class="wrap">
+      <div class="lead-in" style="margin:0 auto;text-align:center">
+        <span class="eyebrow">What we solve</span>
+        <h2>From a founder to a funded company.</h2>
+        <p style="margin-left:auto;margin-right:auto">Most of this is not capital. It is being understood — and having something to be understood by.</p>
+      </div>
+
+      <div class="flow">
+      <div class="node start"><span class="box"><span class="k">Start</span><span class="v">Founder</span></span></div>
+        <div class="flow-line"></div>
+      <div class="node "><span class="box"><span class="k">Becomes</span><span class="v">Your company</span></span></div>
+        <div class="flow-line"></div>
+      <div class="node problem"><span class="box"><span class="k">Which needs stating</span><span class="v">The problem you solve</span></span></div>
+        <div class="flow-line long"></div>
+
+        <div class="branch">
+          <div class="branch-top"><div class="branch-rail"></div></div>
+          <div class="branch-legs"><span><i></i></span><span><i></i></span><span><i></i></span></div>
+          <div class="deliverables">
+      <div class="node "><span class="box"><span class="k">Built by Studios</span><span class="v">Your website</span></span></div>
+      <div class="node "><span class="box"><span class="k">Built by Studios</span><span class="v">Your deck</span></span></div>
+      <div class="node "><span class="box"><span class="k">Built by Studios</span><span class="v">Your promo video</span></span></div>
+          </div>
+        </div>
+
+        <div class="flow-line long"></div>
+      <div class="node "><span class="box"><span class="k">And then</span><span class="v">Ready to go to market</span></span></div>
+        <div class="flow-line"></div>
+      <div class="node finish"><span class="box"><span class="k">The point of all of it</span><span class="v">Investors allocate to your company</span></span></div>
+      </div>
     </div>
   </section>
 
@@ -200,6 +323,27 @@
     if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){v.remove();return;}
     var go=function(){var p=v.play(); if(p&&p.catch)p.catch(function(){});};
     v.addEventListener('canplay',go,{once:true}); go();
+  })();
+</script>
+<script>
+  // Each piece of the spine watches itself, so the sequence still reads
+  // when the diagram is taller than the window.
+  (function () {
+    var bits = document.querySelectorAll('#flow .node, #flow .flow-line, #flow .branch-rail, #flow .branch-legs i');
+    if (!bits.length) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+        !('IntersectionObserver' in window)) {
+      bits.forEach(function (b) { b.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('in');
+        obs.unobserve(e.target);
+      });
+    }, { threshold: 0.55, rootMargin: '0px 0px -12% 0px' });
+    bits.forEach(function (b) { io.observe(b); });
   })();
 </script>
 </body>
