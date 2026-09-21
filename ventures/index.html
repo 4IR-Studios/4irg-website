@@ -106,7 +106,6 @@
   }
   .folio-shot:hover img{transform:scale(1.04)}
   .folio-body{position:relative;z-index:1;padding:clamp(28px,4vw,52px);display:flex;flex-direction:column;justify-content:center}
-  .folio .mark{height:48px;width:auto;display:block;align-self:flex-start;flex:0 0 auto}
   .folio .tagline{
     margin:0;max-width:18ch;
     font-size:clamp(1.5rem,3.2vw,2.5rem);
@@ -153,12 +152,35 @@
   }
   .folio-shot.phast::after{
     content:"";position:relative;width:min(62%,280px);aspect-ratio:426/168;
-    background:var(--midnight);
+    background:#243C60;   /* their navy, which reads correctly on parchment */
     -webkit-mask:url('/assets/phast-mark.png') center/contain no-repeat;
     mask:url('/assets/phast-mark.png') center/contain no-repeat;
     transition:transform .5s cubic-bezier(.2,.7,.2,1),background-color .3s ease;
   }
   .folio-shot.phast:hover::after{transform:scale(1.05);background:var(--cobalt)}
+
+  /* Company marks. All three arrive as alpha masks, so they are painted in
+     parchment rather than dropped in as foreign white PNGs — one rule, and
+     every logo sits on the dark panel the same way. */
+  .folio .mark, .alloc-head .mark{
+    display:block;align-self:flex-start;flex:0 0 auto;
+    position:relative;z-index:1;
+  }
+  /* Each mark in its own brand colour. Seco's blue and PhAST's navy are too
+     dark to sit on midnight (2.9:1 and 1.6:1), so both are lifted along
+     their own hue until they clear 4:1 rather than swapped for something
+     else. Syntis's magenta already passes and is used as-is. */
+  .mark-seco{background:#416AFF;width:34px;aspect-ratio:133/160;
+    -webkit-mask:url('/assets/seco-mark-white.png') left center/contain no-repeat;
+    mask:url('/assets/seco-mark-white.png') left center/contain no-repeat}
+  .mark-phast{background:#5479B2;width:150px;aspect-ratio:600/236;
+    -webkit-mask:url('/assets/phast-mark.png') left center/contain no-repeat;
+    mask:url('/assets/phast-mark.png') left center/contain no-repeat}
+  .mark-syntis{background:#D83C78;width:158px;aspect-ratio:520/240;
+    -webkit-mask:url('/assets/syntis-mark.png') left center/contain no-repeat;
+    mask:url('/assets/syntis-mark.png') left center/contain no-repeat}
+  .folio .mark{margin-bottom:20px}
+  .alloc-head .mark{margin-bottom:18px}
 </style>
 </head>
 <body>
@@ -235,6 +257,7 @@
         </a>
 
         <div class="folio-body">
+          <span class="mark mark-seco"></span>
           <p class="tagline">Protecting what matters.</p>
           <p class="what">Probiotics die before they arrive. Seco Bio&rsquo;s proprietary formulation keeps them alive from the factory to the moment they are used — so what is on the label is what is inside.</p>
           <p class="origin">Out of NASA- and DARPA-funded research at MIT into keeping bacteria alive for soldiers in the field and astronauts on long missions. Published in <em>Nature Materials</em>, 2024.</p>
@@ -275,6 +298,7 @@
         </a>
 
         <div class="folio-body">
+          <span class="mark mark-syntis"></span>
           <p class="tagline">Unlocking the small intestine.</p>
           <p class="what">The drugs that work for obesity are injections. Syntis Bio is building oral therapies that act through the small intestine&rsquo;s own biology instead — a pill where a needle used to be.</p>
           <p class="origin">A pipeline across multiple therapeutic areas, starting with obesity and extending to rare genetic disorders.</p>

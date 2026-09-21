@@ -180,7 +180,6 @@
     background:url('/assets/seco-mark-white.png') center/contain no-repeat;
     opacity:.07;pointer-events:none;
   }
-  .alloc-head .mark{height:42px;width:auto;align-self:flex-start;flex:0 0 auto;position:relative;z-index:1}
   .alloc-head h3{
     margin:20px 0 0;position:relative;z-index:1;
     font-size:clamp(1.4rem,2.8vw,2.1rem);line-height:1.02;letter-spacing:-.032em;
@@ -229,6 +228,29 @@
     width:min(66%,290px);aspect-ratio:520/240;right:-6%;bottom:-8%;
     opacity:.10;filter:invert(1);
   }
+
+  /* Company marks. All three arrive as alpha masks, so they are painted in
+     parchment rather than dropped in as foreign white PNGs — one rule, and
+     every logo sits on the dark panel the same way. */
+  .folio .mark, .alloc-head .mark{
+    display:block;align-self:flex-start;flex:0 0 auto;
+    position:relative;z-index:1;
+  }
+  /* Each mark in its own brand colour. Seco's blue and PhAST's navy are too
+     dark to sit on midnight (2.9:1 and 1.6:1), so both are lifted along
+     their own hue until they clear 4:1 rather than swapped for something
+     else. Syntis's magenta already passes and is used as-is. */
+  .mark-seco{background:#416AFF;width:34px;aspect-ratio:133/160;
+    -webkit-mask:url('/assets/seco-mark-white.png') left center/contain no-repeat;
+    mask:url('/assets/seco-mark-white.png') left center/contain no-repeat}
+  .mark-phast{background:#5479B2;width:150px;aspect-ratio:600/236;
+    -webkit-mask:url('/assets/phast-mark.png') left center/contain no-repeat;
+    mask:url('/assets/phast-mark.png') left center/contain no-repeat}
+  .mark-syntis{background:#D83C78;width:158px;aspect-ratio:520/240;
+    -webkit-mask:url('/assets/syntis-mark.png') left center/contain no-repeat;
+    mask:url('/assets/syntis-mark.png') left center/contain no-repeat}
+  .folio .mark{margin-bottom:20px}
+  .alloc-head .mark{margin-bottom:18px}
 </style>
 </head>
 <body>
@@ -344,7 +366,7 @@
 
       <div class="alloc">
         <div class="alloc-head">
-          <img class="mark" src="/assets/seco-mark-white.png" alt="Seco Bio">
+          <span class="mark mark-seco"></span>
           <h3>Seco Bio</h3>
           <p>Probiotics die before they arrive. Seco Bio keeps them alive from the factory to the moment they are used.</p>
           <a class="site" href="https://seco.bio">seco.bio <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
@@ -364,6 +386,7 @@
 
       <div class="alloc" style="margin-top:clamp(16px,2vw,24px)">
         <div class="alloc-head phast">
+          <span class="mark mark-phast"></span>
           <h3>PhAST</h3>
           <p>When sepsis sets in, doctors guess at antibiotics for days while the lab catches up. PhAST names the one that works in hours.</p>
           <a class="site" href="https://phast.ai">phast.ai <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
@@ -383,6 +406,7 @@
 
       <div class="alloc" style="margin-top:clamp(16px,2vw,24px)">
         <div class="alloc-head syntis">
+          <span class="mark mark-syntis"></span>
           <h3>Syntis Bio</h3>
           <p>Oral therapies that act through the small intestine&rsquo;s own biology — a pill where the working obesity drugs are injections.</p>
           <a class="site" href="https://syntis.bio">syntis.bio <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></a>
