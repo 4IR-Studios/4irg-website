@@ -286,7 +286,7 @@
      Each stratum is narrower than the one holding it up, and the foundation
      is widest, darkest and lands first. The shape is the argument — the
      hierarchy is legible before a word is read. */
-  .strata{margin-top:clamp(36px,5vw,64px);display:flex;flex-direction:column;align-items:center;gap:clamp(8px,1vw,12px)}
+  .strata{margin-top:clamp(26px,3.6vw,44px);display:flex;flex-direction:column;align-items:center;gap:clamp(8px,1vw,12px)}
   .stratum{
     width:100%;position:relative;
     display:grid;grid-template-columns:clamp(74px,9vw,128px) minmax(0,1fr);
@@ -392,6 +392,12 @@
   <!-- THESIS — the opening block. Built bottom up, because that is the claim. -->
   <section class="band" id="thesis">
     <div class="wrap">
+      <!-- Label only, no heading: the hero already carries the page's h1, and
+           a second one competing with it is why this came out before. -->
+      <div class="statement">
+        <span class="eyebrow">Our thesis</span>
+      </div>
+
       <div class="strata" id="strata">
         <div class="stratum s-intelligence">
           <span class="tag">Intelligence</span>
