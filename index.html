@@ -50,7 +50,16 @@
     -webkit-mask-image:radial-gradient(120% 90% at 78% 14%,#000,transparent 72%);
   }
   .hero .wrap{position:relative;z-index:1;width:100%}
-  .hero .eyebrow{color:var(--gold)}
+  /* 11px base, 75% up. Tracking eases off as it grows — .16em was set for
+     small caps and gets loose at this size. */
+  .hero .eyebrow{
+    color:var(--gold);
+    font-size:19.25px;
+    letter-spacing:.12em;
+  }
+  @media(max-width:480px){
+    .hero .eyebrow{font-size:16px;letter-spacing:.1em}
+  }
   h1{
     margin:14px 0 0;
     font-size:clamp(2.5rem,7.4vw,6.1rem);

@@ -55,6 +55,36 @@
   @media (prefers-reduced-motion:reduce){
     .steps li,.steps li::before,.steps li .n{opacity:1!important;transform:none!important;transition:none!important}
   }
+
+  /* ---------- page head video ---------- */
+  /* Real footage from the Boston room, so the blur is lighter than the stock
+     clips elsewhere: enough to soften faces, not so much that The Engine's
+     wall and the slide behind the speaker stop reading. That evidence is the
+     reason to use this clip at all. */
+  .page-head{
+    position:relative;overflow:hidden;isolation:isolate;
+    min-height:min(46vh,440px);
+    display:flex;align-items:flex-end;
+    --wash:.66;
+  }
+  .head-media{position:absolute;inset:0;z-index:-3;overflow:hidden}
+  .head-media video,.head-media img{
+    width:100%;height:100%;object-fit:cover;display:block;
+    filter:blur(6px) saturate(.9);
+    transform:scale(1.12);
+  }
+  .page-head::before{
+    content:"";position:absolute;inset:0;z-index:-2;pointer-events:none;
+    background:linear-gradient(
+      to top,
+      rgba(16,24,32,calc(var(--wash) + .26)) 0%,
+      rgba(16,24,32,calc(var(--wash) + .07)) 42%,
+      rgba(16,24,32,var(--wash)) 100%);
+  }
+  .page-head::after{z-index:-1}
+  .page-head .wrap{width:100%}
+  .page-head .lede{color:rgba(244,241,234,.86)}
+  @media (prefers-reduced-motion:reduce){ .head-media video{display:none} }
 </style>
 </head>
 <body>
@@ -73,6 +103,11 @@
 <main id="top">
 
   <section class="page-head">
+    <div class="head-media" aria-hidden="true">
+      <video autoplay muted loop playsinline preload="auto" poster="/assets/ventures-head.jpg">
+        <source src="/assets/ventures-head.mp4" type="video/mp4">
+      </video>
+    </div>
     <div class="wrap">
       <span class="eyebrow">For founders building in physical industry</span>
       <h1>4IR Ventures</h1>
@@ -185,6 +220,17 @@
       if (!e[0].isIntersecting) return;
       st.classList.add('in'); o.disconnect();
     }, { threshold: 0.3 }).observe(st);
+  })();
+</script>
+<script>
+  (function(){
+    var v=document.querySelector('.head-media video'); if(!v) return;
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){v.remove();return;}
+    var slow=function(){v.playbackRate=0.75;};
+    var go=function(){slow(); var p=v.play(); if(p&&p.catch)p.catch(function(){});};
+    v.addEventListener('loadedmetadata',slow);
+    v.addEventListener('play',slow);
+    v.addEventListener('canplay',go,{once:true}); go();
   })();
 </script>
 </body>
