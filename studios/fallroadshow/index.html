@@ -63,14 +63,16 @@
   }
 
   /* ---------- cities ---------- */
-  .cities{list-style:none;margin:clamp(30px,5vw,52px) 0 0;padding:0;display:grid;gap:18px;grid-template-columns:repeat(5,minmax(0,1fr))}
+  /* Six rooms, so three across and two down rather than six narrow slivers —
+     the artwork is the point and it has to be legible. */
+  .cities{list-style:none;margin:clamp(30px,5vw,52px) 0 0;padding:0;display:grid;gap:clamp(16px,2vw,24px);grid-template-columns:repeat(3,minmax(0,1fr))}
   .cities a{display:block;text-decoration:none;color:inherit;border:1px solid rgba(16,24,32,.16);background:var(--parchment-deep);transition:border-color .2s,transform .2s}
   .cities a:hover{border-color:var(--cobalt);transform:translateY(-2px)}
   .cities img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;background:var(--parchment-deep)}
   .cities .meta{padding:14px 16px 18px}
   .cities .city{font-size:1.05rem;font-weight:600;letter-spacing:-.015em;text-transform:uppercase}
   .cities .when{margin:6px 0 0;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--steel)}
-  @media(max-width:1000px){.cities{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media(max-width:900px){.cities{grid-template-columns:repeat(2,minmax(0,1fr))}}
   @media(max-width:520px){.cities{grid-template-columns:1fr}}
 
   /* ---------- run of show ---------- */
@@ -192,13 +194,14 @@
 
       <div class="lead-in" id="rooms">
         <span class="eyebrow">What you are sponsoring</span>
-        <h2>Five rooms this fall.</h2>
+        <h2>Six rooms this fall.</h2>
         <p>Each evening is private and registration is subject to host approval. Sponsors are named on every one.</p>
       </div>
       <ul class="cities">
         <li><a href="https://luma.com/4IRGroupBoston"><img src="/assets/cities/boston.jpg" alt="" loading="lazy"><div class="meta"><div class="city">Boston</div><p class="when">Thu, Oct 8 · 6–9 PM</p></div></a></li>
         <li><a href="https://luma.com/saltlake"><img src="/assets/cities/salt-lake.jpg" alt="" loading="lazy"><div class="meta"><div class="city">Salt Lake City</div><p class="when">Tue, Oct 13 · 6–9 PM MDT</p></div></a></li>
         <li><a href="https://luma.com/bevhills"><img src="/assets/cities/beverly-hills.jpg" alt="" loading="lazy"><div class="meta"><div class="city">Beverly Hills</div><p class="when">Tue, Oct 27 · 6–9 PM PDT</p></div></a></li>
+        <li><a href="https://luma.com/paloaltoCa"><img src="/assets/cities/palo-alto.jpg" alt="" loading="lazy"><div class="meta"><div class="city">Palo Alto</div><p class="when">Tue, Nov 3 · 6–8 PM PST</p></div></a></li>
         <li><a href="https://luma.com/palmbeachworthave"><img src="/assets/cities/palm-beach.jpg" alt="" loading="lazy"><div class="meta"><div class="city">Palm Beach</div><p class="when">Thu, Nov 5 · 6–9 PM</p></div></a></li>
         <li><a href="https://luma.com/chicago4ir"><img src="/assets/cities/chicago.jpg" alt="" loading="lazy"><div class="meta"><div class="city">Chicago</div><p class="when">Thu, Nov 12 · 6–9 PM</p></div></a></li>
       </ul>
