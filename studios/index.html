@@ -236,6 +236,13 @@
     .caps li{opacity:1;transform:none;transition:none}
     .caps li::before{transform:scaleX(1);transition:none}
   }
+
+  .close h2{
+    margin:14px 0 0;max-width:16ch;
+    font-size:clamp(2rem,5.2vw,4rem);
+    line-height:.98;letter-spacing:-.035em;font-weight:700;text-transform:uppercase;
+  }
+  .close p{margin:22px 0 0;max-width:52ch;color:var(--steel);font-size:clamp(1rem,1.3vw,1.1rem);line-height:1.6}
 </style>
 </head>
 <body>
@@ -352,6 +359,18 @@
           <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/>
         </svg>
       </a>
+    </div>
+  </section>
+
+
+  <section class="band close">
+    <div class="wrap">
+      <span class="eyebrow">Get started</span>
+      <h2>Tell us what you need built.</h2>
+      <p>The positioning, the site, the deck, the video — or all of it. Tell us what the company is and who has to understand it.</p>
+      <div class="actions">
+        <button class="btn btn-solid" type="button" data-form="studios">Talk to Studios <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/></svg></button>
+      </div>
     </div>
   </section>
 

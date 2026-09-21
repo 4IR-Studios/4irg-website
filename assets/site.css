@@ -129,6 +129,8 @@
 
   /* ---------- buttons ---------- */
   .btn{
+    /* Used on both <a> and <button>; the resets keep them identical. */
+    appearance:none;-webkit-appearance:none;font:inherit;cursor:pointer;
     display:inline-flex;align-items:center;gap:11px;
     font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
     text-decoration:none;padding:16px 28px;border:1px solid transparent;
