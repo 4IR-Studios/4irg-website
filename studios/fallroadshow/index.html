@@ -210,10 +210,6 @@
         </li>
         <li>
           <span class="box"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12.5l5.2 5.2L20 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <div><h3>The complete contact list</h3><p>Every attendee afterwards, with their answers to the questions you chose. Not a badge scan.</p></div>
-        </li>
-        <li>
-          <span class="box"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12.5l5.2 5.2L20 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <div><h3>Alignment worth having</h3><p>You sit alongside the universities, institutions and brands already in the room.</p></div>
         </li>
         <li>
@@ -226,7 +222,7 @@
         </li>
         <li>
           <span class="box"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12.5l5.2 5.2L20 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <div><h3>Time on your feet</h3><p>A speaking slot to talk about your firm, ending on one clear next step.</p></div>
+          <div><h3>Presenting time</h3><p>A speaking slot to talk about your firm, ending on one clear next step.</p></div>
         </li>
         <li>
           <span class="box"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12.5l5.2 5.2L20 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
@@ -235,6 +231,10 @@
         <li>
           <span class="box"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12.5l5.2 5.2L20 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           <div><h3>The private invitations</h3><p>Dinners, company days and the smaller gatherings that sit around the salons.</p></div>
+        </li>
+        <li>
+          <span class="box"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 12.5l5.2 5.2L20 7" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <div><h3>The complete contact list</h3><p>Full contact details for every investor and every company in the room, with their answers to the questions you chose. Not a badge scan.</p></div>
         </li>
       </ul>
 
@@ -274,9 +274,10 @@
     // Stagger by index so the ticks land one after another rather than all
     // at once, which would read as a state instead of a confirmation.
     [].forEach.call(c.children, function (li, i) {
-      li.style.transitionDelay = (i * 0.07) + 's';
-      li.querySelector('.box').style.transitionDelay = (i * 0.07) + 's';
-      li.querySelector('.box path').style.transitionDelay = (i * 0.07 + 0.12) + 's';
+      var t = i * 0.22;                       // one after another, visibly
+      li.style.transitionDelay = t + 's';
+      li.querySelector('.box').style.transitionDelay = t + 's';
+      li.querySelector('.box path').style.transitionDelay = (t + 0.14) + 's';
     });
     new IntersectionObserver(function (e, o) {
       if (!e[0].isIntersecting) return;
