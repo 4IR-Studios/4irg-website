@@ -83,15 +83,26 @@
      changing its proportions. */
   .masthead nav{margin-left:auto;display:flex;gap:clamp(18px,3vw,34px)}
   .masthead nav a{
+    position:relative;
     font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;
     color:rgba(244,241,234,.62);text-decoration:none;
-    padding:4px 0;border-bottom:1px solid transparent;
-    transition:color .2s,border-color .2s;
+    padding:6px 0;
+    transition:color .2s ease;
+  }
+  /* The rule is drawn rather than toggled: it grows from the left on the way
+     in and retreats the same way, so the hover has a direction. */
+  .masthead nav a::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:1.5px;
+    background:var(--gold);
+    transform:scaleX(0);transform-origin:left center;
+    transition:transform .28s cubic-bezier(.4,0,.2,1);
   }
   .masthead nav a:hover{color:var(--parchment)}
+  .masthead nav a:hover::after{transform:scaleX(1)}
   /* aria-current marks the page you are on, so the styling follows the
      accessibility state rather than a second hand-maintained class. */
-  .masthead nav a[aria-current="page"]{color:var(--parchment);border-bottom-color:var(--cobalt)}
+  .masthead nav a[aria-current="page"]{color:var(--parchment)}
+  .masthead nav a[aria-current="page"]::after{transform:scaleX(1)}
   @media(max-width:420px){
     .masthead nav{gap:16px}
     .masthead nav a{font-size:10px;letter-spacing:.12em}
@@ -176,3 +187,51 @@
     transition:color .2s,border-color .2s;
   }
   .foot-nav a:hover{color:var(--parchment);border-bottom-color:var(--cobalt)}
+
+  /* ---------- gold statement band ---------- */
+  /* One per page, and one line only. At full width this colour will take
+     over anything it shares a band with, so it gets a single sentence and
+     nothing else to compete with. Midnight on gold is 9.87:1. */
+  .band.gold{
+    background:var(--gold);color:var(--midnight);
+    border-top:none;
+    padding:clamp(44px,7vw,92px) 0;
+    position:relative;overflow:hidden;
+  }
+  .band.gold::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:linear-gradient(rgba(16,24,32,.07) 1px,transparent 1px),
+                     linear-gradient(90deg,rgba(16,24,32,.07) 1px,transparent 1px);
+    background-size:132px 132px;
+    mask-image:radial-gradient(120% 120% at 88% 16%,#000,transparent 70%);
+    -webkit-mask-image:radial-gradient(120% 120% at 88% 16%,#000,transparent 70%);
+  }
+  .band.gold .wrap{position:relative;z-index:1}
+  .band.gold .eyebrow{color:rgba(16,24,32,.62)}
+  .band.gold p{
+    margin:16px 0 0;max-width:24ch;
+    font-size:clamp(1.7rem,4.4vw,3.4rem);
+    line-height:1.02;letter-spacing:-.035em;font-weight:700;text-transform:uppercase;
+    text-wrap:balance;
+  }
+  .band.gold .attrib{
+    margin:clamp(22px,3vw,32px) 0 0;max-width:46ch;
+    font-size:.98rem;line-height:1.55;font-weight:400;text-transform:none;letter-spacing:0;
+    color:rgba(16,24,32,.7);
+  }
+
+  /* ---------- transparent masthead ---------- */
+  /* On a page that opens on video, the bar becomes part of the frame rather
+     than a lid on it: the footage runs to the top edge and the masthead
+     floats over it, with a short scrim so the mark and nav stay readable
+     against whatever the video is doing underneath. */
+  body.hero-top .masthead{
+    position:absolute;top:0;left:0;right:0;
+    background:transparent;border-bottom:none;
+  }
+  body.hero-top .masthead::before{
+    content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+    background:linear-gradient(to bottom, rgba(16,24,32,.55), rgba(16,24,32,0));
+  }
+  /* The hero starts at the very top and pads itself clear of the bar. */
+  body.hero-top .hero{padding-top:clamp(120px,17vh,190px)}
