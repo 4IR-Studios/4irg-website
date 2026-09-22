@@ -497,5 +497,23 @@
   })();
 </script>
 <script src="/assets/form.js" defer></script>
+
+<!-- Netlify parses forms out of deployed HTML at build time, and it cannot
+     see the one assets/form.js injects at runtime. This hidden copy on the
+     home page registers the field names. __forms.html carries the same stub;
+     both exist so detection has more than one place to find it. Keep the
+     names in step with form.js or submissions are rejected. -->
+<form name="enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="hidden" name="form-name" value="enquiry">
+  <input name="bot-field">
+  <select name="interest">
+    <option value="company"></option><option value="investing"></option>
+    <option value="sponsorship"></option><option value="studios"></option>
+    <option value="other"></option>
+  </select>
+  <input name="name"><input type="email" name="email">
+  <input name="company"><input name="website">
+  <textarea name="message"></textarea>
+</form>
 </body>
 </html>
