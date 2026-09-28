@@ -86,7 +86,9 @@
      darkens with the ground to hold contrast above 4.5:1 on every card. */
   .tiers > li:nth-child(1){--card:#FDFBF7;--ink:#6D747A}
   .tiers > li:nth-child(2){--card:#F1EEE5;--ink:#666D74}
-  .tiers > li:nth-child(3){--card:#E6E1D5;--ink:#585F66}
+  /* Third tier takes a pale gold so the warmth builds into the midnight
+     card and its gold edge, rather than stepping through neutrals alone. */
+  .tiers > li:nth-child(3){--card:#F4E2B0;--ink:#585F66;border-color:rgba(139,105,15,.34)}
   .tiers > li{background:var(--card,transparent);
     border:1px solid rgba(16,24,32,.18);padding:clamp(22px,2.6vw,30px);
     display:flex;flex-direction:column;
