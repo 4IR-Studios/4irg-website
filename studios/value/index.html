@@ -38,25 +38,42 @@
   .close p{margin:22px 0 0;max-width:52ch;color:var(--steel);font-size:clamp(1rem,1.3vw,1.1rem);line-height:1.6}
 
   /* ---------- the test ---------- */
-  /* Two statements, each answered. The founder is meant to fail the first
-     one silently, which is what makes the answer land. */
-  .band.gold .ask{max-width:26ch;font-size:clamp(1.55rem,3.7vw,2.95rem)}
-  .band.gold .ask.second{
-    margin-top:clamp(34px,5vw,54px);padding-top:clamp(30px,4vw,44px);
-    border-top:1px solid rgba(16,24,32,.26);
+  /* The questions lead on parchment; the gold is saved for one strip in the
+     middle of the page, where it lands as a break rather than a wall. */
+  .test .ask{
+    margin:16px 0 0;max-width:26ch;
+    font-size:clamp(1.55rem,3.7vw,2.95rem);
+    line-height:1.02;letter-spacing:-.035em;font-weight:700;text-transform:uppercase;
+    text-wrap:balance;
+  }
+  .test .ask.second{
+    margin-top:clamp(32px,4.4vw,48px);padding-top:clamp(28px,3.6vw,40px);
+    border-top:var(--rule);
     max-width:34ch;font-size:clamp(1.15rem,2.4vw,1.95rem);line-height:1.08;
   }
-  /* The verdict is the one line that is not a question, so it carries weight
-     rather than length. */
-  .band.gold .verdict{max-width:28ch}
-  .band.gold .reply{
-    display:inline-block;margin:clamp(18px,2.2vw,24px) 0 0;max-width:none;
+  .test .attrib{
+    margin:clamp(30px,4vw,42px) 0 0;max-width:46ch;
+    font-size:.98rem;line-height:1.55;color:var(--steel);
+  }
+  .reply{
+    display:inline-block;margin:clamp(16px,2vw,22px) 0 0;max-width:none;
     background:var(--midnight);color:var(--parchment);
     font-family:var(--mono);font-weight:500;
     font-size:clamp(.72rem,1vw,.82rem);letter-spacing:.2em;line-height:1;
-    padding:13px 18px;
+    padding:13px 18px;text-transform:uppercase;
   }
-  .band.gold .reply::after{content:".";}
+  .reply::after{content:"."}
+
+  /* One strip, tight around its two lines. */
+  .verdict-band{padding:clamp(38px,5vw,64px) 0}
+  .verdict-band p{max-width:28ch}
+  /* .band.gold p sets the display type, so the chip has to out-specify it. */
+  .band.gold .reply{
+    background:var(--midnight);color:var(--parchment);
+    font-family:var(--mono);font-weight:500;
+    font-size:clamp(.72rem,1vw,.82rem);letter-spacing:.2em;line-height:1;
+    max-width:none;padding:13px 18px;
+  }
 
   /* ---------- the menu ---------- */
   /* Four cards read as a menu rather than an essay: what it is, what is in
@@ -143,15 +160,13 @@
     </div>
   </section>
 
-  <section class="band gold">
+  <section class="band test">
     <div class="wrap">
       <span class="eyebrow">The test</span>
       <p class="ask">Can you explain, in one sentence, what your company does and what you are raising for?</p>
       <p class="reply">We do that</p>
       <p class="ask second">Do your investors have a way — beyond talking to you and reading another deck — to understand in 60 to 90 seconds what you do and what the investment is?</p>
       <p class="reply">We create that</p>
-      <p class="ask second verdict">If it takes you ten minutes to explain, it is not an offering. It is a conversation you have to keep having.</p>
-      <p class="reply">We help with that</p>
       <p class="attrib">Most firms raising capital assume an allocator will understand the technology if it is good enough. They will not. Meetings run long, momentum stalls, and the raise takes a quarter longer than it needed to.</p>
     </div>
   </section>
@@ -160,8 +175,8 @@
     <div class="wrap">
       <div class="lead-in">
         <span class="eyebrow">What we build</span>
-        <h2>What you get.</h2>
-        <p>Take one, or take the set. Most firms start with the video because it is the fastest thing to put in front of an LP.</p>
+        <h2>The value to you.</h2>
+        <p>We help companies, at any stage, tell their story well enough to be investor ready — one-pagers, landing pages, websites, decks and promo videos, for the company and for the raise.</p>
       </div>
       <ul class="tiers" id="svc">
         <li>
@@ -198,6 +213,13 @@
         <span class="k">On what happens next</span>
         <p>Ongoing site maintenance is available as a separate engagement with 4IR Studios. <strong>It is not what we are selling.</strong> We would rather the company owned its assets, its IP and its marketing outright and ran them itself. We launch you; we do not keep you.</p>
       </div>
+    </div>
+  </section>
+
+  <section class="band gold verdict-band">
+    <div class="wrap">
+      <p>If it takes you ten minutes to explain, it is not an offering. It is a conversation you have to keep having.</p>
+      <p class="reply">We help with that</p>
     </div>
   </section>
 
