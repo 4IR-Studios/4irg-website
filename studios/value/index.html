@@ -37,6 +37,27 @@
     line-height:.98;letter-spacing:-.035em;font-weight:700;text-transform:uppercase}
   .close p{margin:22px 0 0;max-width:52ch;color:var(--steel);font-size:clamp(1rem,1.3vw,1.1rem);line-height:1.6}
 
+  /* ---------- the test ---------- */
+  /* Two statements, each answered. The founder is meant to fail the first
+     one silently, which is what makes the answer land. */
+  .band.gold .ask{max-width:26ch;font-size:clamp(1.55rem,3.7vw,2.95rem)}
+  .band.gold .ask.second{
+    margin-top:clamp(34px,5vw,54px);padding-top:clamp(30px,4vw,44px);
+    border-top:1px solid rgba(16,24,32,.26);
+    max-width:34ch;font-size:clamp(1.15rem,2.4vw,1.95rem);line-height:1.08;
+  }
+  /* The verdict is the one line that is not a question, so it carries weight
+     rather than length. */
+  .band.gold .verdict{max-width:28ch}
+  .band.gold .reply{
+    display:inline-block;margin:clamp(18px,2.2vw,24px) 0 0;max-width:none;
+    background:var(--midnight);color:var(--parchment);
+    font-family:var(--mono);font-weight:500;
+    font-size:clamp(.72rem,1vw,.82rem);letter-spacing:.2em;line-height:1;
+    padding:13px 18px;
+  }
+  .band.gold .reply::after{content:".";}
+
   /* ---------- the menu ---------- */
   /* Four cards read as a menu rather than an essay: what it is, what is in
      it, and what happens after delivery — which is the question a founder
@@ -124,8 +145,13 @@
 
   <section class="band gold">
     <div class="wrap">
-      <span class="eyebrow">The problem</span>
-      <p>If it takes you ten minutes to explain, it is not an offering. It is a conversation you have to keep having.</p>
+      <span class="eyebrow">The test</span>
+      <p class="ask">Can you explain, in one sentence, what your company does and what you are raising for?</p>
+      <p class="reply">We do that</p>
+      <p class="ask second">Do your investors have a way — beyond talking to you and reading another deck — to understand in 60 to 90 seconds what you do and what the investment is?</p>
+      <p class="reply">We create that</p>
+      <p class="ask second verdict">If it takes you ten minutes to explain, it is not an offering. It is a conversation you have to keep having.</p>
+      <p class="reply">We help with that</p>
       <p class="attrib">Most firms raising capital assume an allocator will understand the technology if it is good enough. They will not. Meetings run long, momentum stalls, and the raise takes a quarter longer than it needed to.</p>
     </div>
   </section>
