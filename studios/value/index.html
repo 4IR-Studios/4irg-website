@@ -43,7 +43,13 @@
      is really asking when they compare these. */
   .tiers{list-style:none;margin:clamp(34px,5vw,58px) 0 0;padding:0;
     display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,1.8vw,22px);align-items:stretch}
-  .tiers > li{
+  /* Each tier sits a step deeper than the one before it, so the ladder itself
+     reads as increasing scope and the set lands on midnight. The body ink
+     darkens with the ground to hold contrast above 4.5:1 on every card. */
+  .tiers > li:nth-child(1){--card:#FDFBF7;--ink:#6D747A}
+  .tiers > li:nth-child(2){--card:#F1EEE5;--ink:#666D74}
+  .tiers > li:nth-child(3){--card:#E6E1D5;--ink:#585F66}
+  .tiers > li{background:var(--card,transparent);
     border:1px solid rgba(16,24,32,.18);padding:clamp(22px,2.6vw,30px);
     display:flex;flex-direction:column;
     opacity:0;transform:translateY(16px);
@@ -60,11 +66,11 @@
   .tiers > li.all .n{color:var(--gold)}
   .tiers h3{margin:12px 0 0;font-size:clamp(1.05rem,1.9vw,1.35rem);line-height:1.08;
     letter-spacing:-.025em;font-weight:600;text-transform:uppercase}
-  .tiers .what{margin:12px 0 0;font-size:.94rem;line-height:1.55;color:var(--steel)}
+  .tiers .what{margin:12px 0 0;font-size:.94rem;line-height:1.55;color:var(--ink,var(--steel))}
   .tiers > li.all .what{color:rgba(244,241,234,.72)}
   .tiers .inc{list-style:none;margin:18px 0 0;padding:18px 0 0;border-top:var(--rule)}
   .tiers > li.all .inc{border-top-color:rgba(244,241,234,.2)}
-  .tiers .inc li{padding:6px 0;font-size:.9rem;line-height:1.45;color:var(--steel)}
+  .tiers .inc li{padding:6px 0;font-size:.9rem;line-height:1.45;color:var(--ink,var(--steel))}
   .tiers > li.all .inc li{color:rgba(244,241,234,.78)}
   .tiers .inc li::before{content:"\2014";color:var(--oxide);margin-right:9px}
   .tiers > li.all .inc li::before{color:var(--gold)}
@@ -72,7 +78,7 @@
   .tiers .after{margin:auto 0 0;padding-top:18px;border-top:1px dashed rgba(16,24,32,.28)}
   .tiers > li.all .after{border-top-color:rgba(240,184,36,.45)}
   .tiers .after .k{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;
-    text-transform:uppercase;color:var(--steel)}
+    text-transform:uppercase;color:var(--ink,var(--steel))}
   .tiers > li.all .after .k{color:rgba(244,241,234,.5)}
   .tiers .after .v{display:block;margin-top:7px;font-size:.92rem;line-height:1.45;font-weight:600;letter-spacing:-.01em}
   @media(max-width:1000px){.tiers{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -134,21 +140,21 @@
       <ul class="tiers" id="svc">
         <li>
           <div class="n">01</div>
-          <h3>Promo video</h3>
-          <p class="what">Two to three minutes explaining the offering the way you would explain it — to someone who has never heard of you.</p>
+          <h3>2 min promo video</h3>
+          <p class="what">Two minutes explaining the offering the way you would explain it — to someone who has never heard of you.</p>
           <ul class="inc"><li>Script written from your raise</li><li>Built to be watched before a first call</li><li>Master files in every format you need</li></ul>
           <div class="after"><span class="k">After delivery</span><span class="v">Delivered and done. The files are yours.</span></div>
         </li>
         <li>
           <div class="n">02</div>
-          <h3>Investor site</h3>
-          <p class="what">The page an allocator lands on after the intro email. Built to be read in two minutes and remembered after the call.</p>
-          <ul class="inc"><li>Investor-facing, not customer-facing</li><li>Written for people who allocate</li><li>Domain and repository handed over</li></ul>
+          <h3>Company website</h3>
+          <p class="what">The site someone opens after the intro email — and the one they send to a partner. Built to be read in two minutes and remembered after the call.</p>
+          <ul class="inc"><li>Built around the raise, not a brochure</li><li>Reads clean on a phone in a meeting</li><li>Domain and repository handed over</li></ul>
           <div class="after"><span class="k">After delivery</span><span class="v">90 days of basic edits included.</span></div>
         </li>
         <li>
           <div class="n">03</div>
-          <h3>The deck</h3>
+          <h3>Your deck</h3>
           <p class="what">The deck that has to survive being forwarded — read by someone you have never spoken to.</p>
           <ul class="inc"><li>Messaging framework first</li><li>Designed against the story, not a template</li><li>Source files, fully editable</li></ul>
           <div class="after"><span class="k">After delivery</span><span class="v">30 days of basic edits included.</span></div>
