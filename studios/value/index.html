@@ -14,29 +14,6 @@
   .page-head{min-height:min(44vh,400px);display:flex;align-items:flex-end}
   .page-head .wrap{width:100%}
 
-  /* ---------- the three services ---------- */
-  .svc{list-style:none;margin:clamp(34px,5vw,58px) 0 0;padding:0;
-    display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2.4vw,28px)}
-  .svc li{
-    border:1px solid rgba(16,24,32,.18);padding:clamp(24px,3vw,36px);
-    display:flex;flex-direction:column;
-    opacity:0;transform:translateY(16px);
-    transition:opacity .55s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1),border-color .25s;
-  }
-  .svc.in li{opacity:1;transform:none}
-  .svc.in li:nth-child(2){transition-delay:.12s}
-  .svc.in li:nth-child(3){transition-delay:.24s}
-  .svc li:hover{border-color:var(--cobalt)}
-  .svc .n{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--cobalt)}
-  .svc h3{margin:14px 0 0;font-size:clamp(1.2rem,2.2vw,1.6rem);line-height:1.06;
-    letter-spacing:-.028em;font-weight:600;text-transform:uppercase}
-  .svc p{margin:14px 0 0;color:var(--steel);font-size:.98rem;line-height:1.58}
-  .svc ul{list-style:none;margin:18px 0 0;padding:0}
-  .svc ul li{all:unset;display:block;padding:7px 0;font-size:.94rem;color:var(--steel);line-height:1.45}
-  .svc ul li::before{content:"\2014";color:var(--oxide);margin-right:10px}
-  @media(max-width:900px){.svc{grid-template-columns:1fr}}
-  @media (prefers-reduced-motion:reduce){.svc li{opacity:1;transform:none;transition:none}}
-
   /* ---------- proof ---------- */
   .work{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,2.6vw,28px);
     margin-top:clamp(30px,4.5vw,50px)}
@@ -59,6 +36,58 @@
   .close h2{margin:14px 0 0;max-width:16ch;font-size:clamp(2rem,5.2vw,4rem);
     line-height:.98;letter-spacing:-.035em;font-weight:700;text-transform:uppercase}
   .close p{margin:22px 0 0;max-width:52ch;color:var(--steel);font-size:clamp(1rem,1.3vw,1.1rem);line-height:1.6}
+
+  /* ---------- the menu ---------- */
+  /* Four cards read as a menu rather than an essay: what it is, what is in
+     it, and what happens after delivery — which is the question a founder
+     is really asking when they compare these. */
+  .tiers{list-style:none;margin:clamp(34px,5vw,58px) 0 0;padding:0;
+    display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,1.8vw,22px);align-items:stretch}
+  .tiers > li{
+    border:1px solid rgba(16,24,32,.18);padding:clamp(22px,2.6vw,30px);
+    display:flex;flex-direction:column;
+    opacity:0;transform:translateY(16px);
+    transition:opacity .55s cubic-bezier(.2,.7,.2,1),transform .55s cubic-bezier(.2,.7,.2,1),border-color .25s;
+  }
+  .tiers.in > li{opacity:1;transform:none}
+  .tiers.in > li:nth-child(2){transition-delay:.1s}
+  .tiers.in > li:nth-child(3){transition-delay:.2s}
+  .tiers.in > li:nth-child(4){transition-delay:.3s}
+  .tiers > li:hover{border-color:var(--cobalt)}
+  /* The set is the one being sold, so it carries the dark ground. */
+  .tiers > li.all{background:var(--midnight);color:var(--parchment);border-color:var(--midnight);border-top:3px solid var(--gold)}
+  .tiers .n{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--cobalt)}
+  .tiers > li.all .n{color:var(--gold)}
+  .tiers h3{margin:12px 0 0;font-size:clamp(1.05rem,1.9vw,1.35rem);line-height:1.08;
+    letter-spacing:-.025em;font-weight:600;text-transform:uppercase}
+  .tiers .what{margin:12px 0 0;font-size:.94rem;line-height:1.55;color:var(--steel)}
+  .tiers > li.all .what{color:rgba(244,241,234,.72)}
+  .tiers .inc{list-style:none;margin:18px 0 0;padding:18px 0 0;border-top:var(--rule)}
+  .tiers > li.all .inc{border-top-color:rgba(244,241,234,.2)}
+  .tiers .inc li{padding:6px 0;font-size:.9rem;line-height:1.45;color:var(--steel)}
+  .tiers > li.all .inc li{color:rgba(244,241,234,.78)}
+  .tiers .inc li::before{content:"\2014";color:var(--oxide);margin-right:9px}
+  .tiers > li.all .inc li::before{color:var(--gold)}
+  /* Pinned to the bottom so the after-delivery terms line up across cards. */
+  .tiers .after{margin:auto 0 0;padding-top:18px;border-top:1px dashed rgba(16,24,32,.28)}
+  .tiers > li.all .after{border-top-color:rgba(240,184,36,.45)}
+  .tiers .after .k{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--steel)}
+  .tiers > li.all .after .k{color:rgba(244,241,234,.5)}
+  .tiers .after .v{display:block;margin-top:7px;font-size:.92rem;line-height:1.45;font-weight:600;letter-spacing:-.01em}
+  @media(max-width:1000px){.tiers{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media(max-width:620px){.tiers{grid-template-columns:1fr}}
+  @media (prefers-reduced-motion:reduce){.tiers > li{opacity:1;transform:none;transition:none}}
+
+  /* ---------- ownership note ---------- */
+  .ownership{
+    margin-top:clamp(28px,4vw,44px);padding:clamp(22px,3vw,30px);
+    border:1px solid rgba(16,24,32,.2);border-left:3px solid var(--gold-deep);
+    max-width:72ch;
+  }
+  .ownership .k{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep)}
+  .ownership p{margin:12px 0 0;font-size:.97rem;line-height:1.62;color:var(--steel)}
+  .ownership strong{color:var(--midnight);font-weight:600}
 </style>
 </head>
 <body>
@@ -99,29 +128,44 @@
     <div class="wrap">
       <div class="lead-in">
         <span class="eyebrow">What we build</span>
-        <h2>Three ways in.</h2>
+        <h2>What you get.</h2>
         <p>Take one, or take the set. Most firms start with the video because it is the fastest thing to put in front of an LP.</p>
       </div>
-      <ul class="svc" id="svc">
+      <ul class="tiers" id="svc">
         <li>
           <div class="n">01</div>
-          <h3>A promo video</h3>
-          <p>Two to three minutes that explains the offering the way you would explain it, to someone who has never heard of you.</p>
-          <ul><li>Script written from your raise, not a template</li><li>Built to be watched before a first call</li><li>Yours outright, in every format you need</li></ul>
+          <h3>Promo video</h3>
+          <p class="what">Two to three minutes explaining the offering the way you would explain it — to someone who has never heard of you.</p>
+          <ul class="inc"><li>Script written from your raise</li><li>Built to be watched before a first call</li><li>Master files in every format you need</li></ul>
+          <div class="after"><span class="k">After delivery</span><span class="v">Delivered and done. The files are yours.</span></div>
         </li>
         <li>
           <div class="n">02</div>
-          <h3>A site or landing page</h3>
-          <p>The page an allocator lands on after the intro email. Built to be read in two minutes and remembered after the call.</p>
-          <ul><li>Investor-facing, not customer-facing</li><li>Written for people who allocate</li><li>Handed over with the domain and the repo</li></ul>
+          <h3>Investor site</h3>
+          <p class="what">The page an allocator lands on after the intro email. Built to be read in two minutes and remembered after the call.</p>
+          <ul class="inc"><li>Investor-facing, not customer-facing</li><li>Written for people who allocate</li><li>Domain and repository handed over</li></ul>
+          <div class="after"><span class="k">After delivery</span><span class="v">90 days of basic edits included.</span></div>
         </li>
         <li>
           <div class="n">03</div>
-          <h3>The whole set, rebuilt</h3>
-          <p>Deck, site, message and video redone together so they say the same thing — which is usually the actual problem.</p>
-          <ul><li>Positioning and messaging first</li><li>Deck, site and video built off it</li><li>One story, everywhere an LP looks</li></ul>
+          <h3>The deck</h3>
+          <p class="what">The deck that has to survive being forwarded — read by someone you have never spoken to.</p>
+          <ul class="inc"><li>Messaging framework first</li><li>Designed against the story, not a template</li><li>Source files, fully editable</li></ul>
+          <div class="after"><span class="k">After delivery</span><span class="v">30 days of basic edits included.</span></div>
+        </li>
+        <li class="all">
+          <div class="n">04</div>
+          <h3>All three</h3>
+          <p class="what">Video, site and deck built together off one message, so every place an LP looks says the same thing.</p>
+          <ul class="inc"><li>Positioning and messaging first</li><li>All three built from it</li><li>One story, everywhere</li></ul>
+          <div class="after"><span class="k">After delivery</span><span class="v">90 days on the site, 30 on the deck.</span></div>
         </li>
       </ul>
+
+      <div class="ownership">
+        <span class="k">On what happens next</span>
+        <p>Ongoing site maintenance is available as a separate engagement with 4IR Studios. <strong>It is not what we are selling.</strong> We would rather the company owned its assets, its IP and its marketing outright and ran them itself. We launch you; we do not keep you.</p>
+      </div>
     </div>
   </section>
 
